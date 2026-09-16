@@ -45,6 +45,15 @@ async function api(peticio, env, url) {
       if (paper !== 'edicio') return json({ error: 'nomes_lectura' }, 403);
       return await llistarCopies(env);
     }
+    if (ruta === 'foto') {
+      if (peticio.method === 'GET') return await llegirFoto(env, url);
+      if (paper !== 'edicio') return json({ error: 'nomes_lectura' }, 403);
+      if (peticio.method === 'POST') return await desarFoto(peticio, env, url);
+      if (peticio.method === 'DELETE') {
+        await env.INVENTARI.delete('foto:' + String(url.searchParams.get('id') || ''));
+        return json({ ok: true });
+      }
+    }
     if (ruta === 'restaurar' && peticio.method === 'POST') {
       if (paper !== 'edicio') return json({ error: 'nomes_lectura' }, 403);
       return await restaurar(peticio, env);
@@ -168,7 +177,8 @@ function neteja(f) {
     notes: t(f.notes),
     files: Math.max(0, Math.min(40, Number(f.files) || 0)),
     columnes: Math.max(0, Math.min(40, Number(f.columnes) || 0)),
-    actualitzat: t(f.actualitzat)
+    actualitzat: t(f.actualitzat),
+    foto: !!f.foto
   };
 }
 
@@ -192,6 +202,35 @@ async function restaurar(peticio, env) {
   const noves = { actualitzat: new Date().toISOString(), files: c.files };
   await env.INVENTARI.put(CLAU_DADES, JSON.stringify(noves));
   return json({ ok: true, actualitzat: noves.actualitzat });
+}
+
+/* ==================== fotos ==================== */
+
+const MIDA_FOTO = 600 * 1024;
+
+async function llegirFoto(env, url) {
+  const id = String(url.searchParams.get('id') || '');
+  if (!id) return json({ error: 'sense_id' }, 400);
+  const r = await env.INVENTARI.getWithMetadata('foto:' + id, 'arrayBuffer');
+  if (!r || !r.value) return new Response('', { status: 404 });
+  return new Response(r.value, {
+    headers: {
+      'content-type': (r.metadata && r.metadata.t) || 'image/jpeg',
+      'cache-control': 'private, max-age=600'
+    }
+  });
+}
+
+async function desarFoto(peticio, env, url) {
+  const id = String(url.searchParams.get('id') || '');
+  if (!id) return json({ error: 'sense_id' }, 400);
+  const dades = await peticio.arrayBuffer();
+  if (!dades.byteLength) return json({ error: 'foto_buida' }, 400);
+  if (dades.byteLength > MIDA_FOTO) return json({ error: 'foto_massa_gran' }, 413);
+  const t = peticio.headers.get('content-type') || 'image/jpeg';
+  if (!t.startsWith('image/')) return json({ error: 'no_es_imatge' }, 400);
+  await env.INVENTARI.put('foto:' + id, dades, { metadata: { t: t } });
+  return json({ ok: true });
 }
 
 /* ==================== estructura inicial ==================== */

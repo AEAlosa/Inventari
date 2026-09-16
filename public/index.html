@@ -21,7 +21,7 @@ html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--fons);color:var(--tinta);
   font-family:'Bricolage Grotesque',system-ui,-apple-system,'Segoe UI',sans-serif;
   font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;
-  padding-bottom:env(safe-area-inset-bottom)}
+  padding-bottom:calc(20px + env(safe-area-inset-bottom))}
 .pag{max-width:720px;margin:0 auto;padding:18px 16px 40px}
 
 .dalt{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
@@ -39,7 +39,7 @@ h1{margin:0;font-size:20px;font-weight:800;letter-spacing:-.02em}
   border:1.5px solid var(--linia);border-radius:var(--radi);box-shadow:0 18px 40px rgba(23,33,31,.18);
   max-height:min(58vh,400px);overflow:auto}
 .resultats:empty{display:none}
-.res{padding:12px 16px;cursor:pointer;border-bottom:1px solid var(--linia-fina);display:flex;gap:12px;align-items:baseline}
+.res{padding:11px 16px;cursor:pointer;border-bottom:1px solid var(--linia-fina);display:flex;gap:11px;align-items:center}
 .res:last-child{border-bottom:none}
 .res:hover,.res:focus{background:#f4f6f5;outline:none}
 .res .txt{flex:1;min-width:0}
@@ -56,7 +56,9 @@ h1{margin:0;font-size:20px;font-weight:800;letter-spacing:-.02em}
 
 .llenç{background:var(--paper);border:1.5px solid var(--linia);border-radius:var(--radi);
   box-shadow:var(--ombra);overflow:hidden;margin-bottom:16px}
-svg{display:block;width:100%;height:auto;touch-action:manipulation}
+svg{display:block;width:100%;height:auto}
+svg.planol{max-height:min(62vh,520px);touch-action:manipulation}
+svg.mobiliari{max-height:min(58vh,520px);padding:6px;touch-action:manipulation}
 .sala{fill:#fbfbfa;stroke:var(--tinta);stroke-width:5;stroke-linejoin:round;cursor:pointer;transition:fill .15s}
 .sala:hover{fill:#eef2f0}
 .sala.inert{cursor:default;pointer-events:none}
@@ -68,37 +70,47 @@ svg{display:block;width:100%;height:auto;touch-action:manipulation}
 .nom-moble{font-size:9.5px;font-weight:600;fill:var(--tinta);text-anchor:middle;pointer-events:none}
 .compte{font-size:9.5px;font-weight:500;fill:var(--tinta-suau);text-anchor:middle;pointer-events:none}
 .ratlla{stroke:var(--tinta);stroke-opacity:.2;stroke-width:1.5;pointer-events:none}
+.obertura{stroke:var(--paper);stroke-width:8;pointer-events:none}
+.fulla{stroke:var(--tinta);stroke-width:4.5;stroke-linecap:round;pointer-events:none}
+.gir{fill:none;stroke:var(--tinta);stroke-opacity:.32;stroke-width:2.5;stroke-dasharray:6 5;pointer-events:none}
+.etq-entrada{font-size:12px;font-weight:600;fill:var(--tinta-suau);text-anchor:middle;pointer-events:none}
+g.tocable{cursor:pointer}
 g.tocable:focus{outline:none}
 g.tocable:focus-visible>rect:first-of-type{stroke-dasharray:7 4}
-.calaix{fill:var(--paper);stroke:var(--linia);stroke-width:2;cursor:pointer;transition:fill .12s}
-.calaix:hover{fill:#f2f5f4}
-.calaix.ple{fill:#fafbfa;stroke-width:2.5}
-.calaix.tria{stroke-width:3.5}
-.marc{fill:none;stroke-width:5;stroke-linejoin:round}
-.et-calaix{font-size:11px;fill:var(--tinta);pointer-events:none}
-.et-calaix.suau{fill:#a6b0ac}
-.ref-calaix{font-size:9px;fill:#b3bcb8;pointer-events:none;font-variant-numeric:tabular-nums}
+.calaix{fill:var(--paper);stroke:var(--linia);stroke-width:2.5;transition:fill .12s}
+g.tocable:hover>.calaix{fill:#f2f5f4}
+.calaix.ple{fill:#fafbfa}
+.calaix.tria{stroke-width:5}
+.marc{fill:none;stroke-width:7;stroke-linejoin:round}
+.et-calaix{fill:var(--tinta);pointer-events:none}
+.et-calaix.suau{fill:#a9b3af}
+.ref-calaix{fill:#b9c2be;pointer-events:none;font-variant-numeric:tabular-nums}
+.punt{pointer-events:none}
 
 .llista{background:var(--paper);border:1.5px solid var(--linia);border-radius:var(--radi);
   box-shadow:var(--ombra);overflow:hidden;margin-bottom:16px}
 .cap-llista{padding:11px 16px;border-bottom:1px solid var(--linia-fina);font-size:13px;
   color:var(--tinta-suau);display:flex;justify-content:space-between;align-items:center;gap:10px}
-.obj{display:flex;gap:12px;align-items:flex-start;padding:13px 16px;border-bottom:1px solid var(--linia-fina)}
+.obj{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-bottom:1px solid var(--linia-fina)}
 .obj:last-child{border-bottom:none}
 .obj .txt{flex:1;min-width:0}
 .obj .nom{font-weight:600}
 .obj .notes{font-size:13px;color:var(--tinta-suau);margin-top:2px}
+.obj .on{font-size:12.5px;color:var(--tinta-suau);margin-top:2px}
 .obj .qt{font-variant-numeric:tabular-nums;font-weight:600;color:var(--tinta-suau);white-space:nowrap}
-.obj .accions{display:flex;gap:6px}
+.obj .accions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .buit{padding:26px 16px;color:var(--tinta-suau);font-size:14px}
+.mini{width:46px;height:46px;border-radius:8px;object-fit:cover;background:var(--linia-fina);
+  flex:0 0 auto;cursor:pointer;border:1px solid var(--linia)}
+.res .mini{width:36px;height:36px}
 
 .fila-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 button.b{font:inherit;font-size:14px;font-weight:600;padding:10px 16px;border-radius:10px;
   border:1.5px solid var(--tinta);background:var(--tinta);color:#fff;cursor:pointer}
 button.b.clar{background:var(--paper);color:var(--tinta)}
-button.b.mini{padding:5px 10px;font-size:12.5px;font-weight:500;border-color:var(--linia);
+button.b.mini-b{padding:5px 10px;font-size:12.5px;font-weight:500;border-color:var(--linia);
   color:var(--tinta-suau);background:var(--paper)}
-button.b.mini:hover{border-color:var(--tinta);color:var(--tinta)}
+button.b.mini-b:hover{border-color:var(--tinta);color:var(--tinta)}
 button.b:disabled{opacity:.4;cursor:default}
 button.b:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px}
 
@@ -107,7 +119,6 @@ button.b:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px}
 .avis.mal{background:#fdeeec;border-color:var(--maó)}
 .avis .creix{flex:1;min-width:180px}
 
-/* ---------- entrada ---------- */
 .porta{max-width:380px;margin:12vh auto 0;padding:0 16px}
 .porta .caixa{background:var(--paper);border:1.5px solid var(--linia);border-radius:var(--radi);
   box-shadow:var(--ombra);padding:26px}
@@ -119,22 +130,31 @@ button.b:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px}
 .porta button{width:100%}
 .porta .mal-clau{color:var(--maó);font-size:13.5px;margin:10px 0 0;font-weight:500}
 
-dialog{border:none;border-radius:var(--radi);padding:0;max-width:430px;width:calc(100% - 28px);
-  box-shadow:0 24px 60px rgba(23,33,31,.3);color:var(--tinta);background:var(--paper)}
-dialog::backdrop{background:rgba(23,33,31,.45)}
-.dlg{padding:22px}
+dialog{border:none;border-radius:var(--radi);padding:0;max-width:440px;width:calc(100% - 28px);
+  max-height:88vh;box-shadow:0 24px 60px rgba(23,33,31,.3);color:var(--tinta);background:var(--paper)}
+dialog::backdrop{background:rgba(23,33,31,.5)}
+dialog.gran{max-width:min(94vw,760px)}
+.dlg{padding:22px;overflow:auto;max-height:88vh}
 .dlg h2{margin:0 0 3px;font-size:18px;font-weight:700;letter-spacing:-.01em}
 .dlg .on{margin:0 0 17px;font-size:13px;color:var(--tinta-suau)}
 .camp{margin-bottom:13px}
 .camp label{display:block;font-size:13px;font-weight:600;margin-bottom:5px}
-.camp input,.camp textarea{width:100%;padding:10px 12px;border:1.5px solid var(--linia);
+.camp input,.camp textarea,.camp select{width:100%;padding:10px 12px;border:1.5px solid var(--linia);
   border-radius:9px;font:inherit;font-size:16px;background:var(--paper);color:var(--tinta)}
-.camp input:focus,.camp textarea:focus{outline:none;border-color:var(--tinta)}
+.camp input:focus,.camp textarea:focus,.camp select:focus{outline:none;border-color:var(--tinta)}
 .camp textarea{resize:vertical;min-height:64px}
 .parell{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.foto-camp{display:flex;gap:12px;align-items:center}
+.foto-camp img{width:64px;height:64px;border-radius:9px;object-fit:cover;border:1px solid var(--linia)}
+.gestio{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;
+  border-bottom:1px solid var(--linia-fina)}
+.gestio .nom{font-weight:600;font-size:14px}
+.gestio .sub{font-size:12.5px;color:var(--tinta-suau)}
+.gestio .accions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .copia{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;
   border-bottom:1px solid var(--linia-fina);font-size:13.5px}
 .copia:last-child{border-bottom:none}
+.visor{display:block;max-width:100%;max-height:70vh;margin:0 auto;border-radius:10px}
 .carregant{padding:70px 0;text-align:center;color:var(--tinta-suau)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -147,65 +167,73 @@ dialog::backdrop{background:rgba(23,33,31,.45)}
 <script>
 "use strict";
 
-/* ======================= geometria ======================= */
+/* ======================= geometria del plànol ======================= */
+/* Pioners i Raiers: mateixa mida i alineats verticalment.
+   Raiers recolza damunt del passadís; Llops fa de paret dreta del passadís;
+   Follets penja per sota; l'Armari s'enganxa a la paret de dalt de Pioners. */
 const SALES = {
-  pioners:{x:502,y:85,w:161,h:135,r:16}, raiers:{x:514,y:228,w:149,h:162,r:16},
-  llops:{x:690,y:155,w:185,h:380,r:22}, follets:{x:575,y:432,w:95,h:108,r:13}
+  pioners:{x:508,y:85, w:155,h:150,r:16},
+  raiers: {x:508,y:243,w:155,h:150,r:16},
+  llops:  {x:690,y:155,w:185,h:380,r:22},
+  follets:{x:575,y:434,w:95, h:106,r:13}
 };
 const MOBLES = {
-  armari:{x:580,y:35,w:65,h:57,c:'--tinta',sala:null},
-  arxivador:{x:512,y:97,w:48,h:56,c:'--maó',sala:'pioners'},
-  armari_raiers:{x:524,y:342,w:84,h:43,c:'--maó',sala:'raiers'},
+  armari:{x:553,y:30,w:65,h:55,c:'--tinta',sala:null},
+  arxivador:{x:516,y:97,w:48,h:58,c:'--maó',sala:'pioners'},
+  armari_raiers:{x:524,y:344,w:84,h:43,c:'--maó',sala:'raiers'},
   armari_llops:{x:708,y:172,w:162,h:65,c:'--maó',sala:'llops'},
   estanteria:{x:838,y:250,w:34,h:53,c:'--cobalt',sala:'llops'},
   armari_documents:{x:812,y:312,w:58,h:181,c:'--albergínia',sala:'llops'},
   sala_llops:{x:702,y:498,w:160,h:24,c:'--molsa',sala:'llops'},
-  pica:{x:586,y:443,w:14,h:44,c:'--cobalt',sala:'follets'},
-  armari_follets:{x:604,y:443,w:44,h:29,c:'--maó',sala:'follets'},
-  sala_follets:{x:592,y:512,w:58,h:23,c:'--molsa',sala:'follets'}
+  pica:{x:586,y:445,w:14,h:44,c:'--cobalt',sala:'follets'},
+  armari_follets:{x:604,y:445,w:44,h:29,c:'--maó',sala:'follets'},
+  sala_follets:{x:592,y:514,w:58,h:23,c:'--molsa',sala:'follets'}
 };
-const PASSADIS = {x:338,y:392,w:352,h:41};
-const GENERAL = [328,20,564,548];
+const PASSADIS = {x:338,y:393,w:352,h:41};
+const ENTRADA = {x:338,y1:397,y2:429};
+const GENERAL = [292,18,604,548];
 
 /* ======================= estat ======================= */
 let DADES=[], PER_ID={}, FILLS={}, PAPER=null, VIST=null;
 let cami=[], caixaTriada=null, vista=GENERAL.slice(), estatDesat='';
+let fotoPendent=null;
 
 const $ = s => document.querySelector(s);
 const esc = t => String(t==null?'':t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm = t => String(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-const EDITA = () => PAPER === 'edicio';
+const EDITA = () => PAPER==='edicio';
+const tanca = () => { $('#dlg').close(); };
+const lim = (v,a,b) => Math.max(a,Math.min(b,v));
 
 /* ======================= arrencada ======================= */
 async function arrencar(){
   try{
     const r = await fetch('/api/dades');
-    if(r.status === 401) return porta();
+    if(r.status===401) return porta();
     const d = await r.json();
-    PAPER = d.paper; VIST = d.actualitzat; DADES = d.files;
+    PAPER=d.paper; VIST=d.actualitzat; DADES=d.files;
     marc(); indexar(); pintar();
   }catch(e){
     document.getElementById('tot').innerHTML =
-      '<div class="pag"><div class="avis mal"><span class="creix">No s\'ha pogut connectar. ' +
+      '<div class="pag"><div class="avis mal"><span class="creix">No s\'ha pogut connectar. '+
       'Comprova que tens internet i torna-ho a provar.</span></div></div>';
   }
 }
 
 function porta(mal){
   document.getElementById('tot').innerHTML =
-    '<div class="porta"><div class="caixa"><h1>Inventari del cau</h1>' +
-    '<p>Escriu la contrasenya del grup per entrar.</p>' +
-    '<input id="clau" type="password" autocomplete="current-password" placeholder="Contrasenya" autofocus>' +
-    '<button class="b" id="va">Entra</button>' +
-    (mal?'<p class="mal-clau">'+esc(mal)+'</p>':'') + '</div></div>';
+    '<div class="porta"><div class="caixa"><h1>Inventari del cau</h1>'+
+    '<p>Escriu la contrasenya del grup per entrar.</p>'+
+    '<input id="clau" type="password" autocomplete="current-password" placeholder="Contrasenya" autofocus>'+
+    '<button class="b" id="va">Entra</button>'+
+    (mal?'<p class="mal-clau">'+esc(mal)+'</p>':'')+'</div></div>';
   const prova = async () => {
-    const clau = $('#clau').value;
-    if(!clau) return;
-    $('#va').disabled = true; $('#va').textContent = 'Comprovant…';
+    const clau = $('#clau').value; if(!clau) return;
+    $('#va').disabled=true; $('#va').textContent='Comprovant…';
     const r = await fetch('/api/entrar',{method:'POST',headers:{'content-type':'application/json'},
       body:JSON.stringify({clau:clau})});
     if(r.ok) arrencar();
-    else porta(r.status===401 ? 'Aquesta contrasenya no és correcta.' : 'Hi ha hagut un problema. Torna-ho a provar.');
+    else porta(r.status===401?'Aquesta contrasenya no és correcta.':'Hi ha hagut un problema. Torna-ho a provar.');
   };
   $('#va').onclick = prova;
   $('#clau').onkeydown = e => { if(e.key==='Enter') prova(); };
@@ -213,18 +241,15 @@ function porta(mal){
 
 function marc(){
   document.getElementById('tot').innerHTML =
-    '<div class="pag">' +
-    '<div class="dalt"><h1>Inventari del cau</h1><div class="data" id="data"></div></div>' +
-    '<div class="cerca"><input id="q" type="search" autocomplete="off" spellcheck="false" ' +
-      'placeholder="Busca un objecte i et dirà on és" aria-label="Busca un objecte">' +
-      '<div class="resultats" id="resultats" role="listbox"></div></div>' +
-    '<div id="banda"></div><nav class="molla" id="molla" aria-label="On ets"></nav>' +
+    '<div class="pag"><div class="dalt"><h1>Inventari del cau</h1><div class="data" id="data"></div></div>'+
+    '<div class="cerca"><input id="q" type="search" autocomplete="off" spellcheck="false" '+
+      'placeholder="Busca un objecte i et dirà on és" aria-label="Busca un objecte">'+
+      '<div class="resultats" id="resultats" role="listbox"></div></div>'+
+    '<div id="banda"></div><nav class="molla" id="molla" aria-label="On ets"></nav>'+
     '<div id="cos"></div><div class="fila-btns" id="peu"></div></div>';
   let rellotge;
-  $('#q').addEventListener('input', e=>{
-    clearTimeout(rellotge);
-    rellotge = setTimeout(()=>cercar(e.target.value.trim()),120);
-  });
+  $('#q').addEventListener('input', e=>{ clearTimeout(rellotge);
+    rellotge = setTimeout(()=>cercar(e.target.value.trim()),120); });
   $('#q').addEventListener('blur', ()=>setTimeout(()=>{$('#resultats').innerHTML='';},200));
 }
 
@@ -237,55 +262,55 @@ const fillsDe = id => FILLS[id||'·arrel·']||[];
 const objsA = (id,pos) => fillsDe(id).filter(f=>f.tipus==='objecte'&&(pos===undefined||f.pos===pos));
 const moblesA = (id,pos) => fillsDe(id).filter(f=>f.tipus==='moble'&&(pos===undefined||f.pos===pos));
 function compta(id){let n=0;(function b(x){fillsDe(x).forEach(f=>f.tipus==='objecte'?n++:b(f.id));})(id);return n;}
+function totsSota(id){const r=[];(function b(x){fillsDe(x).forEach(f=>{if(f.tipus==='objecte')r.push(f);else b(f.id);});})(id);return r;}
 function etqPos(p){const m=/^R(\d+)C(\d+)$/.exec(p||'');return m?('fila '+m[1]+', col. '+m[2]):p;}
 function ubicacio(f){const t=[];let x=f,g=0;
   while(x&&g++<20){t.unshift(x.nom); if(x.pos)t.unshift(etqPos(x.pos)); x=x.pare?PER_ID[x.pare]:null;}
   return t.join(' › ');}
+function onEs(o){ return (o.pare&&PER_ID[o.pare]?ubicacio(PER_ID[o.pare]):'sense ubicació')+(o.pos?' › '+etqPos(o.pos):''); }
 function colorDe(id){let x=PER_ID[id],g=0;
-  while(x&&g++<20){ if(MOBLES[x.id]) return MOBLES[x.id].c; x=x.pare?PER_ID[x.pare]:null; }
-  return '--tinta';}
+  while(x&&g++<20){ if(MOBLES[x.id]) return MOBLES[x.id].c; x=x.pare?PER_ID[x.pare]:null; } return '--tinta';}
+function salaDe(id){let x=PER_ID[id],g=0;
+  while(x&&g++<20){ if(x.tipus==='sala') return x; x=x.pare?PER_ID[x.pare]:null; } return null;}
 
 function mostrarData(){
   const n = DADES.filter(f=>f.tipus==='objecte').length;
-  let t = n + (n===1?' objecte':' objectes');
-  if(estatDesat) t += '<br><span class="'+(estatDesat==='fallat'?'fallat':'desant')+'">' +
+  let t = n+(n===1?' objecte':' objectes');
+  if(estatDesat) t += '<br><span class="'+(estatDesat==='fallat'?'fallat':'desant')+'">'+
     (estatDesat==='desant'?'Desant…':estatDesat==='desat'?'Desat':'No s\'ha desat')+'</span>';
-  else if(VIST){
-    const d = new Date(VIST);
-    if(!isNaN(d)) t += '<br>al dia ' + d.toLocaleDateString('ca-ES',{day:'numeric',month:'short',year:'numeric'});
-  }
-  $('#data').innerHTML = t;
+  else if(VIST){ const d=new Date(VIST);
+    if(!isNaN(d)) t += '<br>al dia '+d.toLocaleDateString('ca-ES',{day:'numeric',month:'short',year:'numeric'}); }
+  const c=$('#data'); if(c) c.innerHTML=t;
 }
 
 /* ======================= desar ======================= */
-let coa = null;
+let coa=null;
 async function desar(){
-  estatDesat = 'desant'; mostrarData();
+  estatDesat='desant'; mostrarData();
   try{
     const r = await fetch('/api/dades',{method:'POST',headers:{'content-type':'application/json'},
       body:JSON.stringify({files:DADES, vist:VIST})});
     const d = await r.json();
-    if(r.status === 409){
+    if(r.status===409){
       estatDesat=''; mostrarData();
-      $('#banda').innerHTML = '<div class="avis mal"><span class="creix">' +
-        'Algú altre ha desat canvis mentre editaves. Recarrega la pàgina per veure la versió bona. ' +
-        'Els teus canvis d\'ara no s\'han guardat.</span>' +
-        '<button class="b mini" onclick="location.reload()">Recarrega</button></div>';
+      $('#banda').innerHTML = '<div class="avis mal"><span class="creix">'+
+        'Algú altre ha desat canvis mentre editaves. Recarrega per veure la versió bona; '+
+        'el que has fet ara no s\'ha guardat.</span>'+
+        '<button class="b mini-b" onclick="location.reload()">Recarrega</button></div>';
       return;
     }
     if(!r.ok) throw new Error(d.error||'error');
-    VIST = d.actualitzat;
-    estatDesat = 'desat'; mostrarData();
-    clearTimeout(coa); coa = setTimeout(()=>{estatDesat=''; mostrarData();}, 2200);
+    VIST=d.actualitzat; estatDesat='desat'; mostrarData();
+    clearTimeout(coa); coa=setTimeout(()=>{estatDesat=''; mostrarData();},2200);
   }catch(e){
     estatDesat='fallat'; mostrarData();
-    $('#banda').innerHTML = '<div class="avis mal"><span class="creix">' +
-      'No s\'han pogut desar els canvis. Comprova la connexió.</span>' +
-      '<button class="b mini" onclick="desar()">Torna-ho a provar</button></div>';
+    $('#banda').innerHTML = '<div class="avis mal"><span class="creix">'+
+      'No s\'han pogut desar els canvis. Comprova la connexió.</span>'+
+      '<button class="b mini-b" onclick="desar()">Torna-ho a provar</button></div>';
   }
 }
 function tocat(){ indexar(); pintar(); desar(); }
-const nouId = p => p + '_' + Math.random().toString(36).slice(2,10);
+const nouId = p => p+'_'+Math.random().toString(36).slice(2,10);
 
 /* ======================= navegació ======================= */
 function arrel(){ cami=[]; caixaTriada=null; anima(GENERAL); pintar(); }
@@ -294,13 +319,14 @@ function entrar(id,pos){ cami.push({id:id,pos:pos||null}); caixaTriada=null; pin
 function tornarA(n){ cami=cami.slice(0,n); caixaTriada=null; if(!cami.length) anima(GENERAL); pintar(); }
 
 function anarAObjecte(id){
-  const f = PER_ID[id]; if(!f) return;
-  $('#q').value=''; $('#resultats').innerHTML='';
+  const f=PER_ID[id]; if(!f) return;
+  const q=$('#q'); if(q) q.value='';
+  const rs=$('#resultats'); if(rs) rs.innerHTML='';
   const pila=[]; let x=f.pare?PER_ID[f.pare]:null;
   while(x){ pila.unshift({id:x.id,pos:null}); x=x.pare?PER_ID[x.pare]:null; }
   let ant=f;
   for(let i=pila.length-1;i>=0;i--){ pila[i].pos=ant.pos||null; ant=PER_ID[pila[i].id]; }
-  cami=pila; caixaTriada = f.pos||null;
+  cami=pila; caixaTriada=f.pos||null;
   pintar(); window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -316,108 +342,146 @@ function pintar(){
 }
 
 function pintarMolla(){
-  const m = $('#molla');
+  const m=$('#molla'); if(!m) return;
   if(!cami.length){ m.innerHTML='<span class="ara">Plànol del cau</span>'; return; }
-  let h = '<button onclick="arrel()">Plànol</button>';
+  let h='<button onclick="arrel()">Plànol</button>';
   cami.forEach((pas,i)=>{
-    const f = PER_ID[pas.id]; if(!f) return;
+    const f=PER_ID[pas.id]; if(!f) return;
     h += '<span class="sep">›</span>';
-    h += i===cami.length-1 ? '<span class="ara">'+esc(f.nom)+'</span>'
-                           : '<button onclick="tornarA('+(i+1)+')">'+esc(f.nom)+'</button>';
+    h += i===cami.length-1?'<span class="ara">'+esc(f.nom)+'</span>'
+                          :'<button onclick="tornarA('+(i+1)+')">'+esc(f.nom)+'</button>';
   });
-  m.innerHTML = h;
+  m.innerHTML=h;
+}
+
+function portaEntrada(){
+  const x=ENTRADA.x, a=ENTRADA.y1, b=ENTRADA.y2, r=b-a;
+  return '<line class="obertura" x1="'+x+'" y1="'+a+'" x2="'+x+'" y2="'+b+'"></line>'+
+    '<path class="gir" d="M '+(x-r)+' '+a+' A '+r+' '+r+' 0 0 0 '+x+' '+b+'"></path>'+
+    '<line class="fulla" x1="'+x+'" y1="'+a+'" x2="'+(x-r)+'" y2="'+a+'"></line>'+
+    '<text x="'+(x-r/2)+'" y="'+(b+24)+'" class="etq-entrada">Entrada</text>';
 }
 
 function vistaPlanol(){
-  let s = rect(PASSADIS,{cls:'passadis',r:4});
+  let s = rect(PASSADIS,{cls:'passadis',r:4}) + portaEntrada();
   for(const id in SALES){
     const g=SALES[id], f=PER_ID[id]; if(!f) continue;
-    const n = compta(id);
+    const n=compta(id);
     s += '<g class="tocable" tabindex="0" role="button" aria-label="'+esc(f.nom)+', '+n+' objectes" '+
       'onclick="entrar(\''+id+'\')" onkeydown="tecla(event,\''+id+'\')">'+
-      rect(g,{cls:'sala'}) + text(g.x+g.w/2,g.y+g.h/2-3,f.nom,'nom-sala') +
-      text(g.x+g.w/2,g.y+g.h/2+15,n?(n+' objectes'):'buit','compte') + '</g>';
+      rect(g,{cls:'sala'})+text(g.x+g.w/2,g.y+g.h/2-3,f.nom,'nom-sala')+
+      text(g.x+g.w/2,g.y+g.h/2+15,n?(n+' objectes'):'buit','compte')+'</g>';
   }
   for(const id in MOBLES){
     const g=MOBLES[id], f=PER_ID[id]; if(!f) continue;
     if(g.sala===null){
       s += '<g class="tocable" tabindex="0" role="button" aria-label="'+esc(f.nom)+'" '+
         'onclick="entrar(\''+id+'\')" onkeydown="tecla(event,\''+id+'\')">'+
-        rect(g,{cls:'sala',r:6}) + text(g.x+g.w/2,g.y+g.h/2+5,f.nom,'nom-sala') + '</g>';
+        rect(g,{cls:'sala',r:6})+text(g.x+g.w/2,g.y+g.h/2+5,f.nom,'nom-sala')+'</g>';
     } else s += rect(g,{cls:'moble fantasma',r:5,stroke:'var('+g.c+')',fill:'var('+g.c+')'});
   }
-  $('#cos').innerHTML = '<div class="llenç"><svg id="svg" viewBox="'+GENERAL.join(' ')+
-    '" role="img" aria-label="Plànol del cau"><title>Plànol del cau</title>'+s+'</svg></div>';
+  $('#cos').innerHTML = '<div class="llenç"><svg id="svg" class="planol" viewBox="'+GENERAL.join(' ')+
+    '" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Plànol del cau">'+
+    '<title>Plànol del cau</title>'+s+'</svg></div>';
   vista = GENERAL.slice();
 }
 
 function vistaSala(sala){
-  const g = SALES[sala.id];
+  const g=SALES[sala.id];
   let s = rect(g,{cls:'sala inert'});
   Object.keys(MOBLES).filter(id=>MOBLES[id].sala===sala.id).forEach(id=>{
     const gm=MOBLES[id], f=PER_ID[id]; if(!f) return;
     const col='var('+gm.c+')', n=compta(id), vert=gm.h>gm.w*1.5;
     s += '<g class="tocable" tabindex="0" role="button" aria-label="'+esc(f.nom)+', '+n+' objectes" '+
       'onclick="entrar(\''+id+'\')" onkeydown="tecla(event,\''+id+'\')">'+
-      rect(gm,{cls:'moble',r:5,stroke:col,fill:col,opac:.14}) + insinua(gm,f) +
-      (vert ? '<text class="nom-moble" transform="translate('+(gm.x+gm.w/2)+','+(gm.y+gm.h/2)+') rotate(-90)">'+esc(f.nom)+'</text>'
-            : text(gm.x+gm.w/2,gm.y+gm.h/2+1,f.nom,'nom-moble') + text(gm.x+gm.w/2,gm.y+gm.h/2+12,n||'','compte')) +
+      rect(gm,{cls:'moble',r:5,stroke:col,fill:col,opac:.14})+insinua(gm,f)+
+      (vert?'<text class="nom-moble" transform="translate('+(gm.x+gm.w/2)+','+(gm.y+gm.h/2)+') rotate(-90)">'+esc(f.nom)+'</text>'
+           :text(gm.x+gm.w/2,gm.y+gm.h/2+1,f.nom,'nom-moble')+text(gm.x+gm.w/2,gm.y+gm.h/2+12,n||'','compte'))+
       '</g>';
   });
   const p=24;
-  $('#cos').innerHTML = '<div class="llenç"><svg id="svg" viewBox="'+vista.join(' ')+
-    '" role="img" aria-label="'+esc(sala.nom)+'"><title>'+esc(sala.nom)+'</title>'+s+'</svg></div>';
+  let h = '<div class="llenç"><svg id="svg" class="planol" viewBox="'+vista.join(' ')+
+    '" preserveAspectRatio="xMidYMid meet" role="img" aria-label="'+esc(sala.nom)+'">'+
+    '<title>'+esc(sala.nom)+'</title>'+s+'</svg></div>';
+
+  const solts = moblesA(sala.id).filter(m=>!MOBLES[m.id]);
+  if(solts.length) h += '<div class="fila-btns">'+solts.map(m=>
+    '<button class="b clar" onclick="entrar(\''+m.id+'\')">'+esc(m.nom)+' · '+compta(m.id)+'</button>').join('')+'</div>';
+
+  $('#cos').innerHTML = h;
   anima([g.x-p,g.y-p,g.w+p*2,g.h+p*2]);
 }
 
 function insinua(g,f){
   if(!f.files||f.files<2||g.h<26) return '';
   let s='';
-  for(let i=1;i<f.files;i++){
-    const y = g.y + (g.h/f.files)*i;
-    s += '<line class="ratlla" x1="'+(g.x+3)+'" y1="'+y+'" x2="'+(g.x+g.w-3)+'" y2="'+y+'"></line>';
-  }
+  for(let i=1;i<f.files;i++){ const y=g.y+(g.h/f.files)*i;
+    s += '<line class="ratlla" x1="'+(g.x+3)+'" y1="'+y+'" x2="'+(g.x+g.w-3)+'" y2="'+y+'"></line>'; }
   return s;
 }
 
+/* ---------- moble amb les seves proporcions reals ---------- */
 function vistaMoble(m){
   if(!m.files||!m.columnes) return vistaLliure(m);
-  const col='var('+colorDe(m.id)+')', cw=132, ch=96, gap=11, pad=15;
-  const W = pad*2 + m.columnes*cw + (m.columnes-1)*gap;
-  const H = pad*2 + m.files*ch + (m.files-1)*gap;
-  let s = '<rect x="2" y="2" width="'+(W-4)+'" height="'+(H-4)+'" rx="10" class="marc" stroke="'+col+'"></rect>';
+  const col='var('+colorDe(m.id)+')';
+  const g = MOBLES[m.id];
+  const proporcio = g ? g.w/g.h : 1.35;
+  const W = 1000;
+  const H = lim(Math.round(W/proporcio), 420, 1450);
+  const pad = 26, gap = 14;
+  const cw = (W-pad*2-gap*(m.columnes-1))/m.columnes;
+  const ch = (H-pad*2-gap*(m.files-1))/m.files;
+  const lletra = lim(ch*0.13, 15, 32);
+  const ref = lim(lletra*0.72, 12, 22);
+  const linies = Math.max(0, Math.floor((ch-ref-lletra*0.9)/(lletra*1.32)));
+
+  let s = '<rect x="4" y="4" width="'+(W-8)+'" height="'+(H-8)+'" rx="14" class="marc" stroke="'+col+'"></rect>';
   for(let r=1;r<=m.files;r++) for(let c=1;c<=m.columnes;c++){
     const pos='R'+r+'C'+c, x=pad+(c-1)*(cw+gap), y=pad+(r-1)*(ch+gap);
     const objs=objsA(m.id,pos), subs=moblesA(m.id,pos);
     const ple=objs.length||subs.length, tria=caixaTriada===pos;
+    const caps = [].concat(subs.map(v=>({t:v.nom,sub:true})), objs.map(v=>({t:v.nom,sub:false})));
     s += '<g class="tocable" tabindex="0" role="button" aria-label="'+etqPos(pos)+', '+
       (ple?(objs.length+' objectes'):'buit')+'" onclick="triar(\''+pos+'\')" '+
       'onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();triar(\''+pos+'\')}">'+
-      '<rect x="'+x+'" y="'+y+'" width="'+cw+'" height="'+ch+'" rx="6" class="calaix'+
+      '<rect x="'+x+'" y="'+y+'" width="'+cw+'" height="'+ch+'" rx="8" class="calaix'+
       (ple?' ple':'')+(tria?' tria':'')+'" stroke="'+(tria||ple?col:'')+'"></rect>'+
-      '<text x="'+(x+8)+'" y="'+(y+15)+'" class="ref-calaix">'+r+'·'+c+'</text>';
-    let yy = y+33;
-    subs.slice(0,2).forEach(sb=>{ s += '<text x="'+(x+9)+'" y="'+yy+'" class="et-calaix" font-weight="600" fill="'+col+'">'+esc(retalla(sb.nom,16))+'</text>'; yy+=17; });
-    objs.slice(0, subs.length?2:4).forEach(o=>{ s += '<text x="'+(x+9)+'" y="'+yy+'" class="et-calaix">'+esc(retalla(o.nom,17))+'</text>'; yy+=17; });
-    const resta = objs.length - (subs.length?2:4);
-    if(resta>0) s += '<text x="'+(x+9)+'" y="'+yy+'" class="et-calaix suau">+'+resta+' més</text>';
-    if(!ple) s += '<text x="'+(x+9)+'" y="'+(y+ch/2+5)+'" class="et-calaix suau">buit</text>';
+      '<text x="'+(x+10)+'" y="'+(y+ref+6)+'" class="ref-calaix" font-size="'+ref+'">'+r+'·'+c+'</text>';
+    if(linies<=0){
+      if(ple) s += '<circle class="punt" cx="'+(x+cw/2)+'" cy="'+(y+ch/2+ref*0.3)+'" r="'+
+        lim(ch*0.13,5,16)+'" fill="'+col+'" fill-opacity=".8"></circle>';
+    }else{
+      let yy = y+ref+lletra*1.5;
+      caps.slice(0,linies).forEach(e=>{
+        s += '<text x="'+(x+10)+'" y="'+yy+'" class="et-calaix" font-size="'+lletra+'"'+
+          (e.sub?' font-weight="600" fill="'+col+'"':'')+'>'+
+          esc(retalla(e.t, Math.max(6,Math.floor(cw/(lletra*0.52)))))+'</text>';
+        yy += lletra*1.32;
+      });
+      if(caps.length>linies) s += '<text x="'+(x+10)+'" y="'+yy+'" class="et-calaix suau" font-size="'+
+        (lletra*0.9)+'">+'+(caps.length-linies)+' més</text>';
+      if(!ple) s += '<text x="'+(x+10)+'" y="'+(y+ch/2+lletra*0.35)+'" class="et-calaix suau" font-size="'+
+        lletra+'">buit</text>';
+    }
     s += '</g>';
   }
-  let h = '<div class="llenç"><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(m.nom)+
-    '"><title>'+esc(m.nom)+'</title>'+s+'</svg></div>';
+
+  let h = '<div class="llenç"><svg class="mobiliari" viewBox="0 0 '+W+' '+H+
+    '" preserveAspectRatio="xMidYMid meet" role="img" aria-label="'+esc(m.nom)+'">'+
+    '<title>'+esc(m.nom)+'</title>'+s+'</svg></div>';
+
   if(caixaTriada){
     const objs=objsA(m.id,caixaTriada), subs=moblesA(m.id,caixaTriada);
     h += '<div class="llista"><div class="cap-llista"><span>'+esc(etqPos(caixaTriada))+'</span><span>'+
-      (objs.length||'cap')+' '+(objs.length===1?'objecte':'objectes')+'</span></div>' +
-      (objs.length?objs.map(fila).join(''):'<div class="buit">Aquesta casella és buida.</div>') + '</div>';
+      (objs.length||'cap')+' '+(objs.length===1?'objecte':'objectes')+'</span></div>'+
+      (objs.length?objs.map(o=>fila(o)).join(''):'<div class="buit">Aquesta casella és buida.</div>')+'</div>';
     if(subs.length) h += '<div class="fila-btns">'+subs.map(sb=>
       '<button class="b clar" onclick="entrar(\''+sb.id+'\')">'+esc(sb.nom)+' · '+compta(sb.id)+'</button>').join('')+'</div>';
   } else h += '<div class="llista"><div class="buit">Tria una casella per veure què hi ha.</div></div>';
   $('#cos').innerHTML = h;
 }
 function triar(pos){ caixaTriada = caixaTriada===pos?null:pos; pintar(); }
-const retalla = (t,n) => t.length>n ? t.slice(0,n-1)+'…' : t;
+const retalla = (t,n) => t.length>n ? t.slice(0,Math.max(1,n-1))+'…' : t;
 
 function vistaLliure(m){
   const subs=moblesA(m.id), objs=objsA(m.id);
@@ -425,28 +489,39 @@ function vistaLliure(m){
   if(subs.length) h += '<div class="fila-btns">'+subs.map(sb=>
     '<button class="b clar" onclick="entrar(\''+sb.id+'\')">'+esc(sb.nom)+' · '+compta(sb.id)+'</button>').join('')+'</div>';
   h += '<div class="llista"><div class="cap-llista"><span>'+esc(m.nom)+'</span><span>'+
-    (objs.length||'cap')+' '+(objs.length===1?'objecte':'objectes')+'</span></div>' +
-    (objs.length?objs.map(fila).join(''):'<div class="buit">Encara no hi ha res apuntat aquí.</div>') + '</div>';
+    (objs.length||'cap')+' '+(objs.length===1?'objecte':'objectes')+'</span></div>'+
+    (objs.length?objs.map(o=>fila(o)).join(''):'<div class="buit">Encara no hi ha res apuntat aquí.</div>')+'</div>';
   $('#cos').innerHTML = h;
 }
 
-function fila(o){
-  return '<div class="obj"><div class="txt"><div class="nom">'+esc(o.nom)+'</div>'+
-    (o.notes?'<div class="notes">'+esc(o.notes)+'</div>':'')+'</div>'+
+function fila(o, ambOn){
+  return '<div class="obj">'+
+    (o.foto?'<img class="mini" loading="lazy" src="/api/foto?id='+encodeURIComponent(o.id)+
+      '" alt="" onclick="veureFoto(\''+o.id+'\')">':'')+
+    '<div class="txt"><div class="nom">'+esc(o.nom)+'</div>'+
+    (o.notes?'<div class="notes">'+esc(o.notes)+'</div>':'')+
+    (ambOn?'<div class="on">'+esc(onEs(o))+'</div>':'')+'</div>'+
     (o.quantitat!=null?'<div class="qt">×'+o.quantitat+'</div>':'')+
-    (EDITA()?'<div class="accions"><button class="b mini" onclick="formObjecte(\''+o.id+'\')">Edita</button>'+
-      '<button class="b mini" onclick="confirmarTreure(\''+o.id+'\')">Treu</button></div>':'')+'</div>';
+    (EDITA()?'<div class="accions">'+
+      '<button class="b mini-b" onclick="formObjecte(\''+o.id+'\')">Edita</button>'+
+      '<button class="b mini-b" onclick="formMoure(\''+o.id+'\')">Mou</button>'+
+      '<button class="b mini-b" onclick="confirmarTreure(\''+o.id+'\')">Treu</button></div>':'')+'</div>';
 }
 
 function pintarPeu(){
   const pas = cami.length?cami[cami.length-1]:null;
   const ara = pas?PER_ID[pas.id]:null;
-  const potAfegir = ara && ara.tipus==='moble' && (caixaTriada || !ara.files);
   let h='';
-  if(EDITA() && potAfegir){
+  if(ara && ara.tipus==='moble' && EDITA() && (caixaTriada || !ara.files)){
     h += '<button class="b" onclick="formObjecte()">Afegeix un objecte</button>';
     h += '<button class="b clar" onclick="formMoble()">Afegeix una caixa</button>';
   }
+  if(ara && ara.tipus==='sala'){
+    h += '<button class="b clar" onclick="totDeLaSala(\''+ara.id+'\')">Veure-ho tot</button>';
+    if(EDITA()) h += '<button class="b clar" onclick="gestionar(\''+ara.id+'\')">Gestiona els mobles</button>';
+  }
+  if(ara && ara.tipus==='moble' && EDITA() && ara.files)
+    h += '<button class="b clar" onclick="formSafates(\''+ara.id+'\')">Canvia les safates</button>';
   h += '<button class="b clar" onclick="baixarExcel()">Descarrega l\'Excel</button>';
   if(EDITA()) h += '<button class="b clar" onclick="historial()">Historial</button>';
   h += '<button class="b clar" onclick="sortir()">Surt</button>';
@@ -455,47 +530,88 @@ function pintarPeu(){
 
 async function sortir(){ await fetch('/api/sortir',{method:'POST'}); location.reload(); }
 
+/* ======================= tot el d'una sala ======================= */
+function totDeLaSala(id){
+  const sala=PER_ID[id];
+  const objs = totsSota(id).sort((a,b)=>a.nom.localeCompare(b.nom,'ca'));
+  $('#dlg').classList.add('gran');
+  $('#dlg-cos').innerHTML = '<h2>Tot el que hi ha a '+esc(sala.nom)+'</h2>'+
+    '<p class="on">'+objs.length+' objectes, per ordre alfabètic.</p>'+
+    (objs.length?'<div class="llista" style="box-shadow:none;margin:0">'+objs.map(o=>fila(o,true)).join('')+'</div>'
+     :'<p class="on">Encara no hi ha res apuntat en aquesta sala.</p>')+
+    '<div class="fila-btns" style="margin:16px 0 0"><button class="b clar" onclick="tanca()">Tanca</button></div>';
+  $('#dlg').showModal();
+}
+
 /* ======================= cerca ======================= */
 function cercar(q){
-  const caixa = $('#resultats');
+  const caixa=$('#resultats'); if(!caixa) return;
   if(q.length<2){ caixa.innerHTML=''; return; }
-  const n = norm(q);
+  const n=norm(q);
   const tr = DADES.filter(f=>f.tipus==='objecte'&&(norm(f.nom).includes(n)||norm(f.notes).includes(n))).slice(0,30);
   if(!tr.length){ caixa.innerHTML='<div class="cap-res">Cap objecte amb aquest nom. Prova amb una paraula més curta.</div>'; return; }
   caixa.innerHTML = tr.map(f=>
     '<div class="res" role="option" tabindex="0" onmousedown="anarAObjecte(\''+f.id+'\')" '+
-    'onkeydown="if(event.key===\'Enter\')anarAObjecte(\''+f.id+'\')"><div class="txt">'+
-    '<div class="nom">'+esc(f.nom)+'</div><div class="on">'+
-    esc(f.pare&&PER_ID[f.pare]?ubicacio(PER_ID[f.pare]):'sense ubicació')+
-    (f.pos?' › '+esc(etqPos(f.pos)):'')+'</div></div>'+
+    'onkeydown="if(event.key===\'Enter\')anarAObjecte(\''+f.id+'\')">'+
+    (f.foto?'<img class="mini" loading="lazy" src="/api/foto?id='+encodeURIComponent(f.id)+'" alt="">':'')+
+    '<div class="txt"><div class="nom">'+esc(f.nom)+'</div>'+
+    '<div class="on">'+esc(onEs(f))+'</div></div>'+
     (f.quantitat!=null?'<div class="qt">×'+f.quantitat+'</div>':'')+'</div>').join('');
 }
 
 /* ======================= Excel ======================= */
 function baixarExcel(){
-  if(typeof XLSX === 'undefined'){ alert('Encara s\'està carregant. Torna-ho a provar en un segon.'); return; }
-  const per={}; DADES.forEach(f=>per[f.id]=f);
-  const camiDe=(id,d)=>{const f=per[id]; if(!f||d>20) return [];
-    let t = f.pare?camiDe(f.pare,d+1):[]; if(f.pos) t.push(etqPos(f.pos)); t.push(f.nom); return t;};
-  const aoa = [['Objecte','Quantitat','Notes','On és','Sala']];
+  if(typeof XLSX==='undefined'){ alert('Encara s\'està carregant. Torna-ho a provar en un segon.'); return; }
+  const aoa=[['Objecte','Quantitat','Notes','On és','Sala']];
   DADES.filter(f=>f.tipus==='objecte').sort((a,b)=>a.nom.localeCompare(b.nom,'ca')).forEach(f=>{
-    let x=f, sala='';
-    while(x){ if(x.tipus==='sala') sala=x.nom; x = x.pare?per[x.pare]:null; }
-    aoa.push([f.nom, f.quantitat==null?'':f.quantitat, f.notes,
-      f.pare?camiDe(f.pare,0).concat(f.pos?[etqPos(f.pos)]:[]).join(' > '):'', sala]);
+    const s=salaDe(f.id);
+    aoa.push([f.nom, f.quantitat==null?'':f.quantitat, f.notes, onEs(f), s?s.nom:'']);
   });
-  const full = XLSX.utils.aoa_to_sheet(aoa);
-  full['!cols'] = [{wch:34},{wch:10},{wch:38},{wch:48},{wch:14}];
-  full['!freeze'] = {xSplit:0,ySplit:1};
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, full, 'Inventari');
-  XLSX.writeFile(wb, 'inventari-cau-' + new Date().toISOString().slice(0,10) + '.xlsx');
+  const full=XLSX.utils.aoa_to_sheet(aoa);
+  full['!cols']=[{wch:34},{wch:10},{wch:38},{wch:50},{wch:14}];
+  full['!freeze']={xSplit:0,ySplit:1};
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,full,'Inventari');
+  XLSX.writeFile(wb,'inventari-cau-'+new Date().toISOString().slice(0,10)+'.xlsx');
+}
+
+/* ======================= fotos ======================= */
+function veureFoto(id){
+  const o=PER_ID[id];
+  $('#dlg').classList.add('gran');
+  $('#dlg-cos').innerHTML = '<h2>'+esc(o.nom)+'</h2><p class="on">'+esc(onEs(o))+'</p>'+
+    '<img class="visor" src="/api/foto?id='+encodeURIComponent(id)+'" alt="">'+
+    '<div class="fila-btns" style="margin:16px 0 0"><button class="b clar" onclick="tanca()">Tanca</button></div>';
+  $('#dlg').showModal();
+}
+
+function encongir(fitxer){
+  return new Promise((res,rej)=>{
+    const img=new Image(), url=URL.createObjectURL(fitxer);
+    img.onload=()=>{
+      URL.revokeObjectURL(url);
+      const max=900, e=Math.min(1,max/Math.max(img.width,img.height));
+      const c=document.createElement('canvas');
+      c.width=Math.round(img.width*e); c.height=Math.round(img.height*e);
+      c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+      c.toBlob(b=>b?res(b):rej(new Error('no s\'ha pogut processar')),'image/jpeg',0.72);
+    };
+    img.onerror=()=>{ URL.revokeObjectURL(url); rej(new Error('no és una imatge')); };
+    img.src=url;
+  });
+}
+
+async function pujarFoto(id,blob){
+  const r = await fetch('/api/foto?id='+encodeURIComponent(id),
+    {method:'POST',headers:{'content-type':'image/jpeg'},body:blob});
+  if(!r.ok) throw new Error('no s\'ha pogut pujar');
 }
 
 /* ======================= formularis ======================= */
 function formObjecte(id){
-  const o = id?PER_ID[id]:null, pas = cami[cami.length-1];
-  const on = ubicacio(PER_ID[pas.id]) + (caixaTriada?' › '+etqPos(caixaTriada):'');
+  const o = id?PER_ID[id]:null, pas=cami[cami.length-1];
+  const on = ubicacio(PER_ID[pas.id])+(caixaTriada?' › '+etqPos(caixaTriada):'');
+  fotoPendent=null;
   $('#dlg-cos').innerHTML =
     '<h2>'+(o?'Edita l\'objecte':'Afegeix un objecte')+'</h2><p class="on">'+esc(on)+'</p>'+
     '<div class="camp"><label for="f1">Què és</label><input id="f1" value="'+esc(o?o.nom:'')+'"></div>'+
@@ -503,23 +619,45 @@ function formObjecte(id){
       (o&&o.quantitat!=null?o.quantitat:'')+'"></div>'+
     '<div class="camp"><label for="f3">Notes</label><textarea id="f3" placeholder="Estat, de qui és, quan es va fer servir…">'+
       esc(o?o.notes:'')+'</textarea></div>'+
+    '<div class="camp"><label for="f4">Foto</label><div class="foto-camp">'+
+      '<img id="fprev" alt="" style="'+(o&&o.foto?'':'display:none')+'" src="'+
+        (o&&o.foto?'/api/foto?id='+encodeURIComponent(o.id):'')+'">'+
+      '<input id="f4" type="file" accept="image/*" style="flex:1"></div></div>'+
     '<div class="fila-btns" style="margin:0"><button class="b" id="fok">Desa</button>'+
-    '<button class="b clar" onclick="document.getElementById(\'dlg\').close()">Cancel·la</button></div>';
+    '<button class="b clar" onclick="tanca()">Cancel·la</button></div>';
   $('#dlg').showModal(); $('#f1').focus();
-  $('#fok').onclick = () => {
-    const nom = $('#f1').value.trim(); if(!nom){ $('#f1').focus(); return; }
-    const qt = $('#f2').value===''?null:Number($('#f2').value);
-    const notes = $('#f3').value.trim();
-    if(o){ o.nom=nom; o.quantitat=qt; o.notes=notes; o.actualitzat=new Date().toISOString(); }
-    else DADES.push({id:nouId('obj'),tipus:'objecte',pare:pas.id,pos:caixaTriada||'',nom:nom,
-      quantitat:qt,notes:notes,files:0,columnes:0,actualitzat:new Date().toISOString()});
-    $('#dlg').close(); tocat();
+
+  $('#f4').onchange = async () => {
+    const fi=$('#f4').files[0]; if(!fi) return;
+    try{
+      fotoPendent = await encongir(fi);
+      const p=$('#fprev'); p.src=URL.createObjectURL(fotoPendent); p.style.display='';
+    }catch(e){ alert('Aquest fitxer no s\'ha pogut fer servir com a foto.'); }
+  };
+
+  $('#fok').onclick = async () => {
+    const nom=$('#f1').value.trim(); if(!nom){ $('#f1').focus(); return; }
+    const qt=$('#f2').value===''?null:Number($('#f2').value);
+    const notes=$('#f3').value.trim();
+    let obj=o;
+    if(!obj){
+      obj={id:nouId('obj'),tipus:'objecte',pare:pas.id,pos:caixaTriada||'',nom:nom,quantitat:qt,
+        notes:notes,files:0,columnes:0,foto:false,actualitzat:new Date().toISOString()};
+      DADES.push(obj);
+    } else { obj.nom=nom; obj.quantitat=qt; obj.notes=notes; obj.actualitzat=new Date().toISOString(); }
+    if(fotoPendent){
+      $('#fok').disabled=true; $('#fok').textContent='Pujant la foto…';
+      try{ await pujarFoto(obj.id,fotoPendent); obj.foto=true; }
+      catch(e){ alert('L\'objecte s\'ha desat, però la foto no s\'ha pogut pujar.'); }
+      fotoPendent=null;
+    }
+    tanca(); tocat();
   };
 }
 
 function formMoble(){
-  const pas = cami[cami.length-1];
-  const on = ubicacio(PER_ID[pas.id]) + (caixaTriada?' › '+etqPos(caixaTriada):'');
+  const pas=cami[cami.length-1];
+  const on = ubicacio(PER_ID[pas.id])+(caixaTriada?' › '+etqPos(caixaTriada):'');
   $('#dlg-cos').innerHTML =
     '<h2>Afegeix una caixa</h2><p class="on">Dins de '+esc(on)+'</p>'+
     '<div class="camp"><label for="m1">Nom</label><input id="m1" placeholder="Caixa vermella"></div>'+
@@ -527,52 +665,175 @@ function formMoble(){
     '<div class="camp"><label for="m3">Columnes</label><input id="m3" type="number" min="0" value="0"></div></div>'+
     '<p class="on">Deixa-ho a zero si a dins hi va una llista d\'objectes sense compartiments.</p>'+
     '<div class="fila-btns" style="margin:0"><button class="b" id="mok">Desa</button>'+
-    '<button class="b clar" onclick="document.getElementById(\'dlg\').close()">Cancel·la</button></div>';
+    '<button class="b clar" onclick="tanca()">Cancel·la</button></div>';
   $('#dlg').showModal(); $('#m1').focus();
   $('#mok').onclick = () => {
-    const nom = $('#m1').value.trim(); if(!nom){ $('#m1').focus(); return; }
+    const nom=$('#m1').value.trim(); if(!nom){ $('#m1').focus(); return; }
     DADES.push({id:nouId('cai'),tipus:'moble',pare:pas.id,pos:caixaTriada||'',nom:nom,quantitat:null,
-      notes:'',files:Number($('#m2').value)||0,columnes:Number($('#m3').value)||0,
+      notes:'',files:Number($('#m2').value)||0,columnes:Number($('#m3').value)||0,foto:false,
       actualitzat:new Date().toISOString()});
-    $('#dlg').close(); tocat();
+    tanca(); tocat();
+  };
+}
+
+/* ---------- moure ---------- */
+function destinacions(){
+  const d=[];
+  DADES.filter(f=>f.tipus==='moble').forEach(m=>{
+    if(m.files&&m.columnes){
+      for(let r=1;r<=m.files;r++) for(let c=1;c<=m.columnes;c++)
+        d.push({v:m.id+'|R'+r+'C'+c, etq:ubicacio(m)+' › '+etqPos('R'+r+'C'+c)});
+    } else d.push({v:m.id+'|', etq:ubicacio(m)});
+  });
+  return d.sort((a,b)=>a.etq.localeCompare(b.etq,'ca'));
+}
+
+function formMoure(id){
+  const o=PER_ID[id], dest=destinacions(), ara=o.pare+'|'+(o.pos||'');
+  $('#dlg-cos').innerHTML =
+    '<h2>Mou «'+esc(o.nom)+'»</h2><p class="on">Ara és a '+esc(onEs(o))+'</p>'+
+    '<div class="camp"><label for="mv">Cap a on</label><select id="mv">'+
+    dest.map(d=>'<option value="'+esc(d.v)+'"'+(d.v===ara?' selected':'')+'>'+esc(d.etq)+'</option>').join('')+
+    '</select></div>'+
+    '<div class="fila-btns" style="margin:0"><button class="b" id="mvok">Mou-ho</button>'+
+    '<button class="b clar" onclick="tanca()">Cancel·la</button></div>';
+  $('#dlg').showModal();
+  $('#mvok').onclick = () => {
+    const parts=$('#mv').value.split('|');
+    o.pare=parts[0]; o.pos=parts[1]||''; o.actualitzat=new Date().toISOString();
+    tanca(); indexar(); anarAObjecte(id); desar();
+  };
+}
+
+/* ---------- gestionar mobles ---------- */
+function gestionar(idSala){
+  const sala=PER_ID[idSala], mobles=moblesA(idSala);
+  $('#dlg-cos').innerHTML =
+    '<h2>Mobles de '+esc(sala.nom)+'</h2>'+
+    '<p class="on">Els que surten dibuixats al plànol es poden reanomenar i redimensionar, però no treure des d\'aquí.</p>'+
+    mobles.map(m=>'<div class="gestio"><div><div class="nom">'+esc(m.nom)+'</div>'+
+      '<div class="sub">'+(m.files?m.files+' × '+m.columnes+' compartiments':'llista sense compartiments')+
+      ' · '+compta(m.id)+' objectes</div></div><div class="accions">'+
+      '<button class="b mini-b" onclick="formReanomenar(\''+m.id+'\',\''+idSala+'\')">Nom</button>'+
+      '<button class="b mini-b" onclick="formSafates(\''+m.id+'\',\''+idSala+'\')">Safates</button>'+
+      (MOBLES[m.id]?'':'<button class="b mini-b" onclick="confirmarTreure(\''+m.id+'\')">Treu</button>')+
+      '</div></div>').join('')+
+    '<div class="fila-btns" style="margin:16px 0 0">'+
+    '<button class="b" onclick="formMobleNou(\''+idSala+'\')">Afegeix un moble</button>'+
+    '<button class="b clar" onclick="tanca()">Tanca</button></div>';
+  $('#dlg').showModal();
+}
+
+function formMobleNou(idSala){
+  $('#dlg-cos').innerHTML =
+    '<h2>Afegeix un moble</h2><p class="on">A '+esc(PER_ID[idSala].nom)+'</p>'+
+    '<div class="camp"><label for="n1">Nom</label><input id="n1" placeholder="Prestatgeria nova"></div>'+
+    '<div class="parell"><div class="camp"><label for="n2">Files</label><input id="n2" type="number" min="0" value="3"></div>'+
+    '<div class="camp"><label for="n3">Columnes</label><input id="n3" type="number" min="0" value="1"></div></div>'+
+    '<p class="on">Sortirà com a botó sota el plànol de la sala. Per dibuixar-lo al seu lloc calen les coordenades.</p>'+
+    '<div class="fila-btns" style="margin:0"><button class="b" id="nok">Desa</button>'+
+    '<button class="b clar" onclick="gestionar(\''+idSala+'\')">Enrere</button></div>';
+  $('#n1').focus();
+  $('#nok').onclick = () => {
+    const nom=$('#n1').value.trim(); if(!nom){ $('#n1').focus(); return; }
+    DADES.push({id:nouId('mob'),tipus:'moble',pare:idSala,pos:'',nom:nom,quantitat:null,notes:'',
+      files:Number($('#n2').value)||0,columnes:Number($('#n3').value)||0,foto:false,
+      actualitzat:new Date().toISOString()});
+    tanca(); tocat();
+  };
+}
+
+function formReanomenar(id,tornar){
+  const m=PER_ID[id];
+  $('#dlg-cos').innerHTML =
+    '<h2>Nom del moble</h2><p class="on">'+esc(ubicacio(m))+'</p>'+
+    '<div class="camp"><label for="r1">Com se\'n diu</label><input id="r1" value="'+esc(m.nom)+'"></div>'+
+    '<div class="fila-btns" style="margin:0"><button class="b" id="rok">Desa</button>'+
+    '<button class="b clar" onclick="'+(tornar?'gestionar(\''+tornar+'\')':'tanca()')+'">Enrere</button></div>';
+  $('#r1').focus(); $('#r1').select();
+  $('#rok').onclick = () => {
+    const nom=$('#r1').value.trim(); if(!nom) return;
+    m.nom=nom; m.actualitzat=new Date().toISOString();
+    tanca(); tocat();
+  };
+}
+
+function formSafates(id,tornar){
+  const m=PER_ID[id];
+  $('#dlg-cos').innerHTML =
+    '<h2>Compartiments de '+esc(m.nom)+'</h2><p class="on">Ara: '+
+    (m.files?m.files+' files × '+m.columnes+' columnes':'llista sense compartiments')+'</p>'+
+    '<div class="parell"><div class="camp"><label for="s1">Files</label>'+
+    '<input id="s1" type="number" min="0" max="20" value="'+(m.files||0)+'"></div>'+
+    '<div class="camp"><label for="s2">Columnes</label>'+
+    '<input id="s2" type="number" min="0" max="20" value="'+(m.columnes||0)+'"></div></div>'+
+    '<p class="on">Si en treus, el que hi hagi a les caselles que desapareguin es mourà a l\'última que quedi.</p>'+
+    '<div id="s-avis"></div>'+
+    '<div class="fila-btns" style="margin:0"><button class="b" id="sok">Desa</button>'+
+    '<button class="b clar" onclick="'+(tornar?'gestionar(\''+tornar+'\')':'tanca()')+'">Enrere</button></div>';
+  if(!$('#dlg').open) $('#dlg').showModal();
+  const revisa = () => {
+    const f=Number($('#s1').value)||0, c=Number($('#s2').value)||0;
+    const perduts = fillsDe(m.id).filter(x=>{
+      const q=/^R(\d+)C(\d+)$/.exec(x.pos||''); if(!q) return false;
+      return Number(q[1])>f || Number(q[2])>c;
+    }).length;
+    $('#s-avis').innerHTML = perduts
+      ? '<div class="avis mal"><span class="creix">'+perduts+' cosa/es es mouran perquè la seva casella desapareix.</span></div>'
+      : '';
+  };
+  $('#s1').oninput=revisa; $('#s2').oninput=revisa; revisa();
+  $('#sok').onclick = () => {
+    const f=lim(Number($('#s1').value)||0,0,20), c=lim(Number($('#s2').value)||0,0,20);
+    m.files=f; m.columnes=c; m.actualitzat=new Date().toISOString();
+    fillsDe(m.id).forEach(x=>{
+      const q=/^R(\d+)C(\d+)$/.exec(x.pos||''); if(!q) return;
+      if(!f||!c) x.pos='';
+      else if(Number(q[1])>f||Number(q[2])>c) x.pos='R'+f+'C'+c;
+    });
+    caixaTriada=null; tanca(); tocat();
   };
 }
 
 function confirmarTreure(id){
-  const f = PER_ID[id], n = compta(id);
+  const f=PER_ID[id], n=compta(id);
   $('#dlg-cos').innerHTML =
     '<h2>Treure «'+esc(f.nom)+'»?</h2><p class="on">'+
     (n?'També es traurà tot el que hi ha a dins ('+n+' objectes).':'Es pot recuperar des de l\'historial.')+
     '</p><div class="fila-btns" style="margin:0"><button class="b" id="tok">Treu-ho</button>'+
-    '<button class="b clar" onclick="document.getElementById(\'dlg\').close()">Cancel·la</button></div>';
-  $('#dlg').showModal();
+    '<button class="b clar" onclick="tanca()">Cancel·la</button></div>';
+  if(!$('#dlg').open) $('#dlg').showModal();
   $('#tok').onclick = () => {
     const fora={}, fills={};
     DADES.forEach(x=>{ const p=x.pare||''; (fills[p]=fills[p]||[]).push(x.id); });
     (function baixa(x){ fora[x]=1; (fills[x]||[]).forEach(baixa); })(id);
+    DADES.filter(x=>fora[x.id]&&x.foto).forEach(x=>{
+      fetch('/api/foto?id='+encodeURIComponent(x.id),{method:'DELETE'}).catch(()=>{});
+    });
     DADES = DADES.filter(x=>!fora[x.id]);
-    $('#dlg').close(); tocat();
+    const tallat = cami.findIndex(p=>fora[p.id]);
+    if(tallat>=0) cami = cami.slice(0,tallat);
+    caixaTriada=null; tanca(); tocat();
   };
 }
 
 async function historial(){
-  $('#dlg-cos').innerHTML = '<h2>Historial</h2><p class="on">Carregant…</p>';
+  $('#dlg-cos').innerHTML='<h2>Historial</h2><p class="on">Carregant…</p>';
   $('#dlg').showModal();
-  const r = await fetch('/api/copies');
-  const d = await r.json();
-  const llista = (d.copies||[]).map(q=>{
-    const dt = new Date(q);
+  const r=await fetch('/api/copies'); const d=await r.json();
+  const llista=(d.copies||[]).map(q=>{
+    const dt=new Date(q);
     return '<div class="copia"><span>'+esc(isNaN(dt)?q:dt.toLocaleString('ca-ES'))+'</span>'+
-      '<button class="b mini" onclick="restaurar(\''+esc(q)+'\')">Recupera</button></div>';
+      '<button class="b mini-b" onclick="restaurar(\''+esc(q)+'\')">Recupera</button></div>';
   }).join('');
-  $('#dlg-cos').innerHTML = '<h2>Historial</h2>'+
-    '<p class="on">Cada cop que algú desa, es guarda com estava abans. Es conserven els últims canvis.</p>'+
+  $('#dlg-cos').innerHTML='<h2>Historial</h2>'+
+    '<p class="on">Cada cop que algú desa, es guarda com estava abans.</p>'+
     (llista||'<p class="on">Encara no hi ha cap versió anterior.</p>')+
-    '<div class="fila-btns" style="margin:14px 0 0"><button class="b clar" onclick="document.getElementById(\'dlg\').close()">Tanca</button></div>';
+    '<div class="fila-btns" style="margin:14px 0 0"><button class="b clar" onclick="tanca()">Tanca</button></div>';
 }
 
 async function restaurar(quan){
-  $('#dlg-cos').innerHTML = '<h2>Recuperant…</h2>';
+  $('#dlg-cos').innerHTML='<h2>Recuperant…</h2>';
   await fetch('/api/restaurar',{method:'POST',headers:{'content-type':'application/json'},
     body:JSON.stringify({quan:quan})});
   location.reload();
@@ -581,25 +842,25 @@ async function restaurar(quan){
 /* ======================= dibuix ======================= */
 function rect(g,o){
   o=o||{};
-  const r = o.r!=null?o.r:(g.r!=null?g.r:0);
-  let e = '<rect x="'+g.x+'" y="'+g.y+'" width="'+g.w+'" height="'+g.h+'" rx="'+r+'" class="'+(o.cls||'')+'"';
-  if(o.stroke) e += ' stroke="'+o.stroke+'"';
-  if(o.fill) e += ' fill="'+o.fill+'" fill-opacity="'+(o.opac!=null?o.opac:.14)+'"';
-  return e + '></rect>';
+  const r=o.r!=null?o.r:(g.r!=null?g.r:0);
+  let e='<rect x="'+g.x+'" y="'+g.y+'" width="'+g.w+'" height="'+g.h+'" rx="'+r+'" class="'+(o.cls||'')+'"';
+  if(o.stroke) e+=' stroke="'+o.stroke+'"';
+  if(o.fill) e+=' fill="'+o.fill+'" fill-opacity="'+(o.opac!=null?o.opac:.14)+'"';
+  return e+'></rect>';
 }
-const text = (x,y,t,cls) => '<text x="'+x+'" y="'+y+'" class="'+cls+'">'+esc(t)+'</text>';
+const text=(x,y,t,cls)=>'<text x="'+x+'" y="'+y+'" class="'+cls+'">'+esc(t)+'</text>';
 function tecla(ev,id){ if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); entrar(id); } }
 
 function anima(desti){
-  const svg = document.getElementById('svg');
+  const svg=document.getElementById('svg');
   if(!svg){ vista=desti.slice(); return; }
   if(matchMedia('(prefers-reduced-motion: reduce)').matches){
     vista=desti.slice(); svg.setAttribute('viewBox',vista.join(' ')); return;
   }
   const ini=vista.slice(), t0=performance.now(), dur=360;
   requestAnimationFrame(function pas(t){
-    const k = Math.min((t-t0)/dur,1);
-    const e = k<.5 ? 2*k*k : 1-Math.pow(-2*k+2,2)/2;
+    const k=Math.min((t-t0)/dur,1);
+    const e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
     svg.setAttribute('viewBox', ini.map((n,i)=>n+(desti[i]-n)*e).join(' '));
     if(k<1) requestAnimationFrame(pas); else vista=desti.slice();
   });
@@ -610,6 +871,7 @@ document.addEventListener('keydown', e=>{
   if(caixaTriada){ caixaTriada=null; pintar(); }
   else if(cami.length){ cami.pop(); if(!cami.length) anima(GENERAL); pintar(); }
 });
+$('#dlg').addEventListener('close', ()=>$('#dlg').classList.remove('gran'));
 
 arrencar();
 </script>
