@@ -170,6 +170,13 @@ async function desar(peticio, env) {
 
 function neteja(f) {
   const t = v => String(v == null ? '' : v).slice(0, 500);
+  // ha de tenir la forma correcta i, a més, ser un dia que existeix de debò
+  const data = v => {
+    const x = String(v || '');
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(x)) return '';
+    const d = new Date(x + 'T00:00:00Z');
+    return !isNaN(d) && d.toISOString().slice(0, 10) === x ? x : '';
+  };
   return {
     id: t(f.id), tipus: t(f.tipus), pare: f.pare ? t(f.pare) : null,
     pos: t(f.pos), nom: t(f.nom),
@@ -178,7 +185,22 @@ function neteja(f) {
     files: Math.max(0, Math.min(40, Number(f.files) || 0)),
     columnes: Math.max(0, Math.min(40, Number(f.columnes) || 0)),
     actualitzat: t(f.actualitzat),
-    foto: !!f.foto
+    foto: !!f.foto,
+    comprovat: data(f.comprovat),
+    falta: !!f.falta,
+    prestec: f.prestec && f.prestec.qui ? {
+      qui: t(f.prestec.qui).slice(0, 120),
+      des: data(f.prestec.des),
+      torna: data(f.prestec.torna)
+    } : null,
+    tasques: Array.isArray(f.tasques) ? f.tasques.slice(0, 25)
+      .filter(x => x && String(x.text || '').trim())
+      .map(x => ({
+        id: t(x.id).slice(0, 40) || 'T' + Math.random().toString(36).slice(2, 10),
+        text: t(x.text).slice(0, 300),
+        quan: data(x.quan),
+        mesos: Math.max(0, Math.min(120, Number(x.mesos) || 0))
+      })) : []
   };
 }
 

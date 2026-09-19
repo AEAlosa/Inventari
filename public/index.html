@@ -53,6 +53,12 @@ h1{margin:0;font-size:20px;font-weight:800;letter-spacing:-.02em}
   color:var(--cobalt);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .molla .sep{color:#aab4b0}
 .molla .ara{font-weight:600}
+.molla button.enrere{display:inline-flex;align-items:center;gap:3px;text-decoration:none;
+  font-weight:600;color:var(--tinta);background:var(--paper);border:1.5px solid var(--linia);
+  border-radius:9px;padding:5px 11px 5px 7px;margin-right:2px}
+.molla button.enrere:hover{border-color:var(--tinta)}
+.molla button.enrere svg{width:17px;height:17px;flex:0 0 auto}
+.molla button.enrere span{max-width:42vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 .llenç{background:var(--paper);border:1.5px solid var(--linia);border-radius:var(--radi);
   box-shadow:var(--ombra);overflow:hidden;margin-bottom:16px}
@@ -100,6 +106,33 @@ g.tocable:hover>.calaix{fill:#f2f5f4}
 .obj .qt{font-variant-numeric:tabular-nums;font-weight:600;color:var(--tinta-suau);white-space:nowrap}
 .obj .accions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .buit{padding:26px 16px;color:var(--tinta-suau);font-size:14px}
+.marques{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.marca{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:99px;
+  border:1.5px solid;line-height:1.5;white-space:nowrap}
+.marca.tasca{color:#8a6100;border-color:#e2b23c;background:#fdf6e6}
+.marca.venç{color:var(--maó);border-color:var(--maó);background:#fdeeec}
+.marca.fora{color:var(--cobalt);border-color:var(--cobalt);background:#eaf2fb}
+.marca.falta{color:var(--maó);border-color:var(--maó);background:#fdeeec}
+.marca.vist{color:var(--molsa);border-color:#a9d3bb;background:#eef7f1}
+.pastilla{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;
+  padding:0 6px;border-radius:99px;background:var(--maó);color:#fff;font-size:11.5px;font-weight:700;
+  margin-left:7px;font-variant-numeric:tabular-nums}
+.pest{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.pest button{font:inherit;font-size:13.5px;font-weight:600;padding:7px 13px;border-radius:99px;
+  border:1.5px solid var(--linia);background:var(--paper);color:var(--tinta-suau);cursor:pointer}
+.pest button.tria{background:var(--tinta);border-color:var(--tinta);color:#fff}
+.tasca-fila{display:flex;gap:7px;align-items:center;margin-bottom:8px}
+.tasca-fila input[type=text]{flex:1;min-width:0}
+.tasca-fila input[type=date]{width:auto;flex:0 0 auto}
+.tasca-fila input[type=number]{width:62px;flex:0 0 auto}
+.tasca-fila button{flex:0 0 auto}
+.rev{display:flex;gap:10px;align-items:center;padding:11px 0;border-bottom:1px solid var(--linia-fina)}
+.rev:last-of-type{border-bottom:none}
+.rev .txt{flex:1;min-width:0}
+.rev .on{font-size:12px;color:var(--tinta-suau)}
+.rev .tria-b{display:flex;gap:5px;flex:0 0 auto}
+.compt-rev{font-size:13px;color:var(--tinta-suau);margin:0 0 12px}
+.ajuda{font-size:12.5px;color:var(--tinta-suau);margin:-6px 0 12px}
 .mini{width:46px;height:46px;border-radius:8px;object-fit:cover;background:var(--linia-fina);
   flex:0 0 auto;cursor:pointer;border:1px solid var(--linia)}
 .res .mini{width:36px;height:36px}
@@ -204,6 +237,35 @@ const norm = t => String(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-
 const EDITA = () => PAPER==='edicio';
 const tanca = () => { $('#dlg').close(); };
 const lim = (v,a,b) => Math.max(a,Math.min(b,v));
+const avui = () => new Date().toISOString().slice(0,10);
+function diesFins(d){
+  if(!d) return null;
+  const a=new Date(d+'T00:00:00'), b=new Date(avui()+'T00:00:00');
+  return Math.round((a-b)/86400000);
+}
+function quanTxt(d){
+  const n=diesFins(d);
+  if(n===null) return '';
+  if(n<0) return 'fa '+(-n)+(n===-1?' dia':' dies');
+  if(n===0) return 'avui';
+  if(n===1) return 'demà';
+  if(n<31) return 'en '+n+' dies';
+  return new Date(d+'T00:00:00').toLocaleDateString('ca-ES',{day:'numeric',month:'short',year:'numeric'});
+}
+function mesosDes(d){
+  if(!d) return null;
+  return Math.floor((new Date(avui()) - new Date(d+'T00:00:00'))/(30.4*86400000));
+}
+const tasquesDe = o => Array.isArray(o.tasques)?o.tasques:[];
+const vençuda = t => { const n=diesFins(t.quan); return t.quan && n!==null && n<=0; };
+function totesLesTasques(){
+  const r=[];
+  DADES.filter(f=>f.tipus==='objecte').forEach(o=>tasquesDe(o).forEach(t=>r.push({o:o,t:t})));
+  return r.sort((a,b)=>String(a.t.quan||'9999').localeCompare(String(b.t.quan||'9999')));
+}
+const prestats = () => DADES.filter(f=>f.tipus==='objecte'&&f.prestec&&f.prestec.qui);
+const quePendents = () => totesLesTasques().filter(x=>vençuda(x.t)).length +
+  DADES.filter(f=>f.tipus==='objecte'&&f.falta).length;
 
 /* ======================= arrencada ======================= */
 async function arrencar(){
@@ -212,7 +274,10 @@ async function arrencar(){
     if(r.status===401) return porta();
     const d = await r.json();
     PAPER=d.paper; VIST=d.actualitzat; DADES=d.files;
-    marc(); indexar(); pintar();
+    marc(); indexar();
+    const inici = pilaDeCodi(location.hash);
+    history.replaceState({p:inici.pila.map(x=>x.id),c:inici.caixa},'',location.hash||location.pathname);
+    situar(inici.pila, inici.caixa, false);
   }catch(e){
     document.getElementById('tot').innerHTML =
       '<div class="pag"><div class="avis mal"><span class="creix">No s\'ha pogut connectar. '+
@@ -313,10 +378,52 @@ function tocat(){ indexar(); pintar(); desar(); }
 const nouId = p => p+'_'+Math.random().toString(36).slice(2,10);
 
 /* ======================= navegació ======================= */
-function arrel(){ cami=[]; caixaTriada=null; anima(GENERAL); pintar(); }
-function entrar(id,pos){ cami.push({id:id,pos:pos||null}); caixaTriada=null; pintar();
-  if(window.scrollY>140) window.scrollTo({top:0,behavior:'smooth'}); }
-function tornarA(n){ cami=cami.slice(0,n); caixaTriada=null; if(!cami.length) anima(GENERAL); pintar(); }
+/* Cada pas queda desat a l'historial del navegador, o sigui que el botó
+   d'enrere del mòbil i el gest de lliscar cap a la dreta funcionen sols.
+   L'adreça també guarda on ets, així es pot compartir o desar un enllaç
+   que obri directament un moble concret. */
+let profunditat = 0;
+
+function codiDe(pila,caixa){
+  if(!pila.length) return '';
+  return '#'+pila.map(p=>p.id).join('/')+(caixa?'!'+caixa:'');
+}
+
+function pilaDeCodi(codi){
+  const net = String(codi||'').replace(/^#/,'');
+  if(!net) return {pila:[],caixa:null};
+  const [ruta,caixa] = net.split('!');
+  const pila=[]; let pare=null;
+  for(const tros of ruta.split('/')){
+    const f = PER_ID[decodeURIComponent(tros)];
+    if(!f) return {pila:[],caixa:null};
+    if((f.pare||null)!==pare) return {pila:[],caixa:null};
+    pila.push({id:f.id,pos:null}); pare=f.id;
+  }
+  return {pila:pila, caixa:caixa||null};
+}
+
+function situar(pila,caixa,apunta){
+  const eraFons = !cami.length;
+  cami = pila; caixaTriada = caixa||null;
+  if(apunta){ history.pushState({p:pila.map(x=>x.id),c:caixaTriada},'',codiDe(pila,caixaTriada)||location.pathname); profunditat++; }
+  if(!pila.length && !eraFons) anima(GENERAL);
+  pintar();
+}
+
+function arrel(){ situar([],null,true); }
+function entrar(id,pos){
+  situar(cami.concat([{id:id,pos:pos||null}]),null,true);
+  if(window.scrollY>140) window.scrollTo({top:0,behavior:'smooth'});
+}
+function tornarA(n){ situar(cami.slice(0,n),null,true); }
+function triar(pos){ situar(cami, caixaTriada===pos?null:pos, true); }
+
+function enrere(){
+  if(profunditat>0){ history.back(); return; }
+  if(caixaTriada) return situar(cami,null,true);
+  if(cami.length) return situar(cami.slice(0,-1),null,true);
+}
 
 function anarAObjecte(id){
   const f=PER_ID[id]; if(!f) return;
@@ -324,11 +431,20 @@ function anarAObjecte(id){
   const rs=$('#resultats'); if(rs) rs.innerHTML='';
   const pila=[]; let x=f.pare?PER_ID[f.pare]:null;
   while(x){ pila.unshift({id:x.id,pos:null}); x=x.pare?PER_ID[x.pare]:null; }
-  let ant=f;
-  for(let i=pila.length-1;i>=0;i--){ pila[i].pos=ant.pos||null; ant=PER_ID[pila[i].id]; }
-  cami=pila; caixaTriada=f.pos||null;
-  pintar(); window.scrollTo({top:0,behavior:'smooth'});
+  situar(pila, f.pos||null, true);
+  window.scrollTo({top:0,behavior:'smooth'});
 }
+
+addEventListener('popstate', ev => {
+  profunditat = Math.max(0, profunditat-1);
+  if(ev.state && Array.isArray(ev.state.p)){
+    const pila = ev.state.p.map(id=>({id:id,pos:null})).filter(x=>PER_ID[x.id]);
+    situar(pila, ev.state.c||null, false);
+  } else {
+    const r = pilaDeCodi(location.hash);
+    situar(r.pila, r.caixa, false);
+  }
+});
 
 /* ======================= pintat ======================= */
 function pintar(){
@@ -341,10 +457,25 @@ function pintar(){
   pintarPeu();
 }
 
+const FLETXA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 L8 12 L15 19" '+
+  'fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+function titolDe(){
+  if(!cami.length) return 'Plànol del cau';
+  const f=PER_ID[cami[cami.length-1].id];
+  return f ? f.nom + (caixaTriada?' · '+etqPos(caixaTriada):'') : 'Plànol del cau';
+}
+
 function pintarMolla(){
   const m=$('#molla'); if(!m) return;
-  if(!cami.length){ m.innerHTML='<span class="ara">Plànol del cau</span>'; return; }
-  let h='<button onclick="arrel()">Plànol</button>';
+  if(!cami.length && !caixaTriada){
+    m.innerHTML='<span class="ara">Plànol del cau</span>'; return;
+  }
+  const pare = cami.length>1 ? PER_ID[cami[cami.length-2].id] : null;
+  const cap = caixaTriada ? titolDe().split(' · ')[0] : (pare?pare.nom:'el plànol');
+  let h='<button class="enrere" onclick="enrere()" aria-label="Torna a '+esc(cap)+'">'+
+    FLETXA+'<span>'+esc(cap)+'</span></button><span class="sep">·</span>';
+  h+='<button onclick="arrel()">Plànol</button>';
   cami.forEach((pas,i)=>{
     const f=PER_ID[pas.id]; if(!f) return;
     h += '<span class="sep">›</span>';
@@ -480,7 +611,6 @@ function vistaMoble(m){
   } else h += '<div class="llista"><div class="buit">Tria una casella per veure què hi ha.</div></div>';
   $('#cos').innerHTML = h;
 }
-function triar(pos){ caixaTriada = caixaTriada===pos?null:pos; pintar(); }
 const retalla = (t,n) => t.length>n ? t.slice(0,Math.max(1,n-1))+'…' : t;
 
 function vistaLliure(m){
@@ -494,16 +624,31 @@ function vistaLliure(m){
   $('#cos').innerHTML = h;
 }
 
+function marques(o){
+  const m=[];
+  if(o.falta) m.push('<span class="marca falta">no s\'ha trobat</span>');
+  if(o.prestec&&o.prestec.qui) m.push('<span class="marca fora">se l\'ha endut '+esc(o.prestec.qui)+
+    (o.prestec.torna?' · torna '+esc(quanTxt(o.prestec.torna)):'')+'</span>');
+  tasquesDe(o).forEach(t=>{
+    m.push('<span class="marca '+(vençuda(t)?'venç':'tasca')+'">'+esc(t.text)+
+      (t.quan?' · '+esc(quanTxt(t.quan)):'')+'</span>');
+  });
+  return m.length?'<div class="marques">'+m.join('')+'</div>':'';
+}
+
 function fila(o, ambOn){
   return '<div class="obj">'+
     (o.foto?'<img class="mini" loading="lazy" src="/api/foto?id='+encodeURIComponent(o.id)+
       '" alt="" onclick="veureFoto(\''+o.id+'\')">':'')+
     '<div class="txt"><div class="nom">'+esc(o.nom)+'</div>'+
     (o.notes?'<div class="notes">'+esc(o.notes)+'</div>':'')+
-    (ambOn?'<div class="on">'+esc(onEs(o))+'</div>':'')+'</div>'+
+    (ambOn?'<div class="on">'+esc(onEs(o))+'</div>':'')+
+    marques(o)+'</div>'+
     (o.quantitat!=null?'<div class="qt">×'+o.quantitat+'</div>':'')+
     (EDITA()?'<div class="accions">'+
       '<button class="b mini-b" onclick="formObjecte(\''+o.id+'\')">Edita</button>'+
+      '<button class="b mini-b" onclick="formPrestec(\''+o.id+'\')">'+
+        ((o.prestec&&o.prestec.qui)?'Ha tornat':'Se l\'enduen')+'</button>'+
       '<button class="b mini-b" onclick="formMoure(\''+o.id+'\')">Mou</button>'+
       '<button class="b mini-b" onclick="confirmarTreure(\''+o.id+'\')">Treu</button></div>':'')+'</div>';
 }
@@ -520,8 +665,13 @@ function pintarPeu(){
     h += '<button class="b clar" onclick="totDeLaSala(\''+ara.id+'\')">Veure-ho tot</button>';
     if(EDITA()) h += '<button class="b clar" onclick="gestionar(\''+ara.id+'\')">Gestiona els mobles</button>';
   }
+  if(ara && EDITA() && compta(ara.id))
+    h += '<button class="b clar" onclick="revisar(\''+ara.id+'\')">Revisa</button>';
   if(ara && ara.tipus==='moble' && EDITA() && ara.files)
     h += '<button class="b clar" onclick="formSafates(\''+ara.id+'\')">Canvia les safates</button>';
+  const pend = quePendents();
+  h += '<button class="b'+(pend?'':' clar')+'" onclick="pendents()">Pendents'+
+    (pend?'<span class="pastilla">'+pend+'</span>':'')+'</button>';
   h += '<button class="b clar" onclick="baixarExcel()">Descarrega l\'Excel</button>';
   if(EDITA()) h += '<button class="b clar" onclick="historial()">Historial</button>';
   h += '<button class="b clar" onclick="sortir()">Surt</button>';
@@ -562,13 +712,15 @@ function cercar(q){
 /* ======================= Excel ======================= */
 function baixarExcel(){
   if(typeof XLSX==='undefined'){ alert('Encara s\'està carregant. Torna-ho a provar en un segon.'); return; }
-  const aoa=[['Objecte','Quantitat','Notes','On és','Sala']];
+  const aoa=[['Objecte','Quantitat','Notes','On és','Sala','Comprovat','Estat','Qui se l\'ha endut','Coses a fer']];
   DADES.filter(f=>f.tipus==='objecte').sort((a,b)=>a.nom.localeCompare(b.nom,'ca')).forEach(f=>{
     const s=salaDe(f.id);
-    aoa.push([f.nom, f.quantitat==null?'':f.quantitat, f.notes, onEs(f), s?s.nom:'']);
+    aoa.push([f.nom, f.quantitat==null?'':f.quantitat, f.notes, onEs(f), s?s.nom:'',
+      f.comprovat||'', f.falta?'no s\'ha trobat':'', (f.prestec&&f.prestec.qui)?f.prestec.qui:'',
+      tasquesDe(f).map(t=>t.text+(t.quan?' ('+t.quan+')':'')).join('; ')]);
   });
   const full=XLSX.utils.aoa_to_sheet(aoa);
-  full['!cols']=[{wch:34},{wch:10},{wch:38},{wch:50},{wch:14}];
+  full['!cols']=[{wch:34},{wch:10},{wch:38},{wch:50},{wch:14},{wch:13},{wch:16},{wch:20},{wch:40}];
   full['!freeze']={xSplit:0,ySplit:1};
   const wb=XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb,full,'Inventari');
@@ -619,6 +771,11 @@ function formObjecte(id){
       (o&&o.quantitat!=null?o.quantitat:'')+'"></div>'+
     '<div class="camp"><label for="f3">Notes</label><textarea id="f3" placeholder="Estat, de qui és, quan es va fer servir…">'+
       esc(o?o.notes:'')+'</textarea></div>'+
+    '<div class="camp"><label>Coses a fer</label><div id="tasques"></div>'+
+      '<button class="b mini-b" type="button" onclick="afegirFilaTasca()">+ Afegeix una tasca</button>'+
+      '<p class="ajuda" style="margin-top:9px">Data en què toca fer-ho. Si poses mesos, '+
+      'quan la marquis com a feta tornarà a aparèixer d\'aquí a aquest temps en comptes d\'esborrar-se.</p></div>'+
+    (o&&o.comprovat?'<p class="ajuda">Comprovat per últim cop '+esc(quanTxt(o.comprovat))+'.</p>':'')+
     '<div class="camp"><label for="f4">Foto</label><div class="foto-camp">'+
       '<img id="fprev" alt="" style="'+(o&&o.foto?'':'display:none')+'" src="'+
         (o&&o.foto?'/api/foto?id='+encodeURIComponent(o.id):'')+'">'+
@@ -626,6 +783,7 @@ function formObjecte(id){
     '<div class="fila-btns" style="margin:0"><button class="b" id="fok">Desa</button>'+
     '<button class="b clar" onclick="tanca()">Cancel·la</button></div>';
   $('#dlg').showModal(); $('#f1').focus();
+  tasquesDe(o||{}).forEach(afegirFilaTasca);
 
   $('#f4').onchange = async () => {
     const fi=$('#f4').files[0]; if(!fi) return;
@@ -642,9 +800,11 @@ function formObjecte(id){
     let obj=o;
     if(!obj){
       obj={id:nouId('obj'),tipus:'objecte',pare:pas.id,pos:caixaTriada||'',nom:nom,quantitat:qt,
-        notes:notes,files:0,columnes:0,foto:false,actualitzat:new Date().toISOString()};
+        notes:notes,files:0,columnes:0,foto:false,comprovat:avui(),falta:false,prestec:null,
+        tasques:[],actualitzat:new Date().toISOString()};
       DADES.push(obj);
     } else { obj.nom=nom; obj.quantitat=qt; obj.notes=notes; obj.actualitzat=new Date().toISOString(); }
+    obj.tasques = llegirTasques();
     if(fotoPendent){
       $('#fok').disabled=true; $('#fok').textContent='Pujant la foto…';
       try{ await pujarFoto(obj.id,fotoPendent); obj.foto=true; }
@@ -674,6 +834,178 @@ function formMoble(){
       actualitzat:new Date().toISOString()});
     tanca(); tocat();
   };
+}
+
+/* ---------- tasques dins del formulari ---------- */
+function afegirFilaTasca(t){
+  t = t && t.text!==undefined ? t : {text:'',quan:'',mesos:0};
+  const c=document.createElement('div');
+  c.className='tasca-fila';
+  c.innerHTML =
+    '<input type="text" placeholder="Renovar les vendes" value="'+esc(t.text||'')+'">'+
+    '<input type="date" value="'+esc(t.quan||'')+'">'+
+    '<input type="number" min="0" max="120" placeholder="mesos" value="'+(t.mesos||'')+'">'+
+    '<button class="b mini-b" type="button" title="Treu la tasca">×</button>';
+  c.querySelector('button').onclick = () => c.remove();
+  c.dataset.id = t.id || '';
+  $('#tasques').appendChild(c);
+}
+
+function llegirTasques(){
+  return [...document.querySelectorAll('#tasques .tasca-fila')].map(c=>{
+    const e=c.querySelectorAll('input');
+    return {id:c.dataset.id||nouId('t'), text:e[0].value.trim(),
+      quan:e[1].value||'', mesos:Number(e[2].value)||0};
+  }).filter(t=>t.text);
+}
+
+function ferTasca(idObj, idTasca){
+  const o=PER_ID[idObj]; if(!o) return;
+  const t=tasquesDe(o).find(x=>x.id===idTasca); if(!t) return;
+  if(t.mesos>0){
+    const base = t.quan ? new Date(t.quan+'T00:00:00') : new Date();
+    base.setMonth(base.getMonth()+t.mesos);
+    t.quan = base.toISOString().slice(0,10);
+  } else {
+    o.tasques = tasquesDe(o).filter(x=>x.id!==idTasca);
+  }
+  o.actualitzat=new Date().toISOString();
+  desar(); pendents();
+}
+
+/* ---------- préstecs ---------- */
+function formPrestec(id){
+  const o=PER_ID[id], p=o.prestec;
+  if(p&&p.qui){
+    $('#dlg-cos').innerHTML =
+      '<h2>«'+esc(o.nom)+'» ha tornat?</h2>'+
+      '<p class="on">Se\'l va endur '+esc(p.qui)+' '+esc(quanTxt(p.des))+
+      (p.torna?', havia de tornar '+esc(quanTxt(p.torna)):'')+'.</p>'+
+      '<div class="fila-btns" style="margin:0"><button class="b" id="pok">Sí, ja és aquí</button>'+
+      '<button class="b clar" onclick="tanca()">Encara no</button></div>';
+    if(!$('#dlg').open) $('#dlg').showModal();
+    $('#pok').onclick = () => {
+      o.prestec=null; o.comprovat=avui(); o.falta=false;
+      o.actualitzat=new Date().toISOString();
+      tanca(); tocat();
+    };
+    return;
+  }
+  $('#dlg-cos').innerHTML =
+    '<h2>Qui s\'endú «'+esc(o.nom)+'»?</h2><p class="on">'+esc(onEs(o))+'</p>'+
+    '<div class="camp"><label for="p1">Nom</label><input id="p1" placeholder="Qui se l\'emporta"></div>'+
+    '<div class="camp"><label for="p2">Quan hauria de tornar</label><input id="p2" type="date"></div>'+
+    '<div class="fila-btns" style="margin:0"><button class="b" id="pok">Apunta-ho</button>'+
+    '<button class="b clar" onclick="tanca()">Cancel·la</button></div>';
+  if(!$('#dlg').open) $('#dlg').showModal();
+  $('#p1').focus();
+  $('#pok').onclick = () => {
+    const qui=$('#p1').value.trim(); if(!qui){ $('#p1').focus(); return; }
+    o.prestec={qui:qui, des:avui(), torna:$('#p2').value||''};
+    o.actualitzat=new Date().toISOString();
+    tanca(); tocat();
+  };
+}
+
+/* ---------- mode revisió ---------- */
+let revArrel=null;
+function revisar(id){
+  revArrel=id;
+  $('#dlg').classList.add('gran');
+  pintarRevisio();
+  if(!$('#dlg').open) $('#dlg').showModal();
+}
+
+function pintarRevisio(){
+  const arrel=PER_ID[revArrel];
+  const objs=totsSota(revArrel).sort((a,b)=>onEs(a).localeCompare(onEs(b),'ca')||a.nom.localeCompare(b.nom,'ca'));
+  const fets=objs.filter(o=>o.comprovat===avui()||o.falta).length;
+  $('#dlg-cos').innerHTML =
+    '<h2>Revisió de '+esc(arrel.nom)+'</h2>'+
+    '<p class="compt-rev">'+fets+' de '+objs.length+' revisats avui. '+
+    'Ves marcant mentre ho mires de debò; es desa sol.</p>'+
+    objs.map(o=>{
+      const avuiOk = o.comprovat===avui() && !o.falta;
+      return '<div class="rev"><div class="txt"><div class="nom">'+esc(o.nom)+
+        (o.quantitat!=null?' <span class="qt">×'+o.quantitat+'</span>':'')+'</div>'+
+        '<div class="on">'+esc(onEs(o))+
+        (o.prestec&&o.prestec.qui?' · fora, amb '+esc(o.prestec.qui):'')+
+        (!avuiOk&&o.comprovat?' · vist '+esc(quanTxt(o.comprovat)):'')+'</div></div>'+
+        '<div class="tria-b">'+
+        '<button class="b mini-b'+(avuiOk?' tria':'')+'" style="'+(avuiOk?'border-color:var(--molsa);color:var(--molsa)':'')+
+          '" onclick="marcarRev(\''+o.id+'\',true)">Hi és</button>'+
+        '<button class="b mini-b" style="'+(o.falta?'border-color:var(--maó);color:var(--maó)':'')+
+          '" onclick="marcarRev(\''+o.id+'\',false)">Falta</button></div></div>';
+    }).join('')+
+    '<div class="fila-btns" style="margin:16px 0 0">'+
+    '<button class="b" onclick="acabarRevisio()">Acaba la revisió</button></div>';
+}
+
+function marcarRev(id,hiEs){
+  const o=PER_ID[id]; if(!o) return;
+  if(hiEs){ o.comprovat=avui(); o.falta=false; }
+  else { o.falta=true; }
+  o.actualitzat=new Date().toISOString();
+  pintarRevisio();
+}
+
+function acabarRevisio(){
+  const objs=totsSota(revArrel);
+  const falten=objs.filter(o=>o.falta);
+  const vistos=objs.filter(o=>o.comprovat===avui()&&!o.falta).length;
+  $('#dlg-cos').innerHTML =
+    '<h2>Revisió acabada</h2>'+
+    '<p class="on">'+vistos+' comprovats'+(falten.length?', '+falten.length+' sense trobar':'')+'.</p>'+
+    (falten.length?'<div class="llista" style="box-shadow:none;margin:0">'+
+      falten.map(o=>fila(o,true)).join('')+'</div>':
+      '<p class="on">Tot al seu lloc.</p>')+
+    '<div class="fila-btns" style="margin:16px 0 0"><button class="b clar" onclick="tanca()">Tanca</button></div>';
+  desar(); pintar();
+}
+
+/* ---------- pendents ---------- */
+let pestanya='tasques';
+function pendents(p){
+  if(p) pestanya=p;
+  $('#dlg').classList.add('gran');
+  const tsq=totesLesTasques(), fora=prestats();
+  const antics=DADES.filter(f=>f.tipus==='objecte').filter(o=>{
+    const m=mesosDes(o.comprovat); return o.falta || m===null || m>=12;
+  }).sort((a,b)=>String(a.comprovat||'').localeCompare(String(b.comprovat||'')));
+
+  let cos='';
+  if(pestanya==='tasques'){
+    cos = tsq.length ? tsq.map(x=>
+      '<div class="rev"><div class="txt"><div class="nom">'+esc(x.t.text)+'</div>'+
+      '<div class="on">'+esc(x.o.nom)+' · '+esc(onEs(x.o))+
+      (x.t.quan?' · <b>'+esc(quanTxt(x.t.quan))+'</b>':'')+
+      (x.t.mesos?' · es repeteix cada '+x.t.mesos+' mesos':'')+'</div></div>'+
+      (EDITA()?'<div class="tria-b"><button class="b mini-b" onclick="ferTasca(\''+x.o.id+'\',\''+x.t.id+'\')">Fet</button></div>':'')+
+      '</div>').join('') : '<p class="on">Cap tasca apuntada. S\'afegeixen des del formulari de cada objecte.</p>';
+  } else if(pestanya==='fora'){
+    cos = fora.length ? fora.map(o=>
+      '<div class="rev"><div class="txt"><div class="nom">'+esc(o.nom)+'</div>'+
+      '<div class="on">amb '+esc(o.prestec.qui)+' des de '+esc(quanTxt(o.prestec.des))+
+      (o.prestec.torna?' · havia de tornar '+esc(quanTxt(o.prestec.torna)):'')+'</div></div>'+
+      (EDITA()?'<div class="tria-b"><button class="b mini-b" onclick="formPrestec(\''+o.id+'\')">Ha tornat</button></div>':'')+
+      '</div>').join('') : '<p class="on">No hi ha res fora del cau.</p>';
+  } else {
+    cos = antics.length ? antics.map(o=>
+      '<div class="rev"><div class="txt"><div class="nom">'+esc(o.nom)+
+      (o.falta?' <span class="marca falta">no s\'ha trobat</span>':'')+'</div>'+
+      '<div class="on">'+esc(onEs(o))+' · '+
+      (o.comprovat?'comprovat '+esc(quanTxt(o.comprovat)):'mai comprovat')+'</div></div></div>').join('')
+      : '<p class="on">Tot s\'ha comprovat durant l\'últim any.</p>';
+  }
+
+  const p_ = (k,t,n) => '<button class="'+(pestanya===k?'tria':'')+'" onclick="pendents(\''+k+'\')">'+
+    t+(n?' ('+n+')':'')+'</button>';
+  $('#dlg-cos').innerHTML = '<h2>Pendents</h2>'+
+    '<div class="pest">'+p_('tasques','Coses a fer',tsq.length)+
+    p_('fora','Fora del cau',fora.length)+p_('antics','Per comprovar',antics.length)+'</div>'+
+    cos+'<div class="fila-btns" style="margin:16px 0 0">'+
+    '<button class="b clar" onclick="tanca()">Tanca</button></div>';
+  if(!$('#dlg').open) $('#dlg').showModal();
 }
 
 /* ---------- moure ---------- */
@@ -867,9 +1199,11 @@ function anima(desti){
 }
 
 document.addEventListener('keydown', e=>{
-  if(e.key!=='Escape'||$('#dlg').open) return;
-  if(caixaTriada){ caixaTriada=null; pintar(); }
-  else if(cami.length){ cami.pop(); if(!cami.length) anima(GENERAL); pintar(); }
+  if($('#dlg').open) return;
+  if(e.key==='Escape'){ enrere(); return; }
+  if((e.key==='Backspace'||e.key==='ArrowLeft') && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)){
+    e.preventDefault(); enrere();
+  }
 });
 $('#dlg').addEventListener('close', ()=>$('#dlg').classList.remove('gran'));
 
