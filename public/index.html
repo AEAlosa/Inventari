@@ -76,6 +76,10 @@ svg{display:block}
 .titol .sub b{color:var(--ok);font-weight:600}
 .titol .sub i{color:var(--alerta);font-style:normal;font-weight:600}
 .punt-sala{width:10px;height:10px;border-radius:99px;background:var(--tema);flex:0 0 auto}
+.ajuda-b{flex:0 0 auto;width:34px;height:34px;border-radius:99px;border:none;background:transparent;
+  color:var(--tinta-3);cursor:pointer;display:grid;place-items:center}
+.ajuda-b:hover{background:var(--tema-suau);color:var(--tema)}
+.ajuda-b svg{width:21px;height:21px}
 
 /* ============ cos ============ */
 .cos{max-width:760px;margin:0 auto;padding:14px 16px 26px}
@@ -163,6 +167,7 @@ g.toc:hover .cel{fill:#f7f9fa}
 .e.venc{color:var(--alerta);background:var(--alerta-suau)}
 .e.fora{color:var(--raiers);background:var(--raiers-suau)}
 .e.falta{color:var(--alerta);background:var(--alerta-suau)}
+.e.tag{color:var(--tinta-2);background:var(--linia-2)}
 
 .mes{flex:0 0 auto;width:32px;height:32px;border-radius:99px;border:none;background:transparent;
   color:var(--tinta-3);cursor:pointer;display:grid;place-items:center}
@@ -175,9 +180,9 @@ g.toc:hover .cel{fill:#f7f9fa}
   backdrop-filter:saturate(1.6) blur(12px);-webkit-backdrop-filter:saturate(1.6) blur(12px);
   border-top:1px solid var(--linia-2);padding-bottom:env(safe-area-inset-bottom);
 }
-.tabs-int{max-width:760px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
-.tab{background:none;border:none;padding:9px 4px 10px;display:flex;flex-direction:column;
-  align-items:center;gap:3px;color:var(--tinta-3);cursor:pointer;position:relative;font-size:10.5px;
+.tabs-int{max-width:760px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.tab{background:none;border:none;padding:9px 2px 10px;display:flex;flex-direction:column;
+  align-items:center;gap:3px;color:var(--tinta-3);cursor:pointer;position:relative;font-size:10px;
   font-weight:600;letter-spacing:.01em}
 .tab svg{width:22px;height:22px}
 .tab.actiu{color:var(--tema)}
@@ -214,6 +219,7 @@ dialog::backdrop{background:rgba(24,32,39,.45);backdrop-filter:blur(2px)}
 .full{background:var(--carta);border-radius:var(--r-l);box-shadow:var(--ombra-3);
   width:min(94vw,470px);max-height:86vh;overflow:auto;padding:22px}
 .full.ample{width:min(94vw,720px)}
+.full.enorme{width:min(96vw,880px)}
 .full h2{margin:0 0 3px;font-size:19px;font-weight:700;letter-spacing:-.02em}
 .full .on{margin:0 0 18px;font-size:13px;color:var(--tinta-2)}
 .full .ajuda{font-size:12.5px;color:var(--tinta-3);margin:8px 0 14px}
@@ -274,12 +280,112 @@ dialog.baix .full{width:100%;border-radius:var(--r-l) var(--r-l) 0 0;padding-bot
 .foto-m.inicial{display:grid;place-items:center;font-weight:800;font-size:15px;letter-spacing:-.02em}
 .pista{color:var(--tinta-3);font-size:13.5px;text-align:center;padding:26px 10px}
 
+/* manual */
+.manual{position:fixed;inset:0;z-index:70;background:var(--fons);display:flex;flex-direction:column}
+.manual .m-dalt{background:var(--carta);border-bottom:1px solid var(--linia);padding:13px 16px;
+  padding-top:calc(13px + env(safe-area-inset-top));display:flex;gap:10px;align-items:center;
+  justify-content:space-between}
+.manual .m-dalt strong{font-size:17px;font-weight:700;letter-spacing:-.02em}
+.manual .tanca{background:none;border:none;color:var(--tema);font-weight:600;font-size:14.5px;
+  cursor:pointer;padding:6px 4px}
+.manual .m-cos{flex:1;overflow:auto;padding:20px 18px calc(40px + env(safe-area-inset-bottom));
+  max-width:740px;margin:0 auto;width:100%}
+.manual h3{font-size:16px;font-weight:700;letter-spacing:-.01em;margin:30px 0 8px;
+  padding-top:18px;border-top:1px solid var(--linia)}
+.manual h3:first-of-type{border-top:none;padding-top:0;margin-top:20px}
+.manual p{margin:0 0 11px;font-size:15px;line-height:1.55;color:var(--tinta-2);max-width:62ch}
+.manual p b,.manual li b{color:var(--tinta);font-weight:700}
+.manual ul{margin:0 0 12px;padding-left:20px;max-width:62ch}
+.manual li{font-size:15px;line-height:1.55;color:var(--tinta-2);margin-bottom:7px}
+.manual .m-entrada{font-size:16px;color:var(--tinta);border-left:3px solid var(--tema);
+  padding-left:13px;margin-bottom:6px}
+.manual .m-final{margin-top:26px;padding-top:18px;border-top:1px solid var(--linia);
+  font-size:14px;color:var(--tinta-3)}
+.manual .m-fig{background:var(--carta);border:1px solid var(--linia);border-radius:var(--r-m);
+  padding:12px;margin:14px 0 16px;overflow-x:auto}
+.manual .m-fig svg{width:100%;min-width:430px;height:auto;display:block}
+.manual .m-fig.estreta{overflow:visible}
+.manual .m-fig.estreta svg{min-width:0}
+.manual .m-peu{font-size:13.5px;color:var(--tinta-3);margin:-4px 0 14px}
+.manual .m-llegenda{counter-reset:ll;list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+.manual .m-llegenda li{counter-increment:ll;position:relative;padding-left:30px;margin-bottom:8px}
+.manual .m-llegenda li::before{content:counter(ll);position:absolute;left:0;top:1px;width:20px;
+  height:20px;border-radius:99px;background:var(--tinta);color:#fff;font-size:11.5px;
+  font-weight:700;display:grid;place-items:center}
+.cadena{display:flex;flex-wrap:wrap;align-items:stretch;gap:7px;margin:14px 0 8px}
+.cadena i{align-self:center;color:var(--tinta-3);font-style:normal;font-size:16px}
+.baula{border:2px solid var(--c);background:var(--f);border-radius:11px;padding:8px 13px;
+  display:flex;flex-direction:column;gap:1px;min-width:0}
+.baula b{font-size:13px;font-weight:700;color:var(--c);letter-spacing:-.01em}
+.baula span{font-size:11px;color:var(--c);opacity:.78}
+.baula.ple b,.baula.ple span{color:#fff}
+.baula:nth-child(7) b,.baula:nth-child(9) b{color:var(--tinta)}
+.baula:nth-child(7) span,.baula:nth-child(9) span{color:var(--tinta-3);opacity:1}
+.m-punt{display:inline-block;width:10px;height:10px;border-radius:99px;vertical-align:-1px;
+  margin:0 1px 0 5px}
+
 /* pestanyes internes */
 .pest{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;scrollbar-width:none}
 .pest::-webkit-scrollbar{display:none}
 .pest button{flex:0 0 auto;border:1px solid var(--linia);background:var(--carta);border-radius:99px;
   padding:7px 14px;font-size:13.5px;font-weight:600;color:var(--tinta-2);cursor:pointer}
 .pest button.tria{background:var(--tinta);border-color:var(--tinta);color:#fff}
+
+/* ---- llistes ---- */
+.ll-cap{display:flex;gap:9px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.ll-cap input.nom{flex:1;min-width:150px;padding:10px 12px;border:1px solid var(--linia);
+  border-radius:var(--r-s);font:inherit;font-size:16px;font-weight:700}
+.ll-cap input.nom:focus{outline:none;border-color:var(--tema)}
+.ll-eines{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
+.ll-eines input.cerca-mini{flex:1;min-width:130px;padding:9px 12px;border:1px solid var(--linia);
+  border-radius:99px;font:inherit;font-size:15px}
+.ll-eines input.cerca-mini:focus{outline:none;border-color:var(--tema)}
+.ll-eines select{padding:9px 11px;border:1px solid var(--linia);border-radius:99px;font:inherit;
+  font-size:13.5px;background:var(--carta);color:var(--tinta-2);font-weight:600}
+.ll-tags{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;padding-bottom:2px;
+  scrollbar-width:none;-ms-overflow-style:none}
+.ll-tags::-webkit-scrollbar{display:none}
+.ll-tags button{flex:0 0 auto;white-space:nowrap}
+.ll-tags button{border:1px solid var(--linia);background:var(--carta);border-radius:99px;
+  padding:5px 11px;font-size:12.5px;font-weight:600;color:var(--tinta-2);cursor:pointer}
+.ll-tags button.tria{background:var(--tema);border-color:var(--tema);color:#fff}
+.panells{display:grid;gap:12px;grid-template-columns:1fr}
+@media (min-width:700px){.panells{grid-template-columns:1fr 1fr}}
+.panell{border:1px solid var(--linia);border-radius:var(--r-m);background:var(--carta);
+  display:flex;flex-direction:column;overflow:hidden}
+.panell>h3{margin:0;padding:10px 14px;font-size:13px;font-weight:700;border-bottom:1px solid var(--linia-2);
+  display:flex;justify-content:space-between;align-items:center;gap:8px;background:#fafbfc}
+.panell>h3 .n{font-weight:600;color:var(--tinta-3);font-variant-numeric:tabular-nums;margin-left:auto}
+.mini-acc{border:none;background:none;color:var(--cobalt);font:inherit;font-size:12px;font-weight:700;
+  cursor:pointer;padding:3px 8px;border-radius:99px;margin-left:4px}
+.mini-acc:hover{background:var(--raiers-suau)}
+.panell .cos-p{overflow:auto;max-height:36vh;min-height:110px}
+@media (min-width:700px){.panell .cos-p{max-height:46vh}}
+.grup{padding:7px 14px 3px;font-size:11.5px;font-weight:700;color:var(--tinta-3);
+  background:var(--fons);position:sticky;top:0;z-index:1}
+.lin{display:flex;gap:10px;align-items:center;padding:9px 14px;border-bottom:1px solid var(--linia-2);
+  cursor:pointer}
+.lin:last-child{border-bottom:none}
+.lin:hover{background:#f6f8f9}
+.lin .t{flex:1;min-width:0}
+.lin .nm{font-weight:600;font-size:14px;line-height:1.3}
+.lin .sub{font-size:11.5px;color:var(--tinta-3);margin-top:1px;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.lin .sig{flex:0 0 auto;width:26px;height:26px;border-radius:99px;display:grid;place-items:center;
+  font-weight:700;font-size:16px;border:1.5px solid var(--linia);color:var(--tinta-3);background:var(--carta)}
+.lin:hover .sig{border-color:var(--tema);color:var(--tema)}
+.lin .qtx{flex:0 0 auto;width:52px;padding:5px 7px;border:1px solid var(--linia);border-radius:7px;
+  font:inherit;font-size:13px;text-align:center;font-variant-numeric:tabular-nums}
+.lin .qtx:focus{outline:none;border-color:var(--tema)}
+.p-buit{padding:26px 14px;text-align:center;color:var(--tinta-3);font-size:13.5px}
+.fitxa-ll{display:flex;gap:11px;align-items:center;padding:13px 0;border-bottom:1px solid var(--linia-2)}
+.fitxa-ll:last-of-type{border-bottom:none}
+.fitxa-ll .t{flex:1;min-width:0}
+.fitxa-ll .nm{font-weight:700;font-size:15px}
+.fitxa-ll .sub{font-size:12.5px;color:var(--tinta-2);margin-top:2px}
+.fora-marca{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;
+  background:var(--raiers-suau);color:var(--raiers);margin-left:6px}
+.fora-marca.tard{background:var(--alerta-suau);color:var(--alerta)}
 
 .rev{display:flex;gap:11px;align-items:center;padding:11px 0;border-bottom:1px solid var(--linia-2)}
 .rev:last-of-type{border-bottom:none}
@@ -367,12 +473,14 @@ const I = {
   rellotge:'<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.2V12l3.2 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>',
   surt:'<path d="M10 4H5.5A1.5 1.5 0 0 0 4 5.5v13A1.5 1.5 0 0 0 5.5 20H10" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="m15 8 4 4-4 4M19 12H9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
   caixa:'<path d="M3.5 7.8 12 4l8.5 3.8v8.4L12 20l-8.5-3.8V7.8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M3.5 7.8 12 11.6l8.5-3.8M12 11.6V20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>',
+  llistes:'<path d="M7.5 5.5h13M7.5 12h13M7.5 18.5h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m2.6 5.4 1.2 1.2 2-2.2M2.6 11.9l1.2 1.2 2-2.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 17.2v4.2M15.4 19.3h4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+  ajuda:'<circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M9.7 9.4a2.4 2.4 0 1 1 3.2 2.3c-.6.25-.9.8-.9 1.45v.35" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="16.4" r="1.05" fill="currentColor"/>',
   graella:'<rect x="4" y="4" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="4" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="4" y="13" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="13" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/>'
 };
 const ic = (k,cls) => '<svg viewBox="0 0 24 24" aria-hidden="true"'+(cls?' class="'+cls+'"':'')+'>'+I[k]+'</svg>';
 
 /* ===================== estat ===================== */
-let DADES=[], PER_ID={}, FILLS={}, PAPER=null, VIST=null;
+let DADES=[], LLISTES=[], PER_ID={}, FILLS={}, PAPER=null, VIST=null;
 let cami=[], caixaTriada=null, vista=GENERAL.slice(), estat='', profunditat=0;
 let fotoPendent=null, revArrel=null, pestanya='tasques', cercaOberta=false;
 
@@ -437,6 +545,17 @@ function inicialSala(id){
 }
 function temaDe(id){ const s=salaDe(id); return TEMES[s?s.id:'_']||TEMES._; }
 const tasquesDe = o => Array.isArray(o.tasques)?o.tasques:[];
+const etsDe = o => Array.isArray(o.etiquetes)?o.etiquetes:[];
+function totesLesEtiquetes(){
+  const m=new Map();
+  DADES.filter(f=>f.tipus==='objecte').forEach(o=>etsDe(o).forEach(e=>{
+    const k=norm(e); if(!m.has(k)) m.set(k,e);
+  }));
+  return [...m.values()].sort((a,b)=>a.localeCompare(b,'ca'));
+}
+function llegirEtiquetes(txt){
+  return String(txt||'').split(/[,;\n]/).map(x=>x.trim()).filter(Boolean).slice(0,12);
+}
 const vençuda = t => { const n=diesFins(t.quan); return !!t.quan && n!==null && n<=0; };
 function totesLesTasques(){
   const r=[];
@@ -457,7 +576,7 @@ async function arrencar(){
     const r = await fetch('/api/dades');
     if(r.status===401) return porta();
     const d = await r.json();
-    PAPER=d.paper; VIST=d.actualitzat; DADES=d.files;
+    PAPER=d.paper; VIST=d.actualitzat; DADES=d.files; LLISTES=d.llistes||[];
     esquelet(); indexar();
     const i = pilaDeCodi(location.hash);
     history.replaceState({p:i.pila.map(x=>x.id),c:i.caixa},'',location.hash||location.pathname);
@@ -593,6 +712,7 @@ function pintarCap(){
   else if(estat==='fallat') sub='<i>No s\'ha desat</i>';
 
   h += '<div class="titol"><h1>'+esc(titol)+'</h1><div class="sub">'+sub+'</div></div>';
+  h += '<button class="ajuda-b" onclick="instruccions()" aria-label="Com funciona">'+ic('ajuda')+'</button>';
   if(a && salaDe(a.id)) h += '<span class="punt-sala"></span>';
   $('#cap').innerHTML=h;
 }
@@ -626,6 +746,7 @@ function pintarTabs(){
   $('#tabs').innerHTML =
     t(!cami.length,'mapa','Mapa','arrel()') +
     t(cercaOberta,'cerca','Buscar','obrirCerca()') +
+    t(false,'llistes','Llistes','llistes()') +
     t(false,'llista','Pendents','pendents()',n) +
     t(false,'mes','Més','menuMes()');
 }
@@ -865,7 +986,7 @@ function vistaLliure(m){
 
 /* ---------- fila d'objecte ---------- */
 function etiquetes(o){
-  const m=[];
+  const m=etsDe(o).map(e=>'<span class="e tag">'+esc(e)+'</span>');
   if(o.falta) m.push('<span class="e falta">no s\'ha trobat</span>');
   if(o.prestec&&o.prestec.qui){
     const tard = o.prestec.torna && diesFins(o.prestec.torna)<0;
@@ -896,7 +1017,7 @@ async function desar(){
   estat='desant'; pintarCap();
   try{
     const r=await fetch('/api/dades',{method:'POST',headers:{'content-type':'application/json'},
-      body:JSON.stringify({files:DADES,vist:VIST})});
+      body:JSON.stringify({files:DADES,llistes:LLISTES,vist:VIST})});
     const d=await r.json();
     if(r.status===409){
       estat=''; pintarCap();
@@ -922,7 +1043,7 @@ function tocat(){ indexar(); pintar(); desar(); }
 function obrir(html,mida){
   const d=$('#dlg');
   d.className = mida==='baix' ? 'baix' : '';
-  d.innerHTML='<div class="full'+(mida==='ample'?' ample':'')+'">'+
+  d.innerHTML='<div class="full'+(mida==='ample'?' ample':mida==='enorme'?' enorme':'')+'">'+
     (mida==='baix'?'<div class="nansa"></div>':'')+html+'</div>';
   if(!d.open) d.showModal();
 }
@@ -948,11 +1069,14 @@ function menuObjecte(id){
 /* ---------- menú Més ---------- */
 function menuMes(){
   obrir('<h2>Més</h2><p class="on">'+(EDITA()?'Estàs editant l\'inventari.':'Només pots consultar.')+'</p>'+
+    '<button class="opcio" onclick="tanca();instruccions()">'+ic('ajuda')+
+      '<span>Com funciona<small>Manual d\'ús, funció per funció</small></span></button>'+
     '<button class="opcio" onclick="tanca();baixarExcel()">'+ic('excel')+
       '<span>Descarrega l\'Excel<small>Tot l\'inventari en un full de càlcul</small></span></button>'+
     (EDITA()?'<button class="opcio" onclick="tanca();historial()">'+ic('rellotge')+
       '<span>Historial<small>Recupera una versió anterior</small></span></button>':'')+
-    '<button class="opcio perill" onclick="sortir()">'+ic('surt')+'<span>Surt</span></button>','baix');
+    '<button class="opcio perill" onclick="sortir()">'+ic('surt')+
+      '<span>Surt<small>Per entrar amb l\'altra contrasenya</small></span></button>','baix');
 }
 async function sortir(){ await fetch('/api/sortir',{method:'POST'}); location.reload(); }
 
@@ -982,7 +1106,8 @@ function cercar(q){
   const caixa=$('#res'); if(!caixa) return;
   if(q.length<2){ caixa.innerHTML='<div class="pista">Escriu dues lletres o més.</div>'; return; }
   const n=norm(q);
-  const tr=DADES.filter(f=>f.tipus==='objecte'&&(norm(f.nom).includes(n)||norm(f.notes).includes(n))).slice(0,40);
+  const tr=DADES.filter(f=>f.tipus==='objecte'&&(norm(f.nom).includes(n)||norm(f.notes).includes(n)||
+    etsDe(f).some(e=>norm(e).includes(n)))).slice(0,40);
   if(!tr.length){
     caixa.innerHTML='<div class="pista">Cap objecte amb aquest nom.<br>Prova amb una paraula més curta.</div>';
     return;
@@ -1059,13 +1184,20 @@ function formObjecte(id){
     '<div class="camp"><label for="f3">Notes</label>'+
       '<textarea id="f3" placeholder="Estat, de qui és, quan es va fer servir…">'+esc(o?o.notes:'')+
       '</textarea></div>'+
+    '<div class="camp"><label for="f5">Etiquetes</label>'+
+      '<input id="f5" list="ets-existents" placeholder="acampada, cuina, primers auxilis" value="'+
+      esc(etsDe(o||{}).join(', '))+'">'+
+      '<datalist id="ets-existents">'+
+      totesLesEtiquetes().map(e=>'<option value="'+esc(e)+'">').join('')+'</datalist>'+
+      '<p class="ajuda" style="margin:7px 0 0">Separa-les amb comes. Serveixen per agrupar coses '+
+      'que no són al mateix lloc i per muntar llistes de cop.</p></div>'+
     '<div class="camp"><label>Coses a fer</label><div id="tasques"></div>'+
       '<button class="b xicot clar" type="button" onclick="afegirFilaTasca()">+ Afegeix una tasca</button>'+
       '<p class="ajuda">Posa la data en què toca fer-ho. Si hi afegeixes mesos, quan la marquis '+
       'com a feta tornarà a aparèixer d\'aquí a aquest temps en comptes d\'esborrar-se.</p></div>'+
     (o&&o.comprovat?'<p class="ajuda">Comprovat per últim cop '+esc(quanTxt(o.comprovat))+'.</p>':'')+
     '<div class="fila-b dreta"><button class="b clar" onclick="tanca()">Cancel·la</button>'+
-    '<button class="b tema" id="fok">Desa</button></div>');
+    '<button class="b" id="fok">Desa</button></div>');
   $('#f1').focus();
   tasquesDe(o||{}).forEach(afegirFilaTasca);
 
@@ -1081,13 +1213,17 @@ function formObjecte(id){
     const nom=$('#f1').value.trim(); if(!nom){ $('#f1').focus(); return; }
     const qt=$('#f2').value===''?null:Number($('#f2').value);
     const notes=$('#f3').value.trim();
+    const ets=llegirEtiquetes($('#f5').value);
     let obj=o;
     if(!obj){
       obj={id:nouId('obj'),tipus:'objecte',pare:pas.id,pos:caixaTriada||'',nom:nom,quantitat:qt,
         notes:notes,files:0,columnes:0,foto:false,comprovat:avui(),falta:false,prestec:null,
-        tasques:[],actualitzat:new Date().toISOString()};
+        tasques:[],etiquetes:ets,actualitzat:new Date().toISOString()};
       DADES.push(obj);
-    } else { obj.nom=nom; obj.quantitat=qt; obj.notes=notes; obj.actualitzat=new Date().toISOString(); }
+    } else {
+      obj.nom=nom; obj.quantitat=qt; obj.notes=notes; obj.etiquetes=ets;
+      obj.actualitzat=new Date().toISOString();
+    }
     obj.tasques=llegirTasques();
     if(fotoPendent){
       $('#fok').disabled=true; $('#fok').textContent='Pujant la foto…';
@@ -1140,7 +1276,7 @@ function formMoble(){
       '<input id="m3" type="number" min="0" value="0"></div></div>'+
     '<p class="ajuda">Deixa-ho a zero si a dins hi va una llista d\'objectes sense compartiments.</p>'+
     '<div class="fila-b dreta"><button class="b clar" onclick="tanca()">Cancel·la</button>'+
-    '<button class="b tema" id="mok">Desa</button></div>');
+    '<button class="b" id="mok">Desa</button></div>');
   $('#m1').focus();
   $('#mok').onclick=()=>{
     const nom=$('#m1').value.trim(); if(!nom){ $('#m1').focus(); return; }
@@ -1168,7 +1304,7 @@ function formMoure(id){
     dest.map(d=>'<option value="'+esc(d.v)+'"'+(d.v===ara?' selected':'')+'>'+esc(d.etq)+'</option>').join('')+
     '</select></div>'+
     '<div class="fila-b dreta"><button class="b clar" onclick="tanca()">Cancel·la</button>'+
-    '<button class="b tema" id="mvok">Mou-ho</button></div>');
+    '<button class="b" id="mvok">Mou-ho</button></div>');
   $('#mvok').onclick=()=>{
     const p=$('#mv').value.split('|');
     o.pare=p[0]; o.pos=p[1]||''; o.actualitzat=new Date().toISOString();
@@ -1183,7 +1319,7 @@ function formPrestec(id){
       '<p class="on">Se\'l va endur '+esc(p.qui)+' '+esc(quanTxt(p.des))+
       (p.torna?', havia de tornar '+esc(quanTxt(p.torna)):'')+'.</p>'+
       '<div class="fila-b dreta"><button class="b clar" onclick="tanca()">Encara no</button>'+
-      '<button class="b tema" id="pok">Sí, ja és aquí</button></div>');
+      '<button class="b" id="pok">Sí, ja és aquí</button></div>');
     $('#pok').onclick=()=>{
       o.prestec=null; o.comprovat=avui(); o.falta=false;
       o.actualitzat=new Date().toISOString(); tanca(); tocat();
@@ -1194,7 +1330,7 @@ function formPrestec(id){
     '<div class="camp"><label for="p1">Nom</label><input id="p1" placeholder="Qui se l\'emporta"></div>'+
     '<div class="camp"><label for="p2">Quan hauria de tornar</label><input id="p2" type="date"></div>'+
     '<div class="fila-b dreta"><button class="b clar" onclick="tanca()">Cancel·la</button>'+
-    '<button class="b tema" id="pok">Apunta-ho</button></div>');
+    '<button class="b" id="pok">Apunta-ho</button></div>');
   $('#p1').focus();
   $('#pok').onclick=()=>{
     const qui=$('#p1').value.trim(); if(!qui){ $('#p1').focus(); return; }
@@ -1216,7 +1352,7 @@ function gestionar(idSala){
       '<button class="b xicot clar" onclick="formSafates(\''+m.id+'\',\''+idSala+'\')">Safates</button>'+
       (MOBLES[m.id]?'':'<button class="b xicot clar" onclick="confirmarTreure(\''+m.id+'\')">Treu</button>')+
       '</div></div>').join('')+
-    '<div class="fila-b" style="margin-top:18px"><button class="b tema" onclick="formMobleNou(\''+
+    '<div class="fila-b" style="margin-top:18px"><button class="b" onclick="formMobleNou(\''+
     idSala+'\')">Afegeix un moble</button>'+
     '<button class="b clar" onclick="tanca()">Tanca</button></div>','ample');
 }
@@ -1230,7 +1366,7 @@ function formMobleNou(idSala){
     '<p class="ajuda">Sortirà a la llista de sota el plànol de la sala. Per dibuixar-lo al seu lloc '+
     'calen les coordenades.</p>'+
     '<div class="fila-b dreta"><button class="b clar" onclick="gestionar(\''+idSala+'\')">Enrere</button>'+
-    '<button class="b tema" id="nok">Desa</button></div>');
+    '<button class="b" id="nok">Desa</button></div>');
   $('#n1').focus();
   $('#nok').onclick=()=>{
     const nom=$('#n1').value.trim(); if(!nom){ $('#n1').focus(); return; }
@@ -1246,7 +1382,7 @@ function formReanomenar(id,tornar){
     '<div class="camp"><label for="r1">Com se\'n diu</label><input id="r1" value="'+esc(m.nom)+'"></div>'+
     '<div class="fila-b dreta"><button class="b clar" onclick="'+
     (tornar?'gestionar(\''+tornar+'\')':'tanca()')+'">Enrere</button>'+
-    '<button class="b tema" id="rok">Desa</button></div>');
+    '<button class="b" id="rok">Desa</button></div>');
   $('#r1').focus(); $('#r1').select();
   $('#rok').onclick=()=>{
     const nom=$('#r1').value.trim(); if(!nom) return;
@@ -1265,7 +1401,7 @@ function formSafates(id,tornar){
     'a l\'última que quedi.</p><div id="s-avis"></div>'+
     '<div class="fila-b dreta"><button class="b clar" onclick="'+
     (tornar?'gestionar(\''+tornar+'\')':'tanca()')+'">Enrere</button>'+
-    '<button class="b tema" id="sok">Desa</button></div>');
+    '<button class="b" id="sok">Desa</button></div>');
   const revisa=()=>{
     const f=Number($('#s1').value)||0, c=Number($('#s2').value)||0;
     const perduts=fillsDe(m.id).filter(x=>{
@@ -1332,7 +1468,7 @@ function pintarRevisio(){
         '</div></div>';
     }).join('')+
     '<div class="fila-b dreta" style="margin-top:18px">'+
-    '<button class="b tema" onclick="acabarRevisio()">Acaba la revisió</button></div>','ample');
+    '<button class="b" onclick="acabarRevisio()">Acaba la revisió</button></div>','ample');
 }
 function marcarRev(id,hiEs){
   const o=PER_ID[id]; if(!o) return;
@@ -1395,6 +1531,358 @@ function pendents(p){
     'ample');
 }
 
+
+/* ===================== llistes ===================== */
+/* Una llista és un grapat d'objectes triats de l'inventari: el que us endueu a
+   un campament, el que cal revisar, el que es presta a un altre agrupament.
+   Es guarda, es reobre, es torna a fer servir i es pot marcar tota de cop com
+   a treta del cau.                                                            */
+
+let llistaOberta=null, ordreLl='lloc', tagsLl=[], cercaLl='', TAGS_LL=[];
+
+function grupDe(o,ordre){
+  if(ordre==='nom') return (o.nom.trim()[0]||'?').toUpperCase();
+  if(ordre==='etiqueta') return etsDe(o)[0]||'Sense etiqueta';
+  const t=[]; let x=o.pare?PER_ID[o.pare]:null, g=0;
+  while(x&&g++<20){ t.unshift(x.nom); x=x.pare?PER_ID[x.pare]:null; }
+  return t.join(' › ')||'Sense ubicació';
+}
+
+function agrupa(objs,ordre){
+  const m=new Map();
+  objs.forEach(o=>{
+    const k=grupDe(o,ordre);
+    if(!m.has(k)) m.set(k,[]);
+    m.get(k).push(o);
+  });
+  return [...m.entries()]
+    .sort((a,b)=>a[0].localeCompare(b[0],'ca'))
+    .map(([k,v])=>[k, v.sort((a,b)=>a.nom.localeCompare(b.nom,'ca'))]);
+}
+
+const llistaPerId = id => LLISTES.find(l=>l.id===id);
+const itemsDe = l => (l&&Array.isArray(l.items)?l.items:[]).filter(i=>PER_ID[i.id]);
+const objsDeLlista = l => itemsDe(l).map(i=>PER_ID[i.id]);
+
+/* ---------- índex de llistes ---------- */
+function llistes(){
+  llistaOberta=null;
+  const files = LLISTES.slice().sort((a,b)=>
+    String(b.actualitzada||b.creada||'').localeCompare(String(a.actualitzada||a.creada||'')));
+  const cos = files.length ? files.map(l=>{
+    const n=itemsDe(l).length;
+    const fora=l.extreta&&(l.extreta.qui||l.extreta.quan);
+    const tard=fora&&l.extreta.torna&&diesFins(l.extreta.torna)<0;
+    return '<div class="fitxa-ll"><div class="t"><div class="nm">'+esc(l.nom||'Llista sense nom')+
+      (fora?'<span class="fora-marca'+(tard?' tard':'')+'">fora del cau</span>':'')+'</div>'+
+      '<div class="sub">'+compteTxt(n)+
+      (fora?' · se\'ls va endur '+esc(l.extreta.qui||'algú')+' '+esc(quanTxt(l.extreta.quan))+
+        (l.extreta.torna?', torna '+esc(quanTxt(l.extreta.torna)):''):'')+
+      (!fora&&l.actualitzada?' · '+esc(quanTxt(l.actualitzada)):'')+'</div></div>'+
+      '<div class="b-grup"><button class="b xicot clar" onclick="obrirLlista(\''+l.id+'\')">Obre</button>'+
+      '<button class="b xicot clar" onclick="excelLlista(\''+l.id+'\')">Excel</button>'+
+      (EDITA()?'<button class="b xicot clar" onclick="menuLlista(\''+l.id+'\')">⋯</button>':'')+
+      '</div></div>';
+  }).join('') : '<div class="res-buit"><b>Encara no hi ha cap llista</b>'+
+      'Una llista és el que us endueu a un campament, o el que cal revisar. Se selecciona un cop '+
+      'i es torna a fer servir cada any.</div>';
+
+  obrir('<h2>Llistes</h2><p class="on">Queden guardades. Es poden reobrir, editar i reutilitzar.</p>'+
+    cos+
+    '<div class="fila-b" style="margin-top:18px">'+
+    (EDITA()?'<button class="b" onclick="novaLlista()">Nova llista</button>':'')+
+    '<button class="b clar" onclick="tanca()">Tanca</button></div>','ample');
+}
+
+function novaLlista(){
+  obrir('<h2>Nova llista</h2><p class="on">Posa-li un nom que es reconegui d\'aquí a un any.</p>'+
+    '<div class="camp"><label for="nl">Nom</label>'+
+    '<input id="nl" placeholder="Campaments d\'estiu"></div>'+
+    '<div class="fila-b dreta"><button class="b clar" onclick="llistes()">Enrere</button>'+
+    '<button class="b" id="nlok">Crea-la</button></div>');
+  $('#nl').focus();
+  const fer=()=>{
+    const nom=$('#nl').value.trim(); if(!nom){ $('#nl').focus(); return; }
+    const l={id:nouId('ll'),nom:nom,notes:'',creada:avui(),actualitzada:avui(),items:[],extreta:null};
+    LLISTES.push(l); desar(); obrirLlista(l.id);
+  };
+  $('#nlok').onclick=fer;
+  $('#nl').onkeydown=e=>{ if(e.key==='Enter') fer(); };
+}
+
+function menuLlista(id){
+  const l=llistaPerId(id); if(!l) return;
+  obrir('<h2>'+esc(l.nom)+'</h2><p class="on">'+compteTxt(itemsDe(l).length)+'</p>'+
+    '<button class="opcio" onclick="tanca();obrirLlista(\''+id+'\')">'+ic('llapis')+
+      '<span>Obre i edita</span></button>'+
+    '<button class="opcio" onclick="tanca();reanomenarLlista(\''+id+'\')">'+ic('llapis')+
+      '<span>Canvia-li el nom</span></button>'+
+    '<button class="opcio" onclick="tanca();duplicarLlista(\''+id+'\')">'+ic('caixa')+
+      '<span>Duplica-la<small>Per fer-ne una variant sense tocar aquesta</small></span></button>'+
+    '<button class="opcio" onclick="tanca();excelLlista(\''+id+'\')">'+ic('excel')+
+      '<span>Descarrega-la en Excel</span></button>'+
+    '<button class="opcio" onclick="tanca();buidarLlistaPerId(\''+id+'\')">'+ic('paperera')+
+      '<span>Treu-ne tots els objectes<small>La llista es queda, però buida</small></span></button>'+
+    '<button class="opcio perill" onclick="tanca();esborrarLlista(\''+id+'\')">'+ic('paperera')+
+      '<span>Esborra-la per sempre</span></button>','baix');
+}
+
+function reanomenarLlista(id){
+  const l=llistaPerId(id); if(!l) return;
+  obrir('<h2>Nom de la llista</h2>'+
+    '<div class="camp"><label for="rl">Com se\'n diu</label>'+
+    '<input id="rl" value="'+esc(l.nom)+'"></div>'+
+    '<div class="fila-b dreta"><button class="b clar" onclick="llistes()">Enrere</button>'+
+    '<button class="b" id="rlok">Desa</button></div>');
+  $('#rl').focus(); $('#rl').select();
+  $('#rlok').onclick=()=>{
+    const nom=$('#rl').value.trim(); if(!nom) return;
+    l.nom=nom; l.actualitzada=avui(); desar(); llistes();
+  };
+}
+
+function duplicarLlista(id){
+  const l=llistaPerId(id); if(!l) return;
+  const nova={id:nouId('ll'),nom:l.nom+' (còpia)',notes:l.notes||'',creada:avui(),
+    actualitzada:avui(),items:itemsDe(l).map(i=>({id:i.id,quantitat:i.quantitat})),extreta:null};
+  LLISTES.push(nova); desar(); obrirLlista(nova.id);
+}
+
+function esborrarLlista(id){
+  const l=llistaPerId(id); if(!l) return;
+  const fora=l.extreta&&(l.extreta.qui||l.extreta.quan);
+  obrir('<h2>Esborrar «'+esc(l.nom)+'»?</h2><p class="on">'+
+    'La llista desapareix per sempre. Els objectes no es toquen: continuen a l\'inventari.'+
+    (fora?' Com que està marcada com a treta del cau, els objectes es quedaran marcats com a '+
+      'fora; caldrà tornar-los un per un.':'')+'</p>'+
+    '<div class="fila-b dreta"><button class="b clar" onclick="llistes()">Cancel·la</button>'+
+    '<button class="b perill" id="elok">Esborra-la</button></div>');
+  $('#elok').onclick=()=>{
+    LLISTES=LLISTES.filter(x=>x.id!==id);
+    desar(); llistes();
+  };
+}
+
+/* ---------- constructor de dues bandes ---------- */
+function obrirLlista(id){
+  llistaOberta=id; cercaLl=''; tagsLl=[];
+  const l=llistaPerId(id); if(!l) return llistes();
+  TAGS_LL=totesLesEtiquetes();
+  obrir('<div class="ll-cap">'+
+      '<button class="tornar nomes-icona" onclick="llistes()" aria-label="Torna a les llistes">'+
+        ic('enrere')+'</button>'+
+      (EDITA()?'<input class="nom" id="ll-nom" value="'+esc(l.nom)+'" aria-label="Nom de la llista">'
+             :'<h2 style="flex:1">'+esc(l.nom)+'</h2>')+
+    '</div>'+
+    '<div id="ll-estat"></div>'+
+    '<div class="ll-eines">'+
+      '<input class="cerca-mini" id="ll-q" type="search" placeholder="Filtra per nom" '+
+        'autocomplete="off" aria-label="Filtra els objectes">'+
+      '<select id="ll-ordre" aria-label="Com s\'ordena">'+
+        '<option value="lloc">Per sala i moble</option>'+
+        '<option value="nom">Per nom</option>'+
+        '<option value="etiqueta">Per etiqueta</option>'+
+      '</select></div>'+
+    (TAGS_LL.length?'<div class="ll-tags" id="ll-tags">'+TAGS_LL.map((t,i)=>
+      '<button onclick="capgiraTag('+i+')">'+esc(t)+'</button>').join('')+
+      '</div>':'')+
+    '<div class="panells">'+
+      '<div class="panell"><h3><span>Al cau</span>'+
+        (EDITA()?'<button class="mini-acc" onclick="afegirTotElQueEsVeu()">Afegeix-ho tot</button>':'')+
+        '<span class="n" id="n-cau"></span></h3>'+
+        '<div class="cos-p" id="pane-cau"></div></div>'+
+      '<div class="panell"><h3><span>A la llista</span><span class="n" id="n-llista"></span></h3>'+
+        '<div class="cos-p" id="pane-llista"></div></div>'+
+    '</div>'+
+    '<div class="fila-b" style="margin-top:16px" id="ll-peu"></div>','enorme');
+
+  if(EDITA()) $('#ll-nom').onchange=()=>{
+    const nom=$('#ll-nom').value.trim();
+    if(nom){ l.nom=nom; l.actualitzada=avui(); desar(); }
+  };
+  $('#ll-q').addEventListener('input', e=>{ cercaLl=e.target.value.trim(); panells(); });
+  $('#ll-ordre').value=ordreLl;
+  $('#ll-ordre').onchange=e=>{ ordreLl=e.target.value; panells(); };
+  panells();
+}
+
+/* Per índex, no pel text: una etiqueta amb apòstrof trencaria l'atribut. */
+function capgiraTag(i){
+  const t=TAGS_LL[i]; if(t===undefined) return;
+  tagsLl = tagsLl.includes(t) ? tagsLl.filter(x=>x!==t) : tagsLl.concat([t]);
+  const c=$('#ll-tags');
+  if(c) [].slice.call(c.querySelectorAll('button')).forEach((b,j)=>
+    b.classList.toggle('tria', tagsLl.includes(TAGS_LL[j])));
+  panells();
+}
+
+function passaFiltre(o){
+  if(cercaLl.length && !norm(o.nom).includes(norm(cercaLl)) &&
+     !etsDe(o).some(e=>norm(e).includes(norm(cercaLl)))) return false;
+  if(tagsLl.length && !etsDe(o).some(e=>tagsLl.includes(e))) return false;
+  return true;
+}
+
+function panells(){
+  const l=llistaPerId(llistaOberta); if(!l) return;
+  const dins=new Set(itemsDe(l).map(i=>i.id));
+  const tots=DADES.filter(f=>f.tipus==='objecte');
+  const fora=tots.filter(o=>!dins.has(o.id)&&passaFiltre(o));
+  const sel=objsDeLlista(l).filter(passaFiltre);
+
+  const pc=$('#pane-cau'), pl=$('#pane-llista');
+  const sc1=pc?pc.scrollTop:0, sc2=pl?pl.scrollTop:0;
+
+  pc.innerHTML = fora.length
+    ? agrupa(fora,ordreLl).map(([g,items])=>'<div class="grup">'+esc(g)+'</div>'+
+        items.map(o=>linia(o,'+','afegirALlista')).join('')).join('')
+    : '<div class="p-buit">'+(tots.length?'Res que encaixi amb el filtre.':'L\'inventari és buit.')+'</div>';
+
+  pl.innerHTML = sel.length
+    ? agrupa(sel,ordreLl).map(([g,items])=>'<div class="grup">'+esc(g)+'</div>'+
+        items.map(o=>linia(o,'−','treureDeLlista',l)).join('')).join('')
+    : '<div class="p-buit">Encara no hi ha res. Toca un objecte de l\'altre costat.</div>';
+
+  if(pc) pc.scrollTop=sc1;
+  if(pl) pl.scrollTop=sc2;
+  $('#n-cau').textContent=fora.length;
+  $('#n-llista').textContent=itemsDe(l).length;
+  peuLlista(l);
+  estatLlista(l);
+}
+
+function linia(o,signe,accio,l){
+  const it = l ? itemsDe(l).find(i=>i.id===o.id) : null;
+  const sub = [grupDe(o,ordreLl==='lloc'?'etiqueta':'lloc')]
+    .concat(etsDe(o).length&&ordreLl!=='etiqueta'?[etsDe(o).join(', ')]:[])
+    .filter(x=>x&&x!=='Sense etiqueta'&&x!=='Sense ubicació');
+  return '<div class="lin" onclick="'+accio+'(\''+o.id+'\')">'+
+    '<span class="sig">'+signe+'</span>'+
+    '<div class="t"><div class="nm">'+esc(o.nom)+'</div>'+
+    (sub.length?'<div class="sub">'+esc(sub[0])+'</div>':'')+'</div>'+
+    (it && EDITA()
+      ? '<input class="qtx" type="number" min="0" value="'+(it.quantitat==null?'':it.quantitat)+
+        '" onclick="event.stopPropagation()" onchange="quantitatItem(\''+o.id+'\',this.value)" '+
+        'aria-label="Quants en portes">'
+      : (o.quantitat!=null?'<span class="qt">×'+o.quantitat+'</span>':''))+
+    '</div>';
+}
+
+function afegirALlista(idObj){
+  if(!EDITA()) return;
+  const l=llistaPerId(llistaOberta), o=PER_ID[idObj];
+  if(!l||!o) return;
+  if(itemsDe(l).some(i=>i.id===idObj)) return;
+  l.items=itemsDe(l).concat([{id:idObj,quantitat:o.quantitat}]);
+  l.actualitzada=avui();
+  panells(); desar();
+}
+function treureDeLlista(idObj){
+  if(!EDITA()) return;
+  const l=llistaPerId(llistaOberta); if(!l) return;
+  l.items=itemsDe(l).filter(i=>i.id!==idObj);
+  l.actualitzada=avui();
+  panells(); desar();
+}
+function quantitatItem(idObj,val){
+  const l=llistaPerId(llistaOberta); if(!l) return;
+  const it=itemsDe(l).find(i=>i.id===idObj); if(!it) return;
+  it.quantitat = val===''?null:Math.max(0,Number(val)||0);
+  l.actualitzada=avui();
+  desar();
+}
+function afegirTotElQueEsVeu(){
+  const l=llistaPerId(llistaOberta); if(!l||!EDITA()) return;
+  const dins=new Set(itemsDe(l).map(i=>i.id));
+  const nous=DADES.filter(f=>f.tipus==='objecte'&&!dins.has(f.id)&&passaFiltre(f))
+    .map(o=>({id:o.id,quantitat:o.quantitat}));
+  if(!nous.length) return;
+  l.items=itemsDe(l).concat(nous); l.actualitzada=avui();
+  panells(); desar();
+}
+function buidarLlistaPerId(id){
+  const l=llistaPerId(id); if(!l||!EDITA()) return;
+  l.items=[]; l.actualitzada=avui(); desar(); llistes();
+}
+
+function estatLlista(l){
+  const c=$('#ll-estat'); if(!c) return;
+  const e=l.extreta;
+  if(!e||(!e.qui&&!e.quan)){ c.innerHTML=''; return; }
+  const tard=e.torna&&diesFins(e.torna)<0;
+  c.innerHTML='<div class="avis-barra" style="'+(tard?'':
+    'background:var(--raiers-suau);color:var(--raiers)')+'"><span class="creix">'+
+    'Fora del cau des de '+esc(quanTxt(e.quan))+', amb '+esc(e.qui||'algú')+
+    (e.torna?'. Havia de tornar '+esc(quanTxt(e.torna)):'')+
+    (e.notes?'. '+esc(e.notes):'')+'</span></div>';
+}
+
+function peuLlista(l){
+  const c=$('#ll-peu'); if(!c) return;
+  const fora=l.extreta&&(l.extreta.qui||l.extreta.quan);
+  let h='';
+  if(EDITA()){
+    h += fora
+      ? '<button class="b" onclick="tornarLlista()">Ha tornat tot</button>'
+      : '<button class="b" onclick="formExtreure()">Marca-ho com a tret del cau</button>';
+  }
+  h += '<button class="b clar" onclick="excelLlista(\''+l.id+'\')">Excel</button>';
+  h += '<button class="b clar" onclick="llistes()">Fet</button>';
+  c.innerHTML=h;
+}
+
+/* ---------- treure i tornar tota la llista ---------- */
+function formExtreure(){
+  const l=llistaPerId(llistaOberta); if(!l) return;
+  const n=itemsDe(l).length;
+  if(!n){ alert('La llista és buida.'); return; }
+  obrir('<h2>Treure «'+esc(l.nom)+'» del cau</h2>'+
+    '<p class="on">Els '+n+' objectes de la llista quedaran marcats com a fora, un per un, '+
+    'amb aquestes dades.</p>'+
+    '<div class="camp"><label for="e1">Qui se\'ls endú</label>'+
+      '<input id="e1" placeholder="Nom de qui se\'n fa responsable" value="'+
+      esc(l.extreta&&l.extreta.qui||'')+'"></div>'+
+    '<div class="duo"><div class="camp"><label for="e2">Quan surten</label>'+
+      '<input id="e2" type="date" value="'+avui()+'"></div>'+
+      '<div class="camp"><label for="e3">Quan tornen</label>'+
+      '<input id="e3" type="date"></div></div>'+
+    '<div class="camp"><label for="e4">Notes</label>'+
+      '<textarea id="e4" placeholder="A on van, dins de quina furgoneta, què cal vigilar…"></textarea></div>'+
+    '<div class="fila-b dreta"><button class="b clar" onclick="obrirLlista(\''+l.id+'\')">Cancel·la</button>'+
+    '<button class="b" id="exok">Marca-ho</button></div>');
+  $('#e1').focus();
+  $('#exok').onclick=()=>{
+    const qui=$('#e1').value.trim(); if(!qui){ $('#e1').focus(); return; }
+    const quan=$('#e2').value||avui(), torna=$('#e3').value||'', notes=$('#e4').value.trim();
+    l.extreta={qui:qui,quan:quan,torna:torna,notes:notes};
+    l.actualitzada=avui();
+    objsDeLlista(l).forEach(o=>{
+      o.prestec={qui:qui,des:quan,torna:torna};
+      o.actualitzat=new Date().toISOString();
+    });
+    indexar(); desar(); obrirLlista(l.id);
+  };
+}
+
+function tornarLlista(){
+  const l=llistaPerId(llistaOberta); if(!l) return;
+  const n=itemsDe(l).length;
+  obrir('<h2>Ha tornat tot?</h2>'+
+    '<p class="on">Els '+n+' objectes de «'+esc(l.nom)+'» es marcaran com a tornats i '+
+    'comprovats avui. Si en falta algun, torna\'ls igualment i després marca\'l com a perdut '+
+    'des de la seva fitxa.</p>'+
+    '<div class="fila-b dreta"><button class="b clar" onclick="obrirLlista(\''+l.id+'\')">Encara no</button>'+
+    '<button class="b" id="tlok">Sí, ja és tot aquí</button></div>');
+  $('#tlok').onclick=()=>{
+    objsDeLlista(l).forEach(o=>{
+      o.prestec=null; o.comprovat=avui(); o.falta=false;
+      o.actualitzat=new Date().toISOString();
+    });
+    l.extreta=null; l.actualitzada=avui();
+    indexar(); desar(); obrirLlista(l.id);
+  };
+}
+
 /* ===================== historial ===================== */
 async function historial(){
   obrir('<h2>Historial</h2><p class="on">Carregant…</p>');
@@ -1419,22 +1907,328 @@ async function restaurar(quan){
 }
 
 /* ===================== Excel ===================== */
-function baixarExcel(){
-  if(typeof XLSX==='undefined'){ alert('Encara s\'està carregant. Torna-ho a provar en un segon.'); return; }
-  const aoa=[['Objecte','Quantitat','Notes','On és','Sala','Comprovat','Estat',
-    'Qui se l\'ha endut','Coses a fer']];
-  DADES.filter(f=>f.tipus==='objecte').sort((a,b)=>a.nom.localeCompare(b.nom,'ca')).forEach(f=>{
-    const s=salaDe(f.id);
-    aoa.push([f.nom, f.quantitat==null?'':f.quantitat, f.notes, onEs(f), s?s.nom:'',
-      f.comprovat||'', f.falta?'no s\'ha trobat':'', (f.prestec&&f.prestec.qui)?f.prestec.qui:'',
-      tasquesDe(f).map(t=>t.text+(t.quan?' ('+t.quan+')':'')).join('; ')]);
-  });
+/* SheetJS no pot crear taules dinàmiques de debò des del navegador, o sigui que
+   el que es genera és una taula amb filtre a totes les columnes: es reordena i
+   es filtra igual, i des d'allà l'Excel fa la dinàmica amb dos clics
+   (Insereix > Taula dinàmica, amb el rang ja seleccionat).                    */
+
+const CAPS = ['Objecte','Quantitat al cau','Quants en portes','Etiquetes','Sala','Moble','Casella',
+  'On és (camí sencer)','Notes','Estat','Comprovat','Coses a fer'];
+
+function mobleDe(o){
+  let x=o.pare?PER_ID[o.pare]:null, g=0, ultim=null;
+  while(x&&g++<20){ if(x.tipus==='moble') ultim=x; x=x.pare?PER_ID[x.pare]:null; }
+  const cadena=[]; let y=o.pare?PER_ID[o.pare]:null, h=0;
+  while(y&&y.tipus==='moble'&&h++<20){ cadena.unshift(y.nom); y=y.pare?PER_ID[y.pare]:null; }
+  return cadena.join(' › ')||(ultim?ultim.nom:'');
+}
+
+function filaExcel(o,quants){
+  const sala=salaDe(o.id);
+  return [
+    o.nom,
+    o.quantitat==null?'':o.quantitat,
+    quants==null?'':quants,
+    etsDe(o).join(', '),
+    sala?sala.nom:'',
+    mobleDe(o),
+    o.pos?etqPos(o.pos):'',
+    onEs(o),
+    o.notes||'',
+    o.falta ? 'no s\'ha trobat'
+      : (o.prestec&&o.prestec.qui) ? 'fora, amb '+o.prestec.qui : 'al seu lloc',
+    o.comprovat||'',
+    tasquesDe(o).map(t=>t.text+(t.quan?' ('+t.quan+')':'')).join('; ')
+  ];
+}
+
+/* Un full amb capçalera, filtres a totes les columnes i la primera fila fixada. */
+function fullTaula(aoa,amples){
   const full=XLSX.utils.aoa_to_sheet(aoa);
-  full['!cols']=[{wch:34},{wch:10},{wch:38},{wch:50},{wch:14},{wch:13},{wch:16},{wch:20},{wch:40}];
-  full['!freeze']={xSplit:0,ySplit:1};
+  full['!cols']=amples.map(w=>({wch:w}));
+  const ultima=XLSX.utils.encode_cell({r:Math.max(aoa.length-1,0), c:aoa[0].length-1});
+  full['!autofilter']={ref:'A1:'+ultima};
+  return full;
+}
+
+const AMPLES=[34,15,15,26,14,26,14,50,34,18,13,38];
+
+/* Resum: el que una taula dinàmica ensenyaria de primeres. */
+function fullResum(objs){
+  const perSala=new Map(), perTag=new Map(), perMoble=new Map();
+  objs.forEach(o=>{
+    const s=salaDe(o.id), k=s?s.nom:'Sense sala';
+    perSala.set(k,(perSala.get(k)||0)+1);
+    const m=mobleDe(o)||'Sense moble';
+    perMoble.set(m,(perMoble.get(m)||0)+1);
+    const ets=etsDe(o);
+    (ets.length?ets:['Sense etiqueta']).forEach(e=>perTag.set(e,(perTag.get(e)||0)+1));
+  });
+  const bloc=(titol,m)=>[[titol,'Objectes']].concat(
+    [...m.entries()].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'ca')));
+  const aoa=[].concat(
+    [['Resum','']], [['','']],
+    bloc('Per sala',perSala), [['','']],
+    bloc('Per moble',perMoble), [['','']],
+    bloc('Per etiqueta',perTag));
+  const full=XLSX.utils.aoa_to_sheet(aoa);
+  full['!cols']=[{wch:38},{wch:12}];
+  return full;
+}
+
+function comprovaXLSX(){
+  if(typeof XLSX==='undefined'){
+    alert('La part que genera l\'Excel encara s\'està carregant. Prova-ho d\'aquí un segon.');
+    return false;
+  }
+  return true;
+}
+
+function baixarExcel(){
+  if(!comprovaXLSX()) return;
+  const objs=DADES.filter(f=>f.tipus==='objecte').sort((a,b)=>a.nom.localeCompare(b.nom,'ca'));
   const wb=XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb,full,'Inventari');
+  XLSX.utils.book_append_sheet(wb, fullTaula([CAPS].concat(objs.map(o=>filaExcel(o,null))),AMPLES),'Inventari');
+  XLSX.utils.book_append_sheet(wb, fullResum(objs),'Resum');
   XLSX.writeFile(wb,'inventari-cau-'+avui()+'.xlsx');
+}
+
+function excelLlista(id){
+  if(!comprovaXLSX()) return;
+  const l=llistaPerId(id); if(!l) return;
+  const items=itemsDe(l);
+  const objs=items.map(i=>PER_ID[i.id])
+    .sort((a,b)=>grupDe(a,'lloc').localeCompare(grupDe(b,'lloc'),'ca')||a.nom.localeCompare(b.nom,'ca'));
+  const quants=new Map(items.map(i=>[i.id,i.quantitat]));
+
+  const capsal=[['Llista', l.nom||'sense nom'],
+    ['Generat el', avui()],
+    ['Objectes', objs.length]];
+  if(l.extreta&&(l.extreta.qui||l.extreta.quan)){
+    capsal.push(['Fora del cau amb', l.extreta.qui||'']);
+    capsal.push(['Des de', l.extreta.quan||'']);
+    if(l.extreta.torna) capsal.push(['Torna el', l.extreta.torna]);
+    if(l.extreta.notes) capsal.push(['Notes', l.extreta.notes]);
+  }
+
+  const aoa=capsal.concat([['','']], [CAPS], objs.map(o=>filaExcel(o, quants.get(o.id))));
+  const full=XLSX.utils.aoa_to_sheet(aoa);
+  full['!cols']=AMPLES.map(w=>({wch:w}));
+  const filaCaps=capsal.length+1;               // 0-indexat: on és la fila de capçaleres
+  full['!autofilter']={ref:XLSX.utils.encode_cell({r:filaCaps,c:0})+':'+
+    XLSX.utils.encode_cell({r:aoa.length-1,c:CAPS.length-1})};
+
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, full, 'Llista');
+  XLSX.utils.book_append_sheet(wb, fullResum(objs), 'Resum');
+  XLSX.utils.book_append_sheet(wb,
+    fullTaula([CAPS].concat(DADES.filter(f=>f.tipus==='objecte')
+      .sort((a,b)=>a.nom.localeCompare(b.nom,'ca')).map(o=>filaExcel(o,null))), AMPLES),
+    'Inventari sencer');
+
+  const net=(l.nom||'llista').replace(/[^\p{L}\p{N} _-]/gu,'').trim().slice(0,40)||'llista';
+  XLSX.writeFile(wb, net+' — '+avui()+'.xlsx');
+}
+
+
+/* ===================== instruccions ===================== */
+function instruccions(){
+  const v=document.getElementById('manual'); if(v) return;
+  const c=document.createElement('div');
+  c.className='manual'; c.id='manual';
+  c.innerHTML = `
+  <div class="m-dalt">
+    <strong>Com funciona</strong>
+    <button class="tanca" onclick="tancarManual()">Tanca</button>
+  </div>
+  <div class="m-cos">
+
+    <p class="m-entrada">L'inventari del cau és un mapa del que hi ha guardat i on. Serveix per a
+    dues coses: trobar una cosa sense obrir vint calaixos, i saber què teniu abans de comprar-ne
+    més. Aquest manual va funció per funció.</p>
+
+    <h3>Les dues contrasenyes</h3>
+    <p>N'hi ha una per <b>consultar</b>, que té tot el grup, i una per <b>editar</b>, que tenen
+    només les dues o tres persones que el mantenen. Amb la de consultar pots buscar, mirar i
+    descarregar l'Excel, però no surt cap botó de canviar res.</p>
+    <p>La sessió dura <b>dos dies</b>. Passats, torna a demanar la contrasenya. Si vols canviar de
+    mode abans, ves a <b>Més &rsaquo; Surt</b> i torna a entrar amb l'altra.</p>
+
+    <h3>Com està organitzat</h3>
+    <p>Tot penja de la mateixa cadena. Cada pas obre el següent:</p>
+    <div class="cadena">
+      <div class="baula" style="--c:#5a6b7a;--f:#eef1f4"><b>Plànol</b><span>tot el cau</span></div>
+      <i>&rsaquo;</i>
+      <div class="baula" style="--c:#0e8f66;--f:#e5f4ee"><b>Sala</b><span>Llops</span></div>
+      <i>&rsaquo;</i>
+      <div class="baula ple" style="--c:#0e8f66;--f:#0e8f66"><b>Moble</b><span>Armari llops</span></div>
+      <i>&rsaquo;</i>
+      <div class="baula" style="--c:#a3dcc5;--f:#fff"><b>Casella</b><span>fila 2, col. 3</span></div>
+      <i>&rsaquo;</i>
+      <div class="baula" style="--c:#dfe3e7;--f:#fff"><b>Objectes</b><span>la corda</span></div>
+    </div>
+    <p class="m-peu">Cada pas s'obre tocant-lo. La fletxa de dalt a l'esquerra torna enrere, i
+    també va el botó d'enrere del mòbil.</p>
+    <p>Dins d'una casella hi pot haver una <b>caixa</b>, i dins de la caixa més caselles. No hi ha
+    límit de nivells: una bossa dins d'una caixa dins d'una safata funciona igual.</p>
+    <p>Cada sala té el seu color i tota l'aplicació s'hi tenyeix quan hi entres:
+    <span class="m-punt" style="background:#6d4fc7"></span> Pioners,
+    <span class="m-punt" style="background:#1c79c9"></span> Raiers,
+    <span class="m-punt" style="background:#0e8f66"></span> Llops,
+    <span class="m-punt" style="background:#db7126"></span> Follets.</p>
+
+    <h3>Buscar (el camí ràpid)</h3>
+    <p>És el que faràs el 90% dels cops. Toca <b>Buscar</b> a baix, escriu dues lletres i et sortirà
+    on és cada resultat: <i>Llops &rsaquo; Armari llops &rsaquo; fila 1, col. 1</i>. Tocant-lo t'hi
+    porta i queda ressaltat. Busca pel nom, per les notes i per les etiquetes.</p>
+
+    <h3>Llegir un moble</h3>
+    <p>Quan obres un moble, el veus dibuixat amb la seva forma real i les seves caselles:</p>
+    <div class="m-fig estreta">
+      <svg viewBox="0 0 348 218" role="img" aria-label="Graella d'un moble amb quatre punts explicats">
+        <rect x="6" y="6" width="336" height="206" rx="14" fill="#e5f4ee" stroke="#0e8f66" stroke-width="2.5"/>
+        <g>
+          <rect x="22" y="22" width="94" height="54" rx="8" fill="#fff" stroke="#a3dcc5" stroke-width="1.8"/>
+          <text x="32" y="39" font-size="10" font-weight="700" fill="#8e99a4">1&#183;1</text>
+          <circle cx="102" cy="37" r="9" fill="#0e8f66"/>
+          <text x="102" y="41" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">2</text>
+          <text x="32" y="60" font-size="11" fill="#182027">Corda</text>
+
+          <rect x="126" y="22" width="94" height="54" rx="8" fill="#fff" stroke="#e4e8eb" stroke-width="1.5"/>
+          <text x="136" y="39" font-size="10" font-weight="700" fill="#8e99a4">1&#183;2</text>
+          <text x="136" y="58" font-size="11" fill="#a9b3af">buit</text>
+
+          <rect x="230" y="22" width="94" height="54" rx="8" fill="#fff" stroke="#a3dcc5" stroke-width="1.8"/>
+          <text x="240" y="39" font-size="10" font-weight="700" fill="#8e99a4">1&#183;3</text>
+          <circle cx="306" cy="37" r="9" fill="#0e8f66"/>
+          <text x="306" y="41" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">5</text>
+
+          <rect x="20" y="84" width="98" height="58" rx="8" fill="#f6f9f8" stroke="#0e8f66" stroke-width="3"/>
+          <text x="32" y="101" font-size="10" font-weight="700" fill="#8e99a4">2&#183;1</text>
+          <circle cx="102" cy="99" r="9" fill="#0e8f66"/>
+          <text x="102" y="103" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">1</text>
+
+          <rect x="126" y="84" width="94" height="54" rx="8" fill="#fff" stroke="#e4e8eb" stroke-width="1.5"/>
+          <text x="136" y="101" font-size="10" font-weight="700" fill="#8e99a4">2&#183;2</text>
+          <rect x="230" y="84" width="94" height="54" rx="8" fill="#fff" stroke="#e4e8eb" stroke-width="1.5"/>
+          <text x="240" y="101" font-size="10" font-weight="700" fill="#8e99a4">2&#183;3</text>
+
+          <rect x="22" y="148" width="94" height="48" rx="8" fill="#fff" stroke="#e4e8eb" stroke-width="1.5"/>
+          <text x="32" y="165" font-size="10" font-weight="700" fill="#8e99a4">3&#183;1</text>
+          <rect x="126" y="148" width="94" height="48" rx="8" fill="#fff" stroke="#e4e8eb" stroke-width="1.5"/>
+          <text x="136" y="165" font-size="10" font-weight="700" fill="#8e99a4">3&#183;2</text>
+          <rect x="230" y="148" width="94" height="48" rx="8" fill="#fff" stroke="#e4e8eb" stroke-width="1.5"/>
+          <text x="240" y="165" font-size="10" font-weight="700" fill="#8e99a4">3&#183;3</text>
+        </g>
+        <g>
+          <circle cx="32" cy="31" r="8.5" fill="#182027"/>
+          <text x="32" y="35" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">1</text>
+          <circle cx="306" cy="18" r="8.5" fill="#182027"/>
+          <text x="306" y="22" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">2</text>
+          <circle cx="20" cy="84" r="8.5" fill="#182027"/>
+          <text x="20" y="88" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">3</text>
+          <circle cx="136" cy="176" r="8.5" fill="#182027"/>
+          <text x="136" y="180" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">4</text>
+        </g>
+      </svg>
+    </div>
+    <ol class="m-llegenda">
+      <li>La referència de la casella: <b>fila &middot; columna</b>, comptant de dalt a baix i
+      d'esquerra a dreta. És el que et diu la cerca.</li>
+      <li>Quantes coses diferents hi ha a dins.</li>
+      <li>La casella que tens triada ara mateix.</li>
+      <li>Una casella buida.</li>
+    </ol>
+    <p>Tocant una casella, sota hi surt la llista del que hi ha. Al mòbil, quan les caselles són
+    massa estretes per encabir-hi noms, només hi surt el número; els noms els llegeixes tocant.</p>
+
+    <h3>Afegir, canviar i treure coses</h3>
+    <p>Amb la contrasenya d'edició, un cop tries una casella surt el botó rodó <b>Afegeix</b> a baix
+    a la dreta. Cada objecte té nom, quantitat, notes, foto, etiquetes i coses a fer.</p>
+    <p>Als tres punts <b>&ctdot;</b> de cada objecte hi ha la resta: <b>Edita</b>,
+    <b>Se l'enduen</b> (apunta qui se l'emporta), <b>Mou</b> (canviar-lo de casella sense
+    esborrar-lo i tornar-lo a crear) i <b>Treu</b>.</p>
+    <p>Per canviar el moble mateix &mdash; el nom, quantes safates té, o afegir-ne un de nou &mdash;
+    ves a la sala i toca <b>Mobles</b>. Si redueixes les safates d'un armari, t'avisa de quantes
+    coses es mouran abans de deixar-t'ho fer.</p>
+
+    <h3>Etiquetes</h3>
+    <p>Són paraules com <i>acampada</i>, <i>cuina</i> o <i>primers auxilis</i> que poses a cada
+    objecte separades per comes. La ubicació respon &laquo;on és&raquo;; l'etiqueta respon
+    &laquo;què tenim per a&hellip;&raquo;, que és una pregunta diferent i igual de freqüent. Serveixen
+    per buscar, per filtrar i, sobretot, per muntar una llista de cop.</p>
+
+    <h3>Llistes</h3>
+    <p>Una llista és un grapat d'objectes triats: el que us endueu a un campament, el que presteu a
+    un altre agrupament, el que cal revisar. Es fa un cop i es reutilitza cada any.</p>
+    <p>A <b>Llistes</b> &rsaquo; <b>Nova llista</b> li poses nom i s'obre el constructor, amb dues
+    bandes: a l'esquerra tot el que hi ha al cau, a la dreta el que ja has triat. Tocant un objecte
+    passa d'una banda a l'altra.</p>
+    <ul>
+      <li><b>Ordena-ho</b> per sala i moble, per nom o per etiqueta: les dues bandes s'ordenen
+      igual, o sigui que si ho poses per sala recorres el cau en ordre i no et deixes res.</li>
+      <li><b>Filtra per etiqueta</b> tocant els xips, i després <b>Afegeix tot el que es veu</b>:
+      amb dos tocs tens tot el material d'acampada a la llista.</li>
+      <li>A la banda dreta pots canviar <b>quants en portes</b>: potser al cau hi ha 22 pals i
+      només te n'endus 8.</li>
+      <li>Es desa sola. Surt de la llista i torna-hi quan vulguis.</li>
+    </ul>
+    <p><b>Marca-ho com a tret del cau</b> apunta qui se'ls endú, quan surten i quan tornen, i
+    marca <i>tots</i> els objectes de la llista com a fora d'una tacada. A partir d'aquí surten
+    marcats per tota l'aplicació i apareixen a <b>Pendents &rsaquo; Fora del cau</b>. Quan torna
+    tot, <b>Ha tornat tot</b> els allibera de cop i els marca com a comprovats avui.</p>
+    <p>Als tres punts de cada llista hi ha <b>duplicar-la</b> (per fer-ne una variant sense tocar
+    l'original), <b>canviar-li el nom</b> i <b>esborrar-la per sempre</b>. Esborrar una llista no
+    toca els objectes: continuen a l'inventari.</p>
+
+    <h3>Pendents</h3>
+    <p>El botó de baix amb el número vermell. Té tres pestanyes:</p>
+    <ul>
+      <li><b>Coses a fer</b> &mdash; les tasques de cada objecte, per data. Una tasca amb mesos es
+      repeteix: la farmaciola amb &laquo;renovar les vendes, cada 8 mesos&raquo; torna a aparèixer
+      sola quan la marques com a feta. Sense mesos, desapareix.</li>
+      <li><b>Fora del cau</b> &mdash; tot el que algú s'ha endut, individualment o amb una llista.</li>
+      <li><b>Per comprovar</b> &mdash; el que fa més d'un any que ningú mira, o el que no s'ha
+      trobat. És el termòmetre de si l'inventari encara diu la veritat.</li>
+    </ul>
+
+    <h3>Revisar</h3>
+    <p>El botó <b>Revisa</b> surt a qualsevol sala o moble. Et llista el que hi hauria d'haver amb
+    dos botons per cosa: <b>Hi és</b> o <b>Falta</b>. Vas marcant mentre ho mires de debò i al final
+    et dona el resum del que no has trobat.</p>
+    <p>Fes-ho moble per moble, no sala sencera. Vint coses es revisen bé; dues-centes es deixen a
+    mitges.</p>
+
+    <h3>Excel</h3>
+    <p>Des de <b>Més</b> baixa tot l'inventari; des d'una llista, el botó <b>Excel</b> baixa la
+    llista. El fitxer porta tres fulls: la taula, un <b>Resum</b> amb els recomptes per sala, per
+    moble i per etiqueta, i l'inventari sencer.</p>
+    <p>Totes les columnes porten <b>filtre</b>, o sigui que es reordena i es filtra des de la
+    fletxa de cada capçalera. No és una taula dinàmica de debò &mdash; això no es pot generar des
+    del navegador &mdash; però si en vols una, selecciona qualsevol cel·la de la taula i fes
+    <i>Insereix &rsaquo; Taula dinàmica</i>: l'Excel ja n'agafa el rang sol.</p>
+    <p>Per la mateixa raó la capçalera no queda fixada: si la taula és llarga, fes
+    <i>Visualitza &rsaquo; Immobilitza &rsaquo; Immobilitza la fila superior</i> un cop i ja la
+    tindràs sempre a la vista.</p>
+
+    <h3>Si alguna cosa falla</h3>
+    <ul>
+      <li><b>&laquo;Algú altre ha desat canvis&raquo;</b> &mdash; dues persones editàveu alhora.
+      Recarrega; el que hagis fet en aquesta estona no s'ha guardat.</li>
+      <li><b>No es desa</b> &mdash; comprova la connexió i torna-ho a provar amb el botó que surt.</li>
+      <li><b>Has esborrat el que no tocava</b> &mdash; <b>Més &rsaquo; Historial</b>: cada cop que
+      algú desa es guarda com estava abans.</li>
+    </ul>
+
+    <p class="m-final">Els canvis es desen sols; no hi ha cap botó de guardar. A dalt a la dreta
+    surt &laquo;Desat&raquo; un moment cada cop que passa.</p>
+  </div>`;
+  document.body.appendChild(c);
+  document.body.style.overflow='hidden';
+}
+function tancarManual(){
+  const c=document.getElementById('manual'); if(c) c.remove();
+  document.body.style.overflow='';
 }
 
 /* ===================== dibuix ===================== */
@@ -1452,6 +2246,7 @@ function rect(g,o){
 function tecla(ev,id){ if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); entrar(id); } }
 
 document.addEventListener('keydown', e=>{
+  if(e.key==='Escape' && document.getElementById('manual')){ tancarManual(); return; }
   if($('#dlg').open || cercaOberta) return;
   if(e.key==='Escape'){ enrere(); return; }
   if((e.key==='Backspace'||e.key==='ArrowLeft') &&
