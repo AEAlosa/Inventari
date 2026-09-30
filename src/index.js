@@ -14,7 +14,12 @@
 
 const CLAU_DADES = 'inventari';
 const MAX_COPIES = 25;
-const DIES_SESSIO = 60;
+
+/* Quant dura la sessió abans de tornar a demanar la contrasenya.
+   Amb 2 dies, qui entra un dissabte ja torna a trobar la pantalla de
+   contrasenya el dimarts, cosa que permet passar d'edició a consulta i al
+   revés sense esperar. Puja el número si un dia us fa nosa. */
+const DIES_SESSIO = 2;
 
 export default {
   async fetch(peticio, env) {
@@ -140,16 +145,23 @@ function iguals(a, b) {
 async function llegir(env, paper) {
   let dades = await env.INVENTARI.get(CLAU_DADES, 'json');
   if (!dades) {
-    dades = { actualitzat: new Date().toISOString(), files: LLAVOR };
+    dades = { actualitzat: new Date().toISOString(), files: LLAVOR, llistes: [] };
     await env.INVENTARI.put(CLAU_DADES, JSON.stringify(dades));
   }
-  return json({ paper: paper, actualitzat: dades.actualitzat, files: dades.files });
+  return json({
+    paper: paper,
+    actualitzat: dades.actualitzat,
+    files: dades.files,
+    llistes: Array.isArray(dades.llistes) ? dades.llistes : []
+  });
 }
 
 async function desar(peticio, env) {
   const cos = await peticio.json().catch(() => null);
   if (!cos || !Array.isArray(cos.files)) return json({ error: 'dades_invalides' }, 400);
   if (cos.files.length > 20000) return json({ error: 'massa_files' }, 413);
+  if (cos.llistes && !Array.isArray(cos.llistes)) return json({ error: 'llistes_invalides' }, 400);
+  if (cos.llistes && cos.llistes.length > 500) return json({ error: 'massa_llistes' }, 413);
 
   // Si algú altre ha desat mentre aquesta persona editava, no li trepitgem la feina.
   const actual = await env.INVENTARI.get(CLAU_DADES, 'json');
@@ -163,7 +175,13 @@ async function desar(peticio, env) {
     netejarCopies(env);
   }
 
-  const noves = { actualitzat: new Date().toISOString(), files: cos.files.map(neteja) };
+  const noves = {
+    actualitzat: new Date().toISOString(),
+    files: cos.files.map(neteja),
+    llistes: Array.isArray(cos.llistes)
+      ? cos.llistes.map(netejaLlista)
+      : (actual && Array.isArray(actual.llistes) ? actual.llistes : [])
+  };
   await env.INVENTARI.put(CLAU_DADES, JSON.stringify(noves));
   return json({ ok: true, actualitzat: noves.actualitzat });
 }
@@ -186,6 +204,7 @@ function neteja(f) {
     columnes: Math.max(0, Math.min(40, Number(f.columnes) || 0)),
     actualitzat: t(f.actualitzat),
     foto: !!f.foto,
+    etiquetes: Array.isArray(f.etiquetes) ? unifica(f.etiquetes.map(x => t(x).trim().slice(0, 40))) : [],
     comprovat: data(f.comprovat),
     falta: !!f.falta,
     prestec: f.prestec && f.prestec.qui ? {
@@ -201,6 +220,54 @@ function neteja(f) {
         quan: data(x.quan),
         mesos: Math.max(0, Math.min(120, Number(x.mesos) || 0))
       })) : []
+  };
+}
+
+/* "Cuina" i "cuina" són la mateixa etiqueta: es conserva la primera manera
+   d'escriure-la i es descarten les repetides. */
+function unifica(llista) {
+  const vistes = new Set(), fora = [];
+  for (const e of llista) {
+    if (!e) continue;
+    const k = e.toLowerCase();
+    if (vistes.has(k)) continue;
+    vistes.add(k);
+    fora.push(e);
+    if (fora.length >= 12) break;
+  }
+  return fora;
+}
+
+/* Una llista: un nom, un grapat d'objectes i, si s'ha tret del cau,
+   qui se la va endur i quan. */
+function netejaLlista(l) {
+  const t = v => String(v == null ? '' : v).slice(0, 500);
+  const data = v => {
+    const x = String(v || '');
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(x)) return '';
+    const d = new Date(x + 'T00:00:00Z');
+    return !isNaN(d) && d.toISOString().slice(0, 10) === x ? x : '';
+  };
+  return {
+    id: t(l.id).slice(0, 40) || 'L' + Math.random().toString(36).slice(2, 10),
+    nom: t(l.nom).slice(0, 120),
+    notes: t(l.notes),
+    creada: t(l.creada),
+    actualitzada: t(l.actualitzada),
+    items: Array.isArray(l.items)
+      ? l.items.slice(0, 2000)
+          .filter(x => x && t(x.id))
+          .map(x => ({
+            id: t(x.id).slice(0, 60),
+            quantitat: x.quantitat == null || x.quantitat === '' ? null : Number(x.quantitat)
+          }))
+      : [],
+    extreta: l.extreta && (l.extreta.qui || l.extreta.quan) ? {
+      qui: t(l.extreta.qui).slice(0, 120),
+      quan: data(l.extreta.quan),
+      torna: data(l.extreta.torna),
+      notes: t(l.extreta.notes)
+    } : null
   };
 }
 
