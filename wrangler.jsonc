@@ -12,7 +12,7 @@
     {
       "binding": "INVENTARI",
       // Substitueix-ho per l'identificador del teu KV (Storage & Databases > KV).
-      "id": "AQUI_VA_L_ID_DEL_KV"
+      "id": "38d62e7fbb6843169d508a813363bda1"
     }
   ],
   "observability": { "enabled": true }
