@@ -147,6 +147,16 @@ async function llegir(env, paper) {
   if (!dades) {
     dades = { actualitzat: new Date().toISOString(), files: LLAVOR, llistes: [] };
     await env.INVENTARI.put(CLAU_DADES, JSON.stringify(dades));
+  } else {
+    /* Les sales que s'afegeixen amb el temps han d'aparèixer també als caus que
+       ja tenien dades. Només s'hi posen les que falten, mai es toca res més. */
+    const hiSon = new Set(dades.files.map(f => String(f.id)));
+    const falten = LLAVOR.filter(f => f.tipus === 'sala' && !hiSon.has(f.id));
+    if (falten.length) {
+      dades.files = dades.files.concat(falten);
+      dades.actualitzat = new Date().toISOString();
+      await env.INVENTARI.put(CLAU_DADES, JSON.stringify(dades));
+    }
   }
   return json({
     paper: paper,
@@ -338,6 +348,8 @@ const LLAVOR = [
   S('raiers', 'Raiers'),
   S('llops', 'Llops'),
   S('follets', 'Follets'),
+  S('armari_menjar', 'Armari menjar'),
+  S('torre_muni', 'Torre Muni'),
   M('armari', null, 'Armari', 3, 1),
   M('arxivador', 'pioners', 'Arxivador', 3, 1),
   M('armari_raiers', 'raiers', 'Armari raiers', 3, 3),

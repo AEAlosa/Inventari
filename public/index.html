@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
 <style>
 :root{
+  --ample:760px;
   /* neutres */
   --fons:#f0f1f2;
   --carta:#ffffff;
@@ -58,7 +59,8 @@ svg{display:block}
   backdrop-filter:saturate(1.6) blur(12px);-webkit-backdrop-filter:saturate(1.6) blur(12px);
   border-bottom:1px solid var(--linia-2);
 }
-.cap-int{max-width:760px;margin:0 auto;padding:11px 16px;display:flex;align-items:center;gap:10px;min-height:56px}
+.cap-int{max-width:var(--ample);margin:0 auto;padding:11px 16px;display:flex;align-items:center;
+  gap:10px;min-height:56px}
 .tornar{
   display:inline-flex;align-items:center;gap:4px;flex:0 0 auto;
   background:var(--tema-suau);border:none;border-radius:99px;padding:7px 13px 7px 9px;
@@ -80,17 +82,33 @@ svg{display:block}
   color:var(--tinta-3);cursor:pointer;display:grid;place-items:center}
 .ajuda-b:hover{background:var(--tema-suau);color:var(--tema)}
 .ajuda-b svg{width:21px;height:21px}
+.mode-b.encesa{background:var(--tema);color:#fff}
+.mode-b.encesa:hover{background:var(--tema);color:#fff}
 
 /* ============ cos ============ */
-.cos{max-width:760px;margin:0 auto;padding:14px 16px 26px}
-.buscador{
-  width:100%;display:flex;align-items:center;gap:9px;margin-bottom:14px;
-  background:var(--carta);border:1px solid var(--linia);border-radius:99px;
-  padding:12px 17px;color:var(--tinta-3);font-size:15px;cursor:pointer;
-  box-shadow:var(--ombra-1);text-align:left;
+.marc{max-width:var(--ample);margin:0 auto;padding:0 16px;display:flex;gap:24px;align-items:flex-start}
+.cos{flex:1;min-width:0;padding:14px 0 26px}
+.lateral{display:none}
+@media (min-width:1040px){
+  :root{--ample:1200px}
+  .lateral{display:block;flex:0 0 332px;width:332px;padding-top:14px}
+  .caixa-lat{position:sticky;top:76px;background:var(--carta);border:1px solid var(--linia);
+    border-radius:var(--r-m);box-shadow:var(--ombra-1);overflow:hidden;
+    display:flex;flex-direction:column;
+    max-height:calc(100vh - 76px - var(--barra) - 22px)}
+  .cap-lat{display:flex;align-items:center;gap:9px;padding:13px 16px 0}
+  .cap-lat h2{margin:0;font-size:15px;font-weight:700;letter-spacing:-.01em}
+  .cap-lat .bola{min-width:20px;height:20px;padding:0 6px;border-radius:99px;background:var(--alerta);
+    color:#fff;font-size:11.5px;font-weight:700;display:grid;place-items:center;
+    font-variant-numeric:tabular-nums}
+  .cos-lat{overflow:auto;padding:12px 16px 14px}
+  .cos-lat .pest{margin-bottom:12px;flex-wrap:wrap;overflow:visible}
+  .cos-lat .pest button{padding:5px 10px;font-size:12.5px}
+  .cos-lat .rev{padding:9px 0}
+  .cos-lat .rev .nom{font-size:14px}
+  .tab.nomes-mobil{display:none}
+  .tabs-int{grid-template-columns:repeat(3,1fr)}
 }
-.buscador:hover{border-color:var(--tinta-3)}
-.buscador svg{width:18px;height:18px;flex:0 0 auto;color:var(--tinta-3)}
 
 .accions{display:flex;gap:7px;margin-bottom:14px;overflow-x:auto;padding-bottom:2px;
   scrollbar-width:none;-ms-overflow-style:none}
@@ -180,7 +198,7 @@ g.toc:hover .cel{fill:#f7f9fa}
   backdrop-filter:saturate(1.6) blur(12px);-webkit-backdrop-filter:saturate(1.6) blur(12px);
   border-top:1px solid var(--linia-2);padding-bottom:env(safe-area-inset-bottom);
 }
-.tabs-int{max-width:760px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.tabs-int{max-width:var(--ample);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
 .tab{background:none;border:none;padding:9px 2px 10px;display:flex;flex-direction:column;
   align-items:center;gap:3px;color:var(--tinta-3);cursor:pointer;position:relative;font-size:10px;
   font-weight:600;letter-spacing:.01em}
@@ -217,17 +235,23 @@ g.toc:hover .cel{fill:#f7f9fa}
 dialog{border:none;padding:0;background:transparent;max-width:100%;max-height:100%;overflow:visible}
 dialog::backdrop{background:rgba(24,32,39,.45);backdrop-filter:blur(2px)}
 .full{background:var(--carta);border-radius:var(--r-l);box-shadow:var(--ombra-3);
-  width:min(94vw,470px);max-height:86vh;overflow:auto;padding:22px}
-.full.ample{width:min(94vw,720px)}
-.full.enorme{width:min(96vw,880px)}
+  width:min(94vw,520px);overflow:auto;padding:24px;
+  /* el marge de baix i el de dalt són iguals perquè el diàleg va centrat:
+     així mai no arriba a tocar la barra de navegació inferior */
+  max-height:calc(100vh - 2 * (var(--barra) + 14px))}
+.full.ample{width:min(94vw,830px)}
+.full.enorme{width:min(96vw,1000px)}
 .full h2{margin:0 0 3px;font-size:19px;font-weight:700;letter-spacing:-.02em}
 .full .on{margin:0 0 18px;font-size:13px;color:var(--tinta-2)}
 .full .ajuda{font-size:12.5px;color:var(--tinta-3);margin:8px 0 14px}
 dialog.baix{margin:auto auto 0;width:100%;max-width:100%}
-dialog.baix .full{width:100%;border-radius:var(--r-l) var(--r-l) 0 0;padding-bottom:calc(20px + env(safe-area-inset-bottom))}
+dialog.baix{margin-bottom:calc(var(--barra) + env(safe-area-inset-bottom))}
+dialog.baix .full{width:100%;border-radius:var(--r-l) var(--r-l) 0 0;padding-bottom:20px;
+  max-height:calc(100vh - var(--barra) - 40px)}
 @media (min-width:560px){
-  dialog.baix{margin:auto}
-  dialog.baix .full{width:min(94vw,420px);border-radius:var(--r-l);padding-bottom:20px}
+  dialog.baix{margin:auto;margin-bottom:auto}
+  dialog.baix .full{width:min(94vw,460px);border-radius:var(--r-l);padding-bottom:24px;
+    max-height:calc(100vh - 2 * (var(--barra) + 14px))}
 }
 .nansa{width:38px;height:4px;border-radius:99px;background:var(--linia);margin:-6px auto 14px}
 .opcio{display:flex;align-items:center;gap:13px;width:100%;padding:13px 6px;background:none;
@@ -259,70 +283,79 @@ dialog.baix .full{width:100%;border-radius:var(--r-l) var(--r-l) 0 0;padding-bot
   background:var(--carta);color:var(--tinta-3);cursor:pointer;display:grid;place-items:center}
 .tsk .x:hover{border-color:var(--alerta);color:var(--alerta)}
 
-/* cerca */
-.cercador{position:fixed;inset:0;z-index:60;background:var(--fons);display:flex;flex-direction:column}
-.cercador .dalt{background:var(--carta);border-bottom:1px solid var(--linia);padding:11px 14px;
-  padding-top:calc(11px + env(safe-area-inset-top));display:flex;gap:10px;align-items:center}
-.cercador input{flex:1;min-width:0;border:none;background:none;font:inherit;font-size:17px;
-  color:var(--tinta);padding:8px 2px}
-.cercador input:focus{outline:none}
-.cercador .tanca{background:none;border:none;color:var(--tema);font-weight:600;font-size:14.5px;
-  cursor:pointer;flex:0 0 auto;padding:6px 4px}
-.cercador .llista{flex:1;overflow:auto;padding:12px 14px calc(20px + env(safe-area-inset-bottom))}
-.res{display:flex;gap:12px;align-items:center;padding:11px 14px;background:var(--carta);
-  border-radius:var(--r-m);margin-bottom:8px;cursor:pointer;box-shadow:var(--ombra-1)}
-.res:active{transform:scale(.99)}
-.res .t{flex:1;min-width:0}
-.res .nom{font-weight:600}
-.res .on{font-size:12.5px;color:var(--tinta-2);margin-top:1px;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.res .qt{font-variant-numeric:tabular-nums;font-weight:700;font-size:13.5px;color:var(--tinta-2)}
-.foto-m.inicial{display:grid;place-items:center;font-weight:800;font-size:15px;letter-spacing:-.02em}
-.pista{color:var(--tinta-3);font-size:13.5px;text-align:center;padding:26px 10px}
+/* arbre d'espais */
+.barra-sel{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--carta);
+  border:1px solid var(--linia);border-radius:var(--r-m);padding:10px 14px;margin-bottom:12px;
+  box-shadow:var(--ombra-1);position:sticky;top:60px;z-index:12}
+.barra-sel .compt{flex:1;min-width:140px;font-size:13.5px;font-weight:600;color:var(--tinta-2)}
+.arbre{background:var(--carta);border:1px solid var(--linia);border-radius:var(--r-m);
+  box-shadow:var(--ombra-1);overflow:hidden;margin-bottom:16px}
+.fil{display:flex;align-items:center;gap:9px;padding:9px 13px;border-bottom:1px solid var(--linia-2);
+  padding-left:calc(13px + var(--niv) * 17px)}
+.fil:last-child{border-bottom:none}
+.fil:not(.obj-f):not(.buida){background:#fbfcfc;box-shadow:inset 3px 0 0 var(--cc,var(--linia))}
+.fil.buida{color:var(--tinta-3);font-size:13px;padding-top:7px;padding-bottom:7px;
+  border-bottom:1px solid var(--linia-2)}
+.fil .tx{flex:1;min-width:0;cursor:default}
+.fil:not(.obj-f) .tx{cursor:pointer}
+.fil .nm{font-weight:600;font-size:14.5px;line-height:1.3}
+.fil:not(.obj-f) .nm{font-weight:700}
+.fil .sb{font-size:12px;color:var(--tinta-3);margin-top:1px;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.fil .qt{font-variant-numeric:tabular-nums;font-weight:700;font-size:13px;color:var(--tinta-2);
+  flex:0 0 auto}
+.tic{flex:0 0 auto;width:21px;height:21px;border-radius:6px;border:1.8px solid var(--linia);
+  background:var(--carta);cursor:pointer;position:relative;padding:0}
+.tic:hover{border-color:var(--tema)}
+.tic.si{background:var(--tema);border-color:var(--tema)}
+.tic.si::after{content:'';position:absolute;left:6px;top:2px;width:5px;height:10px;
+  border:solid #fff;border-width:0 2.2px 2.2px 0;transform:rotate(42deg)}
+.tic.part{background:var(--tema);border-color:var(--tema)}
+.tic.part::after{content:'';position:absolute;left:4px;top:8px;width:9px;height:2.4px;background:#fff;
+  border-radius:2px}
+.fletxa{flex:0 0 auto;width:24px;height:24px;border:none;background:none;color:var(--tinta-3);
+  cursor:pointer;display:grid;place-items:center;padding:0}
+.fletxa svg{width:17px;height:17px;transition:transform .15s}
+.fletxa.obert svg{transform:rotate(90deg)}
+.fletxa:hover{color:var(--tinta)}
+.cap-fletxa{flex:0 0 auto;width:24px}
+.ves{flex:0 0 auto;width:28px;height:28px;border:none;background:none;color:var(--tinta-3);
+  cursor:pointer;display:grid;place-items:center;border-radius:99px;padding:0}
+.ves svg{width:17px;height:17px}
+.ves:hover{background:var(--linia-2);color:var(--tema)}
 
-/* manual */
-.manual{position:fixed;inset:0;z-index:70;background:var(--fons);display:flex;flex-direction:column}
-.manual .m-dalt{background:var(--carta);border-bottom:1px solid var(--linia);padding:13px 16px;
-  padding-top:calc(13px + env(safe-area-inset-top));display:flex;gap:10px;align-items:center;
-  justify-content:space-between}
-.manual .m-dalt strong{font-size:17px;font-weight:700;letter-spacing:-.02em}
-.manual .tanca{background:none;border:none;color:var(--tema);font-weight:600;font-size:14.5px;
-  cursor:pointer;padding:6px 4px}
-.manual .m-cos{flex:1;overflow:auto;padding:20px 18px calc(40px + env(safe-area-inset-bottom));
-  max-width:740px;margin:0 auto;width:100%}
-.manual h3{font-size:16px;font-weight:700;letter-spacing:-.01em;margin:30px 0 8px;
-  padding-top:18px;border-top:1px solid var(--linia)}
-.manual h3:first-of-type{border-top:none;padding-top:0;margin-top:20px}
-.manual p{margin:0 0 11px;font-size:15px;line-height:1.55;color:var(--tinta-2);max-width:62ch}
-.manual p b,.manual li b{color:var(--tinta);font-weight:700}
-.manual ul{margin:0 0 12px;padding-left:20px;max-width:62ch}
-.manual li{font-size:15px;line-height:1.55;color:var(--tinta-2);margin-bottom:7px}
-.manual .m-entrada{font-size:16px;color:var(--tinta);border-left:3px solid var(--tema);
-  padding-left:13px;margin-bottom:6px}
-.manual .m-final{margin-top:26px;padding-top:18px;border-top:1px solid var(--linia);
-  font-size:14px;color:var(--tinta-3)}
-.manual .m-fig{background:var(--carta);border:1px solid var(--linia);border-radius:var(--r-m);
-  padding:12px;margin:14px 0 16px;overflow-x:auto}
-.manual .m-fig svg{width:100%;min-width:430px;height:auto;display:block}
-.manual .m-fig.estreta{overflow:visible}
-.manual .m-fig.estreta svg{min-width:0}
-.manual .m-peu{font-size:13.5px;color:var(--tinta-3);margin:-4px 0 14px}
-.manual .m-llegenda{counter-reset:ll;list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
-.manual .m-llegenda li{counter-increment:ll;position:relative;padding-left:30px;margin-bottom:8px}
-.manual .m-llegenda li::before{content:counter(ll);position:absolute;left:0;top:1px;width:20px;
-  height:20px;border-radius:99px;background:var(--tinta);color:#fff;font-size:11.5px;
-  font-weight:700;display:grid;place-items:center}
-.cadena{display:flex;flex-wrap:wrap;align-items:stretch;gap:7px;margin:14px 0 8px}
-.cadena i{align-self:center;color:var(--tinta-3);font-style:normal;font-size:16px}
-.baula{border:2px solid var(--c);background:var(--f);border-radius:11px;padding:8px 13px;
-  display:flex;flex-direction:column;gap:1px;min-width:0}
-.baula b{font-size:13px;font-weight:700;color:var(--c);letter-spacing:-.01em}
-.baula span{font-size:11px;color:var(--c);opacity:.78}
-.baula.ple b,.baula.ple span{color:#fff}
-.baula:nth-child(7) b,.baula:nth-child(9) b{color:var(--tinta)}
-.baula:nth-child(7) span,.baula:nth-child(9) span{color:var(--tinta-3);opacity:1}
-.m-punt{display:inline-block;width:10px;height:10px;border-radius:99px;vertical-align:-1px;
-  margin:0 1px 0 5px}
+/* cerca */
+.cercador{position:relative;z-index:25;margin-bottom:14px}
+.camp-cerca{display:flex;align-items:center;gap:10px;background:var(--carta);
+  border:1px solid var(--linia);border-radius:99px;padding:0 15px;box-shadow:var(--ombra-1)}
+.camp-cerca:focus-within{border-color:var(--tema);box-shadow:0 0 0 3px var(--tema-suau)}
+.camp-cerca svg{width:18px;height:18px;flex:0 0 auto;color:var(--tinta-3)}
+.camp-cerca input{flex:1;min-width:0;border:none;background:none;font:inherit;font-size:16px;
+  color:var(--tinta);padding:13px 0}
+.camp-cerca input:focus{outline:none}
+.camp-cerca input::placeholder{color:#9aa5a1}
+.camp-cerca input::-webkit-search-cancel-button{display:none}
+.neteja{flex:0 0 auto;width:24px;height:24px;border-radius:99px;border:none;background:var(--linia-2);
+  color:var(--tinta-2);font-size:15px;line-height:1;cursor:pointer}
+.neteja:hover{background:var(--linia);color:var(--tinta)}
+.suggeriments{display:none;position:absolute;top:calc(100% + 7px);left:0;right:0;z-index:30;
+  background:var(--carta);border:1px solid var(--linia);border-radius:var(--r-m);
+  box-shadow:var(--ombra-3);max-height:min(62vh,430px);overflow:auto;padding:5px}
+.suggeriments.obert{display:block}
+.sug{display:flex;gap:11px;align-items:center;padding:9px 11px;border-radius:10px;cursor:pointer}
+.sug:hover,.sug.actiu{background:var(--linia-2)}
+.sug .t{flex:1;min-width:0}
+.sug .nm{font-weight:600;display:flex;align-items:baseline;gap:7px}
+.sug .mena{font-size:10.5px;font-weight:600;color:var(--tinta-3);text-transform:lowercase;
+  background:var(--linia-2);padding:1px 7px;border-radius:99px;flex:0 0 auto}
+.sug:hover .mena,.sug.actiu .mena{background:var(--carta)}
+.sug .on{font-size:12.5px;color:var(--tinta-2);margin-top:1px;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.sug .qt{font-variant-numeric:tabular-nums;font-weight:700;font-size:13.5px;color:var(--tinta-2);
+  flex:0 0 auto}
+.sug-ic{width:36px;height:36px;border-radius:9px;object-fit:cover;background:var(--linia-2);
+  flex:0 0 auto;display:grid;place-items:center;font-weight:800;font-size:14px}
+.sug-res{padding:16px 13px;color:var(--tinta-3);font-size:13.5px;text-align:center}
 
 /* pestanyes internes */
 .pest{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;scrollbar-width:none}
@@ -428,7 +461,10 @@ const SALES = {
   pioners:{x:508,y:85, w:155,h:150,r:14},
   raiers: {x:508,y:243,w:155,h:150,r:14},
   llops:  {x:690,y:155,w:185,h:380,r:18},
-  follets:{x:575,y:434,w:95, h:106,r:12}
+  follets:{x:575,y:434,w:95, h:106,r:12},
+  /* Dues sales soltes, sense connexió amb la resta del cau. */
+  armari_menjar:{x:344,y:456,w:95, h:106,r:12},
+  torre_muni:   {x:452,y:456,w:95, h:106,r:12}
 };
 const MOBLES = {
   armari:          {x:553,y:30, w:65, h:55, sala:null},
@@ -444,7 +480,7 @@ const MOBLES = {
 };
 const PASSADIS = {x:338,y:393,w:352,h:41};
 const ENTRADA  = {x:338,y1:397,y2:429};
-const GENERAL  = [292,18,604,548];
+const GENERAL  = [286,16,616,560];
 
 /* colors per sala */
 const TEMES = {
@@ -452,6 +488,8 @@ const TEMES = {
   raiers: {c:'#1c79c9',s:'#e8f2fc',m:'#aed2f0'},
   llops:  {c:'#0e8f66',s:'#e5f4ee',m:'#a3dcc5'},
   follets:{c:'#db7126',s:'#fdf1e6',m:'#f2c79c'},
+  armari_menjar:{c:'#5a6b7a',s:'#eef1f4',m:'#c3cdd6'},
+  torre_muni:   {c:'#5a6b7a',s:'#eef1f4',m:'#c3cdd6'},
   _:      {c:'#5a6b7a',s:'#eef1f4',m:'#c3cdd6'}
 };
 
@@ -473,6 +511,7 @@ const I = {
   rellotge:'<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.2V12l3.2 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>',
   surt:'<path d="M10 4H5.5A1.5 1.5 0 0 0 4 5.5v13A1.5 1.5 0 0 0 5.5 20H10" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="m15 8 4 4-4 4M19 12H9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
   caixa:'<path d="M3.5 7.8 12 4l8.5 3.8v8.4L12 20l-8.5-3.8V7.8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M3.5 7.8 12 11.6l8.5-3.8M12 11.6V20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>',
+  llistat:'<path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="3.4" y="4.4" width="3.2" height="3.2" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3.4" y="10.4" width="3.2" height="3.2" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3.4" y="16.4" width="3.2" height="3.2" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/>',
   llistes:'<path d="M7.5 5.5h13M7.5 12h13M7.5 18.5h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m2.6 5.4 1.2 1.2 2-2.2M2.6 11.9l1.2 1.2 2-2.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 17.2v4.2M15.4 19.3h4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
   ajuda:'<circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M9.7 9.4a2.4 2.4 0 1 1 3.2 2.3c-.6.25-.9.8-.9 1.45v.35" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="16.4" r="1.05" fill="currentColor"/>',
   graella:'<rect x="4" y="4" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="4" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="4" y="13" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="13" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/>'
@@ -482,7 +521,12 @@ const ic = (k,cls) => '<svg viewBox="0 0 24 24" aria-hidden="true"'+(cls?' class
 /* ===================== estat ===================== */
 let DADES=[], LLISTES=[], PER_ID={}, FILLS={}, PAPER=null, VIST=null;
 let cami=[], caixaTriada=null, vista=GENERAL.slice(), estat='', profunditat=0;
-let fotoPendent=null, revArrel=null, pestanya='tasques', cercaOberta=false;
+let fotoPendent=null, revArrel=null, pestanya='tasques';
+let modeLlista=false, plegats={}, seleccio=new Set();
+/* Capa = el que hi ha per damunt del contingut (un panell o el manual). Cada
+   capa oberta apila una entrada d'historial perquè el botó d'enrere del
+   navegador, el del ratolí i el gest del mòbil la tanquin en comptes de sortir. */
+let capa=null, saltaPop=0;
 
 const $ = s => document.querySelector(s);
 const esc = t => String(t==null?'':t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -579,7 +623,8 @@ async function arrencar(){
     PAPER=d.paper; VIST=d.actualitzat; DADES=d.files; LLISTES=d.llistes||[];
     esquelet(); indexar();
     const i = pilaDeCodi(location.hash);
-    history.replaceState({p:i.pila.map(x=>x.id),c:i.caixa},'',location.hash||location.pathname);
+    history.replaceState({p:i.pila.map(x=>x.id),c:i.caixa,m:false,k:null},'',
+      location.hash||location.pathname);
     situar(i.pila, i.caixa, false);
   }catch(e){
     $('#tot').innerHTML='<div class="cos"><div class="avis-barra"><span class="creix">'+
@@ -610,9 +655,44 @@ function porta(mal){
 function esquelet(){
   $('#tot').innerHTML =
     '<header class="cap"><div class="cap-int" id="cap"></div></header>'+
-    '<main class="cos"><div id="banda"></div><div id="accions"></div><div id="vista"></div></main>'+
+    '<div class="marc"><main class="cos"><div id="banda"></div>'+
+      '<div class="cercador" id="cercador">'+
+        '<div class="camp-cerca">'+ic('cerca')+
+          '<input id="q" type="search" autocomplete="off" spellcheck="false" '+
+          'placeholder="Busca un objecte i et dirà on és" aria-label="Busca a l\'inventari" '+
+          'role="combobox" aria-expanded="false" aria-controls="sug">'+
+          '<button class="neteja" id="q-x" aria-label="Esborra" hidden>×</button>'+
+        '</div>'+
+        '<div class="suggeriments" id="sug" role="listbox"></div>'+
+      '</div>'+
+      '<div id="accions"></div><div id="vista"></div></main>'+
+      '<aside class="lateral" id="lateral" aria-label="Pendents"></aside></div>'+
     '<nav class="tabs"><div class="tabs-int" id="tabs"></div></nav>'+
     '<div id="fab"></div>';
+  cablejarCerca();
+}
+
+/* La barra de cerca es queda sempre a la pàgina, o sigui que els seus
+   escoltadors es lliguen un sol cop, quan es construeix l'esquelet. */
+function cablejarCerca(){
+  const q=$('#q'), x=$('#q-x'); if(!q) return;
+  let temps;
+  q.addEventListener('input', e=>{
+    const v=e.target.value;
+    if(x) x.hidden = !v;
+    clearTimeout(temps);
+    temps=setTimeout(()=>cercar(v.trim()), 110);
+  });
+  q.addEventListener('keydown', teclaCerca);
+  q.addEventListener('focus', ()=>{ if(q.value.trim().length>=2) cercar(q.value.trim()); });
+  /* El retard deixa que un clic damunt d'un suggeriment hi arribi abans que
+     el desplegable es tanqui. */
+  q.addEventListener('blur', ()=>setTimeout(tancaSug,150));
+  if(x) x.onclick=()=>{ q.value=''; x.hidden=true; tancaSug(); q.focus(); };
+  document.addEventListener('click', e=>{
+    const c=$('#cercador');
+    if(c && !c.contains(e.target)) tancaSug();
+  });
 }
 
 /* ===================== navegació ===================== */
@@ -633,11 +713,26 @@ function pilaDeCodi(codi){
   }
   return {pila:pila, caixa:caixa||null};
 }
+function estatAra(){
+  return {p:cami.map(x=>x.id), c:caixaTriada, m:modeLlista, k:capa};
+}
+
+function tancaCapaReal(){
+  const d=$('#dlg');
+  if(d){ if(d.open) d.close(); d.className=''; }
+  const m=document.getElementById('manual');
+  if(m){ m.remove(); document.body.style.overflow=''; }
+}
+
 function situar(pila,caixa,apunta){
   const eraFons=!cami.length;
+  /* Si se surt d'una capa navegant, la seva entrada d'historial queda a sota:
+     tornar enrere et deixa on eres abans d'obrir-la, que és el que s'espera. */
+  if(apunta && capa){ tancaCapaReal(); capa=null; }
   cami=pila; caixaTriada=caixa||null;
   if(apunta){
-    history.pushState({p:pila.map(x=>x.id),c:caixaTriada},'',codiDe(pila,caixaTriada)||location.pathname);
+    history.pushState({p:pila.map(x=>x.id),c:caixaTriada,m:modeLlista,k:null},'',
+      codiDe(pila,caixaTriada)||location.pathname);
     profunditat++;
   }
   if(!pila.length && !eraFons) vista=GENERAL.slice();
@@ -649,27 +744,38 @@ function aplicarTema(){
   a.setProperty('--tema',t.c); a.setProperty('--tema-suau',t.s); a.setProperty('--tema-mig',t.m);
 }
 function arrel(){ situar([],null,true); }
+function anarAlMapa(){
+  if(modeLlista){ modeLlista=false; }
+  situar([],null,true);
+}
 function entrar(id,pos){ situar(cami.concat([{id:id}]),pos||null,true); amunt(); }
 function tornarA(n){ situar(cami.slice(0,n),null,true); }
 function triar(pos){ situar(cami, caixaTriada===pos?null:pos, true); }
 function amunt(){ if(window.scrollY>120) window.scrollTo({top:0,behavior:'smooth'}); }
 function enrere(){
+  if(capa) return tanca();
   if(profunditat>0){ history.back(); return; }
   if(caixaTriada) return situar(cami,null,true);
   if(cami.length) return situar(cami.slice(0,-1),null,true);
+  if(modeLlista) return capgiraMode();
 }
 function anarAObjecte(id){
   const f=PER_ID[id]; if(!f) return;
-  tancarCerca();
+  tancaSug();
   const pila=[]; let x=f.pare?PER_ID[f.pare]:null;
   while(x){ pila.unshift({id:x.id}); x=x.pare?PER_ID[x.pare]:null; }
   situar(pila, f.pos||null, true);
   window.scrollTo({top:0,behavior:'smooth'});
 }
 addEventListener('popstate', ev=>{
+  if(saltaPop>0){ saltaPop--; return; }
+  /* Si hi havia una capa oberta, aquesta entrada era seva: es tanca i prou. */
+  if(capa){ tancaCapaReal(); capa=null; pintar(); return; }
   profunditat=Math.max(0,profunditat-1);
-  if(ev.state && Array.isArray(ev.state.p)){
-    situar(ev.state.p.map(id=>({id:id})).filter(x=>PER_ID[x.id]), ev.state.c||null, false);
+  const st = (ev.state && Array.isArray(ev.state.p)) ? ev.state : null;
+  if(st){
+    modeLlista=!!st.m;
+    situar(st.p.map(id=>({id:id})).filter(x=>PER_ID[x.id]), st.c||null, false);
   } else {
     const r=pilaDeCodi(location.hash); situar(r.pila,r.caixa,false);
   }
@@ -679,11 +785,19 @@ addEventListener('popstate', ev=>{
 function actual(){ return cami.length?PER_ID[cami[cami.length-1].id]:null; }
 
 function pintar(){
-  pintarCap(); pintarAccions(); pintarTabs(); pintarFab();
+  pintarCap(); pintarAccions(); pintarTabs(); pintarFab(); pintarLateral();
   const a=actual();
+  if(modeLlista) return vistaEspais();
   if(!a) vistaPlanol();
   else if(a.tipus==='sala') vistaSala(a);
   else vistaMoble(a);
+}
+
+function capgiraMode(){
+  modeLlista=!modeLlista;
+  history.pushState(estatAra(),'',location.hash||location.pathname);
+  profunditat++;
+  amunt(); pintar();
 }
 
 function pintarCap(){
@@ -712,6 +826,11 @@ function pintarCap(){
   else if(estat==='fallat') sub='<i>No s\'ha desat</i>';
 
   h += '<div class="titol"><h1>'+esc(titol)+'</h1><div class="sub">'+sub+'</div></div>';
+  h += '<button class="ajuda-b mode-b'+(modeLlista?' encesa':'')+'" onclick="capgiraMode()" '+
+    'aria-pressed="'+(modeLlista?'true':'false')+'" aria-label="'+
+    (modeLlista?'Torna al mapa':'Mostra-ho com a llista')+'" title="'+
+    (modeLlista?'Torna al mapa':'Mostra-ho com a llista')+'">'+
+    ic(modeLlista?'mapa':'llistat')+'</button>';
   h += '<button class="ajuda-b" onclick="instruccions()" aria-label="Com funciona">'+ic('ajuda')+'</button>';
   if(a && salaDe(a.id)) h += '<span class="punt-sala"></span>';
   $('#cap').innerHTML=h;
@@ -719,19 +838,15 @@ function pintarCap(){
 
 function pintarAccions(){
   const a=actual(); let h='';
-  if(!a){
-    h += '<button class="buscador" onclick="obrirCerca()">'+ic('cerca')+
-      '<span>Busca un objecte i et dirà on és</span></button>';
-  } else {
+  if(a && !modeLlista){
     const xips=[];
     if(a.tipus==='sala'){
-      xips.push(['ull','Veure-ho tot','totDeLaSala(\''+a.id+'\')',false]);
       if(EDITA()&&compta(a.id)) xips.push(['check','Revisa','revisar(\''+a.id+'\')',true]);
-      if(EDITA()) xips.push(['graella','Mobles','gestionar(\''+a.id+'\')',false]);
+      if(EDITA()) xips.push(['graella','Gestionar mobles','gestionar(\''+a.id+'\')',false]);
     } else {
       if(EDITA()&&compta(a.id)) xips.push(['check','Revisa','revisar(\''+a.id+'\')',true]);
       if(EDITA()&&(caixaTriada||!a.files)) xips.push(['caixa','Nova caixa','formMoble()',false]);
-      if(EDITA()&&a.files) xips.push(['graella','Safates','formSafates(\''+a.id+'\')',false]);
+      if(EDITA()) xips.push(['graella','Gestionar aquest moble','gestionarMoble(\''+a.id+'\')',false]);
     }
     if(xips.length) h += '<div class="accions">'+xips.map(x=>
       '<button class="xip'+(x[3]?' tema':'')+'" onclick="'+x[2]+'">'+ic(x[0])+x[1]+'</button>').join('')+'</div>';
@@ -741,19 +856,19 @@ function pintarAccions(){
 
 function pintarTabs(){
   const a=actual(), n=quePendents();
-  const t=(k,icona,txt,accio,badge)=>'<button class="tab'+(k?' actiu':'')+'" onclick="'+accio+'">'+
+  const t=(k,icona,txt,accio,badge,cls)=>'<button class="tab'+(k?' actiu':'')+
+    (cls?' '+cls:'')+'" onclick="'+accio+'">'+
     ic(icona)+(badge?'<span class="bombolleta">'+badge+'</span>':'')+'<span>'+txt+'</span></button>';
   $('#tabs').innerHTML =
-    t(!cami.length,'mapa','Mapa','arrel()') +
-    t(cercaOberta,'cerca','Buscar','obrirCerca()') +
+    t(!cami.length&&!modeLlista,'mapa','Mapa','anarAlMapa()') +
     t(false,'llistes','Llistes','llistes()') +
-    t(false,'llista','Pendents','pendents()',n) +
+    t(false,'llista','Pendents','pendents()',n,'nomes-mobil') +
     t(false,'mes','Més','menuMes()');
 }
 
 function pintarFab(){
   const a=actual();
-  const pot = a && a.tipus==='moble' && EDITA() && (caixaTriada || !a.files);
+  const pot = !modeLlista && a && a.tipus==='moble' && EDITA() && (caixaTriada || !a.files);
   $('#fab').innerHTML = pot ?
     '<button class="fab" onclick="formObjecte()">'+ic('suma')+'Afegeix</button>' : '';
 }
@@ -769,11 +884,33 @@ function portaEntrada(){
 
 /* El nom de la sala va damunt d'una pastilla del seu color: així queda al mateix
    lloc a totes les sales i mai no es barreja amb el contorn dels mobles. */
+/* Un nom llarg en una sala petita («Armari menjar») es faria més ample que la
+   sala i trepitjaria la del costat. L'escalat de sota s'hi acosta a ull; qui
+   garanteix que hi cap és ajustaEtiquetes(), que mesura el text ja dibuixat. */
+/* Amb el text ja al document es pot mesurar: si encara sobresurt, se li diu
+   l'amplada exacta que ha d'ocupar i el navegador l'hi encabeix. */
+function ajustaEtiquetes(){
+  const v=$('#vista'); if(!v) return;
+  [].slice.call(v.querySelectorAll('.et-sala[data-max]')).forEach(t=>{
+    const max=Number(t.getAttribute('data-max'));
+    let w=0; try{ w=t.getBBox().width; }catch(e){ return; }
+    if(w>max){
+      t.setAttribute('textLength', max.toFixed(0));
+      t.setAttribute('lengthAdjust','spacingAndGlyphs');
+    }
+  });
+}
+
 function etiquetaSala(cx,cy,nom,sota,T,ampleSala){
-  const a=Math.min(Math.max(nom.length,sota.length)*6.6+22, (ampleSala||999)-8);
+  const marge=(ampleSala||999)-10;
+  const fsNom=14.5, fsSota=9.5;
+  const volNom=nom.length*fsNom*0.46+20;
+  const k=volNom>marge ? Math.max(0.6, marge/volNom) : 1;
+  const a=Math.min(Math.max(volNom*k, sota.length*fsSota*0.5+20), marge);
   return '<rect x="'+(cx-a/2)+'" y="'+(cy-17)+'" width="'+a+'" height="34" rx="9" fill="'+T.s+
     '" opacity=".94"></rect>'+
-    '<text x="'+cx+'" y="'+(cy-1)+'" class="et-sala" fill="'+T.c+'" stroke="none">'+esc(nom)+'</text>'+
+    '<text x="'+cx+'" y="'+(cy-1)+'" class="et-sala" data-max="'+marge.toFixed(0)+
+      '" style="font-size:'+(fsNom*k).toFixed(1)+'px" fill="'+T.c+'" stroke="none">'+esc(nom)+'</text>'+
     '<text x="'+cx+'" y="'+(cy+12)+'" class="et-comp" fill="'+T.c+'" stroke="none">'+esc(sota)+'</text>';
 }
 
@@ -808,6 +945,7 @@ function vistaPlanol(){
   $('#vista').innerHTML = '<div class="llenç"><svg id="svg" class="planol" viewBox="'+GENERAL.join(' ')+
     '" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Plànol del cau">'+
     '<title>Plànol del cau</title>'+s+'</svg></div>';
+  ajustaEtiquetes();
   vista=GENERAL.slice();
 }
 
@@ -1042,12 +1180,19 @@ function tocat(){ indexar(); pintar(); desar(); }
 /* ===================== diàlegs ===================== */
 function obrir(html,mida){
   const d=$('#dlg');
+  if(!capa){
+    capa='dlg';
+    history.pushState(estatAra(),'',location.hash||location.pathname);
+  }
   d.className = mida==='baix' ? 'baix' : '';
   d.innerHTML='<div class="full'+(mida==='ample'?' ample':mida==='enorme'?' enorme':'')+'">'+
     (mida==='baix'?'<div class="nansa"></div>':'')+html+'</div>';
   if(!d.open) d.showModal();
 }
-function tanca(){ $('#dlg').close(); }
+function tanca(){
+  tancaCapaReal();
+  if(capa){ capa=null; saltaPop++; history.back(); }
+}
 $('#dlg').addEventListener('click', ev=>{ if(ev.target===$('#dlg')) tanca(); });
 
 /* ---------- menú d'un objecte ---------- */
@@ -1055,85 +1200,255 @@ function menuObjecte(id){
   const o=PER_ID[id];
   const fora = o.prestec&&o.prestec.qui;
   obrir('<h2>'+esc(o.nom)+'</h2><p class="on">'+esc(onEs(o))+'</p>'+
-    '<button class="opcio" onclick="tanca();formObjecte(\''+id+'\')">'+ic('llapis')+
+    '<button class="opcio" onclick="formObjecte(\''+id+'\')">'+ic('llapis')+
       '<span>Edita<small>Nom, quantitat, notes, foto i tasques</small></span></button>'+
-    '<button class="opcio" onclick="tanca();formPrestec(\''+id+'\')">'+ic('fora')+
+    '<button class="opcio" onclick="formPrestec(\''+id+'\')">'+ic('fora')+
       '<span>'+(fora?'Ha tornat':'Se l\'enduen')+
       '<small>'+(fora?'El té '+esc(o.prestec.qui):'Apunta qui se l\'emporta')+'</small></span></button>'+
-    '<button class="opcio" onclick="tanca();formMoure(\''+id+'\')">'+ic('mou')+
+    '<button class="opcio" onclick="formMoure(\''+id+'\')">'+ic('mou')+
       '<span>Mou<small>Canvia\'l de lloc</small></span></button>'+
-    '<button class="opcio perill" onclick="tanca();confirmarTreure(\''+id+'\')">'+ic('paperera')+
+    '<button class="opcio perill" onclick="confirmarTreure(\''+id+'\')">'+ic('paperera')+
       '<span>Treu-lo de l\'inventari</span></button>','baix');
 }
 
 /* ---------- menú Més ---------- */
 function menuMes(){
   obrir('<h2>Més</h2><p class="on">'+(EDITA()?'Estàs editant l\'inventari.':'Només pots consultar.')+'</p>'+
-    '<button class="opcio" onclick="tanca();instruccions()">'+ic('ajuda')+
+    '<button class="opcio" onclick="instruccions()">'+ic('ajuda')+
       '<span>Com funciona<small>Manual d\'ús, funció per funció</small></span></button>'+
-    '<button class="opcio" onclick="tanca();baixarExcel()">'+ic('excel')+
-      '<span>Descarrega l\'Excel<small>Tot l\'inventari en un full de càlcul</small></span></button>'+
-    (EDITA()?'<button class="opcio" onclick="tanca();historial()">'+ic('rellotge')+
+
+    (EDITA()?'<button class="opcio" onclick="historial()">'+ic('rellotge')+
       '<span>Historial<small>Recupera una versió anterior</small></span></button>':'')+
     '<button class="opcio perill" onclick="sortir()">'+ic('surt')+
       '<span>Surt<small>Per entrar amb l\'altra contrasenya</small></span></button>','baix');
 }
 async function sortir(){ await fetch('/api/sortir',{method:'POST'}); location.reload(); }
 
-/* ===================== cerca ===================== */
-function obrirCerca(){
-  if(cercaOberta) return;
-  cercaOberta=true; pintarTabs();
-  const c=document.createElement('div');
-  c.className='cercador'; c.id='cercador';
-  c.innerHTML='<div class="dalt">'+ic('cerca','')+
-    '<input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="Busca un objecte" '+
-    'aria-label="Busca un objecte">'+
-    '<button class="tanca" onclick="tancarCerca()">Tanca</button></div>'+
-    '<div class="llista" id="res"><div class="pista">Escriu dues lletres o més.</div></div>';
-  c.querySelector('svg').style.cssText='width:20px;height:20px;color:var(--tinta-3);flex:0 0 auto';
-  document.body.appendChild(c);
-  const inp=$('#q'); inp.focus();
-  let rel;
-  inp.addEventListener('input', e=>{ clearTimeout(rel); rel=setTimeout(()=>cercar(e.target.value.trim()),110); });
-  inp.addEventListener('keydown', e=>{ if(e.key==='Escape') tancarCerca(); });
-}
-function tancarCerca(){
-  const c=$('#cercador'); if(c) c.remove();
-  cercaOberta=false; pintarTabs();
-}
-function cercar(q){
-  const caixa=$('#res'); if(!caixa) return;
-  if(q.length<2){ caixa.innerHTML='<div class="pista">Escriu dues lletres o més.</div>'; return; }
-  const n=norm(q);
-  const tr=DADES.filter(f=>f.tipus==='objecte'&&(norm(f.nom).includes(n)||norm(f.notes).includes(n)||
-    etsDe(f).some(e=>norm(e).includes(n)))).slice(0,40);
-  if(!tr.length){
-    caixa.innerHTML='<div class="pista">Cap objecte amb aquest nom.<br>Prova amb una paraula més curta.</div>';
-    return;
-  }
-  caixa.innerHTML=tr.map(f=>{
-    const T=temaDe(f.id);
-    return '<div class="res" onclick="anarAObjecte(\''+f.id+'\')">'+
-      (f.foto?'<img class="foto-m" loading="lazy" src="/api/foto?id='+encodeURIComponent(f.id)+'" alt="">'
-             :'<span class="foto-m inicial" style="background:'+T.s+';color:'+T.c+'">'+
-               esc(inicialSala(f.id))+'</span>')+
-      '<div class="t"><div class="nom">'+esc(f.nom)+'</div>'+
-      '<div class="on">'+esc(onEs(f))+'</div></div>'+
-      (f.quantitat!=null?'<span class="qt">×'+f.quantitat+'</span>':'')+'</div>';
-  }).join('');
+
+/* ===================== mode llista ===================== */
+/* El mateix contingut que el mapa, però com a arbre desplegable i amb caselles
+   per triar què vols endur-te a l'Excel. Mostra el que hi ha sota on ets:
+   des d'una sala, aquella sala; des del plànol, tot el cau.                   */
+
+function fillsOrdenats(id){
+  return fillsDe(id).slice().sort((a,b)=>{
+    if((a.tipus==='objecte')!==(b.tipus==='objecte')) return a.tipus==='objecte'?1:-1;
+    if(a.tipus==='objecte' && a.pos!==b.pos) return String(a.pos).localeCompare(String(b.pos),'ca',{numeric:true});
+    return a.nom.localeCompare(b.nom,'ca');
+  });
 }
 
-/* ===================== veure-ho tot ===================== */
-function totDeLaSala(id){
-  const sala=PER_ID[id];
-  const objs=totsSota(id).sort((a,b)=>a.nom.localeCompare(b.nom,'ca'));
-  obrir('<h2>Tot el que hi ha a '+esc(sala.nom)+'</h2>'+
-    '<p class="on">'+objs.length+' objectes, per ordre alfabètic.</p>'+
-    (objs.length?objs.map(o=>fila(o,true)).join('')
-      :'<div class="res-buit"><b>Encara no hi ha res</b>Aquesta sala és buida.</div>')+
-    '<div class="fila-b dreta" style="margin-top:18px"><button class="b clar" onclick="tanca()">Tanca</button></div>',
-    'ample');
+function estatCasella(n){
+  if(n.tipus==='objecte') return seleccio.has(n.id)?'si':'no';
+  const ids=totsSota(n.id).map(o=>o.id);
+  if(!ids.length) return 'no';
+  const k=ids.filter(i=>seleccio.has(i)).length;
+  return k===0?'no':(k===ids.length?'si':'part');
+}
+
+function capgiraSel(id){
+  const n=PER_ID[id]; if(!n) return;
+  if(n.tipus==='objecte'){
+    seleccio.has(id)?seleccio.delete(id):seleccio.add(id);
+  } else {
+    const ids=totsSota(id).map(o=>o.id);
+    const tots=ids.length && ids.every(i=>seleccio.has(i));
+    ids.forEach(i=> tots?seleccio.delete(i):seleccio.add(i));
+  }
+  repintaArbre();
+}
+
+function capgiraPlec(id){
+  plegats[id]=!plegats[id];
+  repintaArbre();
+}
+
+function repintaArbre(){
+  const y=window.scrollY;
+  vistaEspais();
+  window.scrollTo({top:y});
+}
+
+function arrelsLlista(){
+  const a=actual();
+  return a ? [a] : fillsDe(null);
+}
+
+function nodeArbre(n,nivell){
+  const esObj = n.tipus==='objecte';
+  const fills = esObj?[]:fillsOrdenats(n.id);
+  const obert = !plegats[n.id];
+  const est = estatCasella(n);
+  const T = temaDe(n.id);
+  const n_ = esObj?0:compta(n.id);
+
+  let sub='';
+  if(esObj){
+    const t=[];
+    if(n.pos) t.push(etqPos(n.pos));
+    if(etsDe(n).length) t.push(etsDe(n).join(', '));
+    if(n.prestec&&n.prestec.qui) t.push('fora, amb '+n.prestec.qui);
+    if(n.falta) t.push('no s\'ha trobat');
+    sub=t.join(' · ');
+  } else {
+    sub = n.tipus==='sala' ? compteTxt(n_)
+      : (n.files?n.files+' × '+n.columnes+' compartiments · ':'')+compteTxt(n_);
+  }
+
+  let h='<div class="fil'+(esObj?' obj-f':'')+'" style="--niv:'+nivell+
+      (esObj?'':';--cc:'+T.c)+'">'+
+    '<button class="tic '+est+'" onclick="capgiraSel(\''+n.id+'\')" role="checkbox" '+
+      'aria-checked="'+(est==='si'?'true':est==='part'?'mixed':'false')+'" '+
+      'aria-label="Tria '+esc(n.nom)+'"></button>'+
+    (esObj||!fills.length
+      ? '<span class="cap-fletxa"></span>'
+      : '<button class="fletxa'+(obert?' obert':'')+'" onclick="capgiraPlec(\''+n.id+'\')" '+
+        'aria-expanded="'+(obert?'true':'false')+'" aria-label="Desplega '+esc(n.nom)+'">'+
+        '<svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" '+
+        'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>')+
+    '<div class="tx" '+(esObj?'':'onclick="capgiraPlec(\''+n.id+'\')"')+'>'+
+      '<div class="nm">'+esc(n.nom)+'</div>'+
+      (sub?'<div class="sb">'+esc(sub)+'</div>':'')+'</div>'+
+    (esObj && n.quantitat!=null?'<span class="qt">×'+n.quantitat+'</span>':'')+
+    (esObj?'<button class="ves" onclick="anarAObjecte(\''+n.id+'\')" '+
+      'aria-label="Ves-hi al mapa">'+ic('mapa')+'</button>':'')+
+    '</div>';
+
+  if(!esObj && obert && fills.length)
+    h += fills.map(f=>nodeArbre(f,nivell+1)).join('');
+  if(!esObj && obert && !fills.length)
+    h += '<div class="fil buida" style="--niv:'+(nivell+1)+'">Encara no hi ha res aquí.</div>';
+  return h;
+}
+
+function vistaEspais(){
+  const arrels=arrelsLlista();
+  const totsIds=[].concat.apply([],arrels.map(a=>totsSota(a.id).map(o=>o.id)));
+  const triats=totsIds.filter(i=>seleccio.has(i)).length;
+
+  let h='<div class="barra-sel">'+
+    '<span class="compt">'+(triats?triats+' de '+totsIds.length+' triats':
+      'Tria què vols descarregar')+'</span>'+
+    '<div class="b-grup">'+
+    '<button class="b xicot clar" onclick="selTot('+(triats===totsIds.length&&totsIds.length?'false':'true')+')">'+
+      (triats===totsIds.length&&totsIds.length?'Cap':'Tot')+'</button>'+
+    '<button class="b xicot" onclick="excelSeleccio()"'+(triats?'':' disabled')+'>'+
+      'Descarrega en Excel</button></div></div>';
+
+  h += '<div class="arbre">'+arrels.map(a=>nodeArbre(a,0)).join('')+'</div>';
+  $('#vista').innerHTML=h;
+}
+
+function selTot(posa){
+  const ids=[].concat.apply([],arrelsLlista().map(a=>totsSota(a.id).map(o=>o.id)));
+  ids.forEach(i=> posa?seleccio.add(i):seleccio.delete(i));
+  repintaArbre();
+}
+
+function excelSeleccio(){
+  if(!comprovaXLSX()) return;
+  const arrels=arrelsLlista();
+  const ids=new Set([].concat.apply([],arrels.map(a=>totsSota(a.id).map(o=>o.id))));
+  const objs=DADES.filter(f=>f.tipus==='objecte'&&ids.has(f.id)&&seleccio.has(f.id))
+    .sort((a,b)=>grupDe(a,'lloc').localeCompare(grupDe(b,'lloc'),'ca')||a.nom.localeCompare(b.nom,'ca'));
+  if(!objs.length) return;
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, fullTaula([CAPS].concat(objs.map(o=>filaExcel(o,null))),AMPLES),'Selecció');
+  XLSX.utils.book_append_sheet(wb, fullResum(objs),'Resum');
+  const on = arrels.length===1 ? arrels[0].nom : 'cau';
+  const net=on.replace(/[^\p{L}\p{N} _-]/gu,'').trim().slice(0,40)||'cau';
+  XLSX.writeFile(wb,'inventari — '+net+' — '+avui()+'.xlsx');
+}
+
+/* ===================== cerca ===================== */
+/* Cercador de tota la vida: la pàgina es queda on és i sota la barra surt un
+   desplegable amb el que encaixa. Suggereix objectes, mobles i sales.        */
+
+let SUG=[], sugTriat=-1;
+
+function cercar(q){
+  const caixa=$('#sug'); if(!caixa) return;
+  if(q.length<2){ tancaSug(); return; }
+  const n=norm(q);
+
+  const puntua=(f)=>{
+    const nm=norm(f.nom);
+    if(nm===n) return 0;
+    if(nm.startsWith(n)) return 1;
+    if(nm.includes(n)) return 2;
+    if(f.tipus==='objecte'&&etsDe(f).some(e=>norm(e).startsWith(n))) return 3;
+    if(f.tipus==='objecte'&&etsDe(f).some(e=>norm(e).includes(n))) return 4;
+    if(f.tipus==='objecte'&&norm(f.notes).includes(n)) return 5;
+    return 9;
+  };
+
+  SUG = DADES.map(f=>({f:f,p:puntua(f)}))
+    .filter(x=>x.p<9)
+    .sort((a,b)=>a.p-b.p || (a.f.tipus==='objecte'?0:1)-(b.f.tipus==='objecte'?0:1)
+      || a.f.nom.localeCompare(b.f.nom,'ca'))
+    .slice(0,12)
+    .map(x=>x.f);
+
+  sugTriat=-1;
+  if(!SUG.length){
+    caixa.innerHTML='<div class="sug-res">Cap element amb aquest nom.</div>';
+    caixa.classList.add('obert'); $('#q').setAttribute('aria-expanded','true');
+    return;
+  }
+  caixa.innerHTML = SUG.map((f,i)=>{
+    const T=temaDe(f.id);
+    const mena = f.tipus==='objecte' ? 'objecte' : (f.tipus==='sala'?'sala':'moble');
+    const on = f.tipus==='objecte' ? onEs(f) : (f.tipus==='sala'?compteTxt(compta(f.id)):ubicacio(f));
+    return '<div class="sug" role="option" data-i="'+i+'" onmousedown="triaSug('+i+')">'+
+      (f.foto?'<img class="sug-ic" loading="lazy" src="/api/foto?id='+encodeURIComponent(f.id)+'" alt="">'
+             :'<span class="sug-ic" style="background:'+T.s+';color:'+T.c+'">'+
+               esc(f.tipus==='objecte'?inicialSala(f.id):(f.tipus==='sala'?'▢':'▤'))+'</span>')+
+      '<div class="t"><div class="nm">'+esc(f.nom)+
+        '<span class="mena">'+mena+'</span></div>'+
+      '<div class="on">'+esc(on)+'</div></div>'+
+      (f.tipus==='objecte'&&f.quantitat!=null?'<span class="qt">×'+f.quantitat+'</span>':'')+
+      '</div>';
+  }).join('');
+  caixa.classList.add('obert');
+  $('#q').setAttribute('aria-expanded','true');
+}
+
+function tancaSug(){
+  const c=$('#sug'); if(!c) return;
+  c.classList.remove('obert'); c.innerHTML=''; sugTriat=-1;
+  const q=$('#q'); if(q) q.setAttribute('aria-expanded','false');
+}
+
+function teclaCerca(e){
+  const c=$('#sug');
+  if(e.key==='Escape'){ tancaSug(); e.target.blur(); return; }
+  if(!c||!c.classList.contains('obert')||!SUG.length) return;
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+    e.preventDefault();
+    sugTriat = e.key==='ArrowDown'
+      ? Math.min(sugTriat+1, SUG.length-1)
+      : Math.max(sugTriat-1, 0);
+    [].slice.call(c.querySelectorAll('.sug')).forEach((d,i)=>
+      d.classList.toggle('actiu', i===sugTriat));
+    const act=c.querySelector('.sug.actiu'); if(act) act.scrollIntoView({block:'nearest'});
+  }
+  if(e.key==='Enter'){
+    e.preventDefault();
+    triaSug(sugTriat>=0?sugTriat:0);
+  }
+}
+
+function triaSug(i){
+  const f=SUG[i]; if(!f) return;
+  const q=$('#q'); if(q){ q.value=''; q.blur(); }
+  $('#q-x').hidden=true;
+  tancaSug();
+  if(f.tipus==='objecte') return anarAObjecte(f.id);
+  // sala o moble: s'hi entra directament
+  const pila=[]; let x=f;
+  while(x){ pila.unshift({id:x.id}); x=x.pare?PER_ID[x.pare]:null; }
+  situar(pila, null, true);
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 /* ===================== fotos ===================== */
@@ -1376,6 +1691,19 @@ function formMobleNou(idSala){
     tanca(); tocat();
   };
 }
+function gestionarMoble(id){
+  const m=PER_ID[id]; if(!m) return;
+  obrir('<h2>'+esc(m.nom)+'</h2><p class="on">'+esc(ubicacio(m))+' · '+compteTxt(compta(m.id))+'</p>'+
+    '<button class="opcio" onclick="formReanomenar(\''+id+'\')">'+ic('llapis')+
+      '<span>Canvia-li el nom</span></button>'+
+    '<button class="opcio" onclick="formSafates(\''+id+'\')">'+ic('graella')+
+      '<span>Compartiments<small>'+(m.files?m.files+' files × '+m.columnes+' columnes'
+        :'ara és una llista sense compartiments')+'</small></span></button>'+
+    (MOBLES[id]?''
+      :'<button class="opcio perill" onclick="confirmarTreure(\''+id+'\')">'+ic('paperera')+
+       '<span>Treu aquest moble</span></button>'),'baix');
+}
+
 function formReanomenar(id,tornar){
   const m=PER_ID[id];
   obrir('<h2>Nom del moble</h2><p class="on">'+esc(ubicacio(m))+'</p>'+
@@ -1490,14 +1818,18 @@ function acabarRevisio(){
 }
 
 /* ===================== pendents ===================== */
-function pendents(p){
-  if(p) pestanya=p;
+/* A ordinador viu en una columna fixa a la dreta i no cal obrir res; a mòbil
+   segueix sent un panell de la barra de baix. El contingut és el mateix.     */
+
+const lateralActiu = () => window.matchMedia('(min-width:1040px)').matches;
+
+function cosPendents(compacte){
   const tsq=totesLesTasques(), fora=prestats(), antics=perComprovar();
   let cos='';
   if(pestanya==='tasques'){
     cos = tsq.length ? tsq.map(x=>
       '<div class="rev"><div class="t"><div class="nom">'+esc(x.t.text)+'</div>'+
-      '<div class="on">'+esc(x.o.nom)+' · '+esc(onEs(x.o))+
+      '<div class="on">'+esc(x.o.nom)+(compacte?'':' · '+esc(onEs(x.o)))+
       (x.t.quan?' · <b style="color:'+(vençuda(x.t)?'var(--alerta)':'var(--tinta)')+'">'+
         esc(quanTxt(x.t.quan))+'</b>':'')+
       (x.t.mesos?' · cada '+x.t.mesos+' mesos':'')+'</div></div>'+
@@ -1509,28 +1841,43 @@ function pendents(p){
       '<div class="rev"><div class="t"><div class="nom">'+esc(o.nom)+'</div>'+
       '<div class="on">amb '+esc(o.prestec.qui)+' des de '+esc(quanTxt(o.prestec.des))+
       (o.prestec.torna?' · havia de tornar '+esc(quanTxt(o.prestec.torna)):'')+'</div></div>'+
-      (EDITA()?'<div class="b-grup"><button class="b xicot clar" onclick="tanca();formPrestec(\''+
+      (EDITA()?'<div class="b-grup"><button class="b xicot clar" onclick="formPrestec(\''+
         o.id+'\')">Ha tornat</button></div>':'')+'</div>').join('')
       : '<div class="res-buit"><b>No hi ha res fora del cau</b>Tot és al seu lloc.</div>';
   } else {
     cos = antics.length ? antics.map(o=>
       '<div class="rev"><div class="t"><div class="nom">'+esc(o.nom)+
       (o.falta?' <span class="e falta">no s\'ha trobat</span>':'')+'</div>'+
-      '<div class="on">'+esc(onEs(o))+' · '+
+      '<div class="on">'+(compacte?'':esc(onEs(o))+' · ')+
       (o.comprovat?'comprovat '+esc(quanTxt(o.comprovat)):'mai comprovat')+'</div></div>'+
-      '<div class="b-grup"><button class="b xicot clar" onclick="tanca();anarAObjecte(\''+o.id+
+      '<div class="b-grup"><button class="b xicot clar" onclick="anarAObjecte(\''+o.id+
       '\')">Ves-hi</button></div></div>').join('')
       : '<div class="res-buit"><b>Tot comprovat</b>No hi ha res pendent de l\'últim any.</div>';
   }
   const pb=(k,t,n)=>'<button class="'+(pestanya===k?'tria':'')+'" onclick="pendents(\''+k+'\')">'+
     t+(n?' · '+n:'')+'</button>';
-  obrir('<h2>Pendents</h2>'+
-    '<div class="pest">'+pb('tasques','Coses a fer',tsq.length)+pb('fora','Fora del cau',fora.length)+
-    pb('antics','Per comprovar',antics.length)+'</div>'+cos+
+  return '<div class="pest">'+pb('tasques','Coses a fer',tsq.length)+pb('fora','Fora del cau',fora.length)+
+    pb('antics','Per comprovar',antics.length)+'</div>'+cos;
+}
+
+function pendents(p){
+  if(p) pestanya=p;
+  if(lateralActiu()){ pintarLateral(); return; }
+  obrir('<h2>Pendents</h2>'+cosPendents(false)+
     '<div class="fila-b dreta" style="margin-top:18px"><button class="b clar" onclick="tanca()">Tanca</button></div>',
     'ample');
 }
 
+function pintarLateral(){
+  const c=$('#lateral'); if(!c) return;
+  if(!lateralActiu()){ c.innerHTML=''; return; }
+  const n=quePendents();
+  const y=c.querySelector('.cos-lat') ? c.querySelector('.cos-lat').scrollTop : 0;
+  c.innerHTML='<div class="caixa-lat"><div class="cap-lat"><h2>Pendents</h2>'+
+    (n?'<span class="bola">'+n+'</span>':'')+'</div>'+
+    '<div class="cos-lat">'+cosPendents(true)+'</div></div>';
+  const nou=c.querySelector('.cos-lat'); if(nou) nou.scrollTop=y;
+}
 
 /* ===================== llistes ===================== */
 /* Una llista és un grapat d'objectes triats de l'inventari: el que us endueu a
@@ -2034,6 +2381,11 @@ function excelLlista(id){
 /* ===================== instruccions ===================== */
 function instruccions(){
   const v=document.getElementById('manual'); if(v) return;
+  tancaCapaReal();
+  if(!capa){
+    capa='manual';
+    history.pushState(estatAra(),'',location.hash||location.pathname);
+  } else capa='manual';
   const c=document.createElement('div');
   c.className='manual'; c.id='manual';
   c.innerHTML = `
@@ -2226,10 +2578,7 @@ function instruccions(){
   document.body.appendChild(c);
   document.body.style.overflow='hidden';
 }
-function tancarManual(){
-  const c=document.getElementById('manual'); if(c) c.remove();
-  document.body.style.overflow='';
-}
+function tancarManual(){ tanca(); }
 
 /* ===================== dibuix ===================== */
 function rect(g,o){
@@ -2246,15 +2595,15 @@ function rect(g,o){
 function tecla(ev,id){ if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); entrar(id); } }
 
 document.addEventListener('keydown', e=>{
-  if(e.key==='Escape' && document.getElementById('manual')){ tancarManual(); return; }
-  if($('#dlg').open || cercaOberta) return;
+  if(e.key==='Escape' && capa){ tanca(); return; }
+  if($('#dlg').open) return;
   if(e.key==='Escape'){ enrere(); return; }
   if((e.key==='Backspace'||e.key==='ArrowLeft') &&
      !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)){
     e.preventDefault(); enrere();
   }
   if(e.key==='/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)){
-    e.preventDefault(); obrirCerca();
+    e.preventDefault(); const q=$('#q'); if(q) q.focus();
   }
 });
 
