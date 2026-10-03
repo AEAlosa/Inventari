@@ -87,9 +87,10 @@ svg{display:block}
 .mode-b:hover{border-color:var(--tema);color:var(--tema)}
 .mode-b svg{width:19px;height:19px}
 /* Damunt del mapa va flotant a la seva cantonada, no a la de la pàgina. */
-.mode-b.flotant{position:absolute;top:10px;right:10px;z-index:3;width:36px;height:36px;padding:0;
+.mode-b.flotant{position:absolute;top:10px;right:10px;z-index:3;width:38px;height:38px;padding:0;
   background:rgba(255,255,255,.92);box-shadow:var(--ombra-1);
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.mode-b.flotant svg{width:17px;height:17px}
 .barra-mode{display:flex;justify-content:flex-end;margin-bottom:10px}
 
 /* ============ cos ============ */
@@ -114,10 +115,7 @@ svg{display:block}
   .cos-lat .rev{padding:9px 0}
   .cos-lat .rev .nom{font-size:14px}
   .tab.nomes-mobil{display:none}
-  /* Les pestanyes s'alineen amb la columna del mapa, no amb la pàgina sencera:
-     se'ls reserva a la dreta l'espai que ocupa la columna de pendents. */
-  .tabs-int{grid-template-columns:repeat(3,1fr);padding:0 16px;
-    padding-right:calc(16px + 300px + 24px)}
+  .tabs-int{padding:0 16px}
 }
 
 .accions{display:flex;gap:7px;margin-bottom:14px;overflow-x:auto;padding-bottom:2px;
@@ -208,7 +206,8 @@ g.toc:hover .cel{fill:#f7f9fa}
   backdrop-filter:saturate(1.6) blur(12px);-webkit-backdrop-filter:saturate(1.6) blur(12px);
   border-top:1px solid var(--linia-2);padding-bottom:env(safe-area-inset-bottom);
 }
-.tabs-int{max-width:var(--ample);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.tabs-int{max-width:var(--ample);margin:0 auto;display:grid;
+  grid-auto-flow:column;grid-auto-columns:1fr}
 .tab{background:none;border:none;padding:9px 2px 10px;display:flex;flex-direction:column;
   align-items:center;gap:3px;color:var(--tinta-3);cursor:pointer;position:relative;font-size:10px;
   font-weight:600;letter-spacing:.01em}
@@ -473,10 +472,10 @@ const SALES = {
   raiers: {x:508,y:243,w:155,h:150,r:14},
   llops:  {x:690,y:155,w:185,h:380,r:18},
   follets:{x:575,y:434,w:95, h:106,r:12},
-  /* Dues sales soltes, sense connexió amb la resta del cau: van damunt del
-     passadís, a l'espai lliure que queda a l'esquerra de Raiers. */
-  armari_menjar:{x:300,y:273,w:95, h:106,r:12},
-  torre_muni:   {x:406,y:273,w:95, h:106,r:12}
+  /* Dues sales soltes, sense connexió amb la resta del cau: a l'esquerra de
+     Raiers i centrades verticalment entre Pioners i Raiers. */
+  armari_menjar:{x:262,y:186,w:95, h:106,r:12},
+  torre_muni:   {x:368,y:186,w:95, h:106,r:12}
 };
 const MOBLES = {
   armari:          {x:553,y:30, w:65, h:55, sala:null},
