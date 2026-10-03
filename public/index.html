@@ -367,6 +367,50 @@ dialog.baix .full{width:100%;border-radius:var(--r-l) var(--r-l) 0 0;padding-bot
   flex:0 0 auto;display:grid;place-items:center;font-weight:800;font-size:14px}
 .sug-res{padding:16px 13px;color:var(--tinta-3);font-size:13.5px;text-align:center}
 
+/* manual */
+.manual{position:fixed;inset:0;z-index:70;background:var(--fons);display:flex;flex-direction:column}
+.manual .m-dalt{background:var(--carta);border-bottom:1px solid var(--linia);padding:13px 16px;
+  padding-top:calc(13px + env(safe-area-inset-top));display:flex;gap:10px;align-items:center;
+  justify-content:space-between}
+.manual .m-dalt strong{font-size:17px;font-weight:700;letter-spacing:-.02em}
+.manual .tanca{background:none;border:none;color:var(--tema);font-weight:600;font-size:14.5px;
+  cursor:pointer;padding:6px 4px}
+.manual .m-cos{flex:1;overflow:auto;padding:20px 18px calc(40px + env(safe-area-inset-bottom));
+  max-width:740px;margin:0 auto;width:100%}
+.manual h3{font-size:16px;font-weight:700;letter-spacing:-.01em;margin:30px 0 8px;
+  padding-top:18px;border-top:1px solid var(--linia)}
+.manual h3:first-of-type{border-top:none;padding-top:0;margin-top:20px}
+.manual p{margin:0 0 11px;font-size:15px;line-height:1.55;color:var(--tinta-2);max-width:62ch}
+.manual p b,.manual li b{color:var(--tinta);font-weight:700}
+.manual ul{margin:0 0 12px;padding-left:20px;max-width:62ch}
+.manual li{font-size:15px;line-height:1.55;color:var(--tinta-2);margin-bottom:7px}
+.manual .m-entrada{font-size:16px;color:var(--tinta);border-left:3px solid var(--tema);
+  padding-left:13px;margin-bottom:6px}
+.manual .m-final{margin-top:26px;padding-top:18px;border-top:1px solid var(--linia);
+  font-size:14px;color:var(--tinta-3)}
+.manual .m-fig{background:var(--carta);border:1px solid var(--linia);border-radius:var(--r-m);
+  padding:12px;margin:14px 0 16px;overflow-x:auto}
+.manual .m-fig svg{width:100%;min-width:430px;height:auto;display:block}
+.manual .m-fig.estreta{overflow:visible}
+.manual .m-fig.estreta svg{min-width:0}
+.manual .m-peu{font-size:13.5px;color:var(--tinta-3);margin:-4px 0 14px}
+.manual .m-llegenda{counter-reset:ll;list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+.manual .m-llegenda li{counter-increment:ll;position:relative;padding-left:30px;margin-bottom:8px}
+.manual .m-llegenda li::before{content:counter(ll);position:absolute;left:0;top:1px;width:20px;
+  height:20px;border-radius:99px;background:var(--tinta);color:#fff;font-size:11.5px;
+  font-weight:700;display:grid;place-items:center}
+.cadena{display:flex;flex-wrap:wrap;align-items:stretch;gap:7px;margin:14px 0 8px}
+.cadena i{align-self:center;color:var(--tinta-3);font-style:normal;font-size:16px}
+.baula{border:2px solid var(--c);background:var(--f);border-radius:11px;padding:8px 13px;
+  display:flex;flex-direction:column;gap:1px;min-width:0}
+.baula b{font-size:13px;font-weight:700;color:var(--c);letter-spacing:-.01em}
+.baula span{font-size:11px;color:var(--c);opacity:.78}
+.baula.ple b,.baula.ple span{color:#fff}
+.baula:nth-child(7) b,.baula:nth-child(9) b{color:var(--tinta)}
+.baula:nth-child(7) span,.baula:nth-child(9) span{color:var(--tinta-3);opacity:1}
+.m-punt{display:inline-block;width:10px;height:10px;border-radius:99px;vertical-align:-1px;
+  margin:0 1px 0 5px}
+
 /* pestanyes internes */
 .pest{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;scrollbar-width:none}
 .pest::-webkit-scrollbar{display:none}
@@ -2468,20 +2512,25 @@ function instruccions(){
       <i>&rsaquo;</i>
       <div class="baula" style="--c:#dfe3e7;--f:#fff"><b>Objectes</b><span>la corda</span></div>
     </div>
-    <p class="m-peu">Cada pas s'obre tocant-lo. La fletxa de dalt a l'esquerra torna enrere, i
-    també va el botó d'enrere del mòbil.</p>
+    <p class="m-peu">Cada pas s'obre tocant-lo. Per tornar enrere va la fletxa de dalt a l'esquerra,
+    el botó d'enrere del navegador, el botó lateral del ratolí i el gest del mòbil: tots fan el
+    mateix i cap no et treu de l'aplicació.</p>
     <p>Dins d'una casella hi pot haver una <b>caixa</b>, i dins de la caixa més caselles. No hi ha
     límit de nivells: una bossa dins d'una caixa dins d'una safata funciona igual.</p>
     <p>Cada sala té el seu color i tota l'aplicació s'hi tenyeix quan hi entres:
     <span class="m-punt" style="background:#6d4fc7"></span> Pioners,
     <span class="m-punt" style="background:#1c79c9"></span> Raiers,
     <span class="m-punt" style="background:#0e8f66"></span> Llops,
-    <span class="m-punt" style="background:#db7126"></span> Follets.</p>
+    <span class="m-punt" style="background:#db7126"></span> Follets. L'<b>Armari menjar</b> i la
+    <b>Torre Muni</b> van en gris i suren a part del plànol, perquè no toquen cap altra sala.</p>
 
     <h3>Buscar (el camí ràpid)</h3>
-    <p>És el que faràs el 90% dels cops. Toca <b>Buscar</b> a baix, escriu dues lletres i et sortirà
-    on és cada resultat: <i>Llops &rsaquo; Armari llops &rsaquo; fila 1, col. 1</i>. Tocant-lo t'hi
-    porta i queda ressaltat. Busca pel nom, per les notes i per les etiquetes.</p>
+    <p>És el que faràs el 90% dels cops. La barra de cerca és sempre a dalt de la pàgina. Escriu-hi
+    dues lletres i just a sota apareix una llista amb el que encaixa, sense que la pàgina es mogui.
+    Cada suggeriment diu de quina mena és &mdash; objecte, moble o sala &mdash; i on és:
+    <i>Llops &rsaquo; Armari llops &rsaquo; fila 1, col. 1</i>. Tocant-lo t'hi porta.</p>
+    <p>Busca pel nom, per les notes i per les etiquetes. Amb el teclat pots baixar i pujar per la
+    llista amb les fletxes i entrar-hi amb Retorn.</p>
 
     <h3>Llegir un moble</h3>
     <p>Quan obres un moble, el veus dibuixat amb la seva forma real i les seves caselles:</p>
@@ -2543,6 +2592,18 @@ function instruccions(){
     <p>Tocant una casella, sota hi surt la llista del que hi ha. Al mòbil, quan les caselles són
     massa estretes per encabir-hi noms, només hi surt el número; els noms els llegeixes tocant.</p>
 
+    <h3>Mapa o llista</h3>
+    <p>A la cantonada de dalt a la dreta del mapa hi ha un botó que canvia la manera de veure el
+    mateix contingut. En <b>mode llista</b> tot surt com un arbre desplegable, de la sala fins a
+    l'objecte, i es pot plegar i desplegar cada secció.</p>
+    <p>El botó s'adapta a on ets: des d'una sala et dona la llista d'aquella sala; des del plànol
+    general, la de tot el cau.</p>
+    <p>Cada element &mdash; sales, mobles i objectes &mdash; porta una casella. Marcant una sala es
+    marca tot el que hi ha a dins; si en desmarques una part, la casella del pare queda a mitges.
+    A dalt hi ha <b>Tot</b> per marcar-ho o desmarcar-ho de cop i <b>Descarrega en Excel</b>, que
+    baixa només el que hagis triat. La selecció es manté quan tornes al mapa i quan entres i surts
+    de les sales.</p>
+
     <h3>Afegir, canviar i treure coses</h3>
     <p>Amb la contrasenya d'edició, un cop tries una casella surt el botó rodó <b>Afegeix</b> a baix
     a la dreta. Cada objecte té nom, quantitat, notes, foto, etiquetes i coses a fer.</p>
@@ -2550,8 +2611,9 @@ function instruccions(){
     <b>Se l'enduen</b> (apunta qui se l'emporta), <b>Mou</b> (canviar-lo de casella sense
     esborrar-lo i tornar-lo a crear) i <b>Treu</b>.</p>
     <p>Per canviar el moble mateix &mdash; el nom, quantes safates té, o afegir-ne un de nou &mdash;
-    ves a la sala i toca <b>Mobles</b>. Si redueixes les safates d'un armari, t'avisa de quantes
-    coses es mouran abans de deixar-t'ho fer.</p>
+    ves a la sala i toca <b>Gestionar mobles</b>. Si ja ets dins d'un moble, el botó diu
+    <b>Gestionar aquest moble</b> i et porta directament a les seves safates. Si en redueixes el
+    nombre, t'avisa de quantes coses es mouran abans de deixar-t'ho fer.</p>
 
     <h3>Etiquetes</h3>
     <p>Són paraules com <i>acampada</i>, <i>cuina</i> o <i>primers auxilis</i> que poses a cada
@@ -2583,7 +2645,8 @@ function instruccions(){
     toca els objectes: continuen a l'inventari.</p>
 
     <h3>Pendents</h3>
-    <p>El botó de baix amb el número vermell. Té tres pestanyes:</p>
+    <p>A l'ordinador és la columna de la dreta, sempre a la vista. Al mòbil, el botó de baix amb el
+    número vermell. Té tres pestanyes:</p>
     <ul>
       <li><b>Coses a fer</b> &mdash; les tasques de cada objecte, per data. Una tasca amb mesos es
       repeteix: la farmaciola amb &laquo;renovar les vendes, cada 8 mesos&raquo; torna a aparèixer
@@ -2601,9 +2664,11 @@ function instruccions(){
     mitges.</p>
 
     <h3>Excel</h3>
-    <p>Des de <b>Més</b> baixa tot l'inventari; des d'una llista, el botó <b>Excel</b> baixa la
-    llista. El fitxer porta tres fulls: la taula, un <b>Resum</b> amb els recomptes per sala, per
-    moble i per etiqueta, i l'inventari sencer.</p>
+    <p>Surt de dos llocs. Des del <b>mode llista</b>, el botó <b>Descarrega en Excel</b> baixa el
+    que hagis marcat amb les caselles: una sala, un moble o tot el cau, segons el que triïs. Des
+    d'una <b>llista desada</b>, el botó <b>Excel</b> baixa aquella llista.</p>
+    <p>El fitxer porta tres fulls: la taula, un <b>Resum</b> amb els recomptes per sala, per moble
+    i per etiqueta, i l'inventari sencer.</p>
     <p>Totes les columnes porten <b>filtre</b>, o sigui que es reordena i es filtra des de la
     fletxa de cada capçalera. No és una taula dinàmica de debò &mdash; això no es pot generar des
     del navegador &mdash; però si en vols una, selecciona qualsevol cel·la de la taula i fes
